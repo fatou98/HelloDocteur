@@ -16,4 +16,14 @@ class AccueilController extends Controller
             'controller_name' => 'AccueilController',
         ]);
     }
+    
+        /**
+         * @Route("/apropos", name="apropos")
+         */
+        public function apropos()
+        {
+            return $this->render('accueil/apropos.html.twig', [
+                'controller_name' => 'AccueilController',
+            ]);
+        }
 }
