@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Entity\Specialite;
+use Symfony\Component\HttpFoundation\Request;
 
 class AccueilController extends Controller
 {
@@ -26,4 +28,28 @@ class AccueilController extends Controller
                 'controller_name' => 'AccueilController',
             ]);
         }
+          /**
+         * @Route("/apropos", name="apropos")
+         */
+        public function contact()
+        {
+            return $this->render('accueil/apropos.html.twig', [
+                'controller_name' => 'AccueilController',
+            ]);
+        }
+        /**
+     * @Route("/accueil", name="accueil")
+     */
+// public function specialite(Request $request)
+// {
+
+   
+// $em = $this->getDoctrine()->getManager();
+// $specialitet=$em->getRepository(Specialite::class)->findAll();;
+// }
+
+// return $this->render('accueil/index.html.twig',[
+//     'specialites'=>$specialitet
+
+//     ]);
 }
