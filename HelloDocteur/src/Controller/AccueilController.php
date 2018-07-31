@@ -40,16 +40,16 @@ class AccueilController extends Controller
         /**
      * @Route("/accueil", name="accueil")
      */
-// public function specialite(Request $request)
-// {
+public function specialite(Request $request)
+{
 
    
-// $em = $this->getDoctrine()->getManager();
-// $specialitet=$em->getRepository(Specialite::class)->findAll();;
-// }
+$em = $this->getDoctrine()->getManager();
+$specialitet=$em->getRepository(Specialite::class)->findAll();;
 
-// return $this->render('accueil/index.html.twig',[
-//     'specialites'=>$specialitet
 
-//     ]);
+return $this->render('accueil/layoutaccueil.html.twig', [
+    'specialites'=>$specialitet
+]);
+}
 }

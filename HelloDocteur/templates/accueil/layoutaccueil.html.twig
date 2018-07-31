@@ -62,12 +62,13 @@
                                         <div class="row align-items-end">
                                             <div class="col-12 col-md-4">
                                                 <div class="form-group">
-                                                    <select class="form-control" id="speciality">
-                                                    <option>Speciality 1</option>
-                                                    <option>Speciality 2</option>
-                                                    <option>Speciality 3</option>
-                                                    <option>Speciality 4</option>
-                                                    <option>Speciality 5</option>
+                                                    <select class="form-control" id="speciality" name="specialite">
+                                                    <option>Specialite</option>
+                                                    {% for specialite in specialites %}
+												<option value="{{specialite.id}}">{{specialite.libelle}}</option>
+
+									{% endfor %}
+										
                                                 </select>
                                                 </div>
                                             </div>
@@ -85,7 +86,7 @@
                                             
                                             <div class="col-12 col-md-5 mb-0">
                                                 <div class="form-group mb-0">
-                                                    <button type="submit" class="btn medilife-btn">Rechercher<span>+</span></button>
+                                                    <button type="submit" class="btn medilife-btn">Rechercher <span>+</span></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -97,17 +98,17 @@
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info mb-30">
                                         <img src="img/icons/alarm-clock.png" alt="">
-                                        <p>Mon - Sat 08:00 - 21:00 <br>Sunday CLOSED</p>
+                                        <p>Lundi - Samedi 08:00 - 21:00 <br>Sunday CLOSED</p>
                                     </div>
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info mb-30">
                                         <img src="img/icons/envelope.png" alt="">
-                                        <p>0080 673 729 766 <br>contact@business.com</p>
+                                        <p>+221772688933 <br>jaafargueye@gmail.com</p>
                                     </div>
                                     <!-- Single Contact Info -->
                                     <div class="single-contact-info">
                                         <img src="img/icons/map-pin.png" alt="">
-                                        <p>Lamas Str, no 14-18 <br>41770 Miami</p>
+                                        <p>sacre coeur, VDN <br>41770 Dakar</p>
                                     </div>
                                 </div>
                             </div>
