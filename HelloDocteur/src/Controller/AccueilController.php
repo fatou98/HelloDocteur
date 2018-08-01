@@ -5,6 +5,11 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Specialite;
+use App\Repository\SpecialiteRepository;
+use App\Repository\QuartierRepository;
+use App\Repository\RegionRepository;
+use App\Repository\MedecinRepository;
+use App\Repository\StructureRepository;
 use Symfony\Component\HttpFoundation\Request;
 
 class AccueilController extends Controller
@@ -29,27 +34,34 @@ class AccueilController extends Controller
             ]);
         }
           /**
-         * @Route("/apropos", name="apropos")
+         * @Route("/search", name="search")
          */
-        public function contact()
+        public function search(Request $request,MedecinRepository $medecinrepo,StructureRepository $structurerepo)
         {
-            return $this->render('accueil/apropos.html.twig', [
-                'controller_name' => 'AccueilController',
+            $em = $this->getDoctrine()->getManager();
+            $medecins=$medecinrepo->findAll();
+            $structures=$structurerepo->findAll();
+
+            return $this->render('accueil/search.html.twig', [
+                'medecins' => $medecins,
+                'structures' => $structures
             ]);
         }
         /**
      * @Route("/accueil", name="accueil")
      */
-public function specialite(Request $request)
-{
+            public function specialite(Request $request,SpecialiteRepository $specialiterepo,RegionRepository $regionrepo)
+            {
 
-   
-$em = $this->getDoctrine()->getManager();
-$specialitet=$em->getRepository(Specialite::class)->findAll();;
+            
+            $em = $this->getDoctrine()->getManager();
+            $specialites=$specialiterepo->findAll();
+            $regions=$regionrepo->findAll();
 
 
-return $this->render('accueil/layoutaccueil.html.twig', [
-    'specialites'=>$specialitet
-]);
-}
+            return $this->render('accueil/layoutaccueil.html.twig', [
+                'specialites'=>$specialites,
+                'regions'=>$regions
+            ]);
+            }
 }
