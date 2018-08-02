@@ -25,11 +25,16 @@ class Structure
      * @ORM\JoinColumn(nullable=false)
      */
     private $TypeStructure;
- /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Medecin")
+     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Medecin",inversedBy="structure")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Medecin;
+    private $medecins;
+     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Medecin",mappedBy="structure")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $medecin;
 
 
 
@@ -87,6 +92,26 @@ class Structure
     public function setMedecin($Medecin)
     {
         $this->Medecin = $Medecin;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of medecins
+     */ 
+    public function getMedecins()
+    {
+        return $this->medecins;
+    }
+
+    /**
+     * Set the value of medecins
+     *
+     * @return  self
+     */ 
+    public function setMedecins($medecins)
+    {
+        $this->medecins = $medecins;
 
         return $this;
     }

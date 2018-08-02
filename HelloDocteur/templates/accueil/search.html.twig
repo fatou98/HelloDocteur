@@ -1,104 +1,118 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-
- <div class="row">
-                <!-- ***** Progress Bars & Accordions ***** -->
+    <!-- ***** Book An Appoinment Area Start ***** -->
+    <div class="medilife-book-an-appoinment-area" style="padding-top:190px;margin-bottom:30px;">
+        <div class="container">
+            <div class="row">
                 <div class="col-12">
-                    <div class="elements-title">
-                        <h2>Accordions &amp; Tabs</h2>
-                    </div>
+                    <div class="appointment-form-content">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-12 col-lg-9">
+                                <div class="medilife-appointment-form">
+                                    <form action="#" method="post">
+                                        <div class="row align-items-end">
+                                            <div class="col-12 col-md-5">
+                                                <div class="form-group">
+                                                    <select class="form-control" id="speciality" name="specialite">
+                                                    <option>Specialités</option>
+                                                    {% for specialite in specialites %}
+												<option value="{{specialite.id}}">{{specialite.libelle}}</option>
 
+									{% endfor %}
+										
+                                                </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group">
+                                                    <select class="form-control" id="doctors">
+                                                    <option>Lieu</option>
+ {% for region in regions %}
+												<option value="{{region.id}}">{{region.libelle}}</option>
 
-                    <div class="accordions mb-100" id="accordion" role="tablist" aria-multiselectable="true">
-                        <!-- single accordian area -->
-                        <div class="panel single-accordion">
-                            <h6><a role="button" class="" aria-expanded="true" aria-controls="collapseOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Donec ipsum metus, pharetr a quis nunc sit amet, maximus.
-                                    <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                    <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                    </a></h6>
-                            <div id="collapseOne" class="accordion-content collapse show">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis semper finibus ac eget ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vulputate id justo quis facilisis.</p>
+									{% endfor %}
+                                                </select>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-12 col-md-3">
+                                                <div class="form-group">
+                                                    <input type="submit" style="margin-top:-40px;" class="btn medilife-btn" value="Rechercher">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        <!-- single accordian area -->
-                        <div class="panel single-accordion">
-                            <h6>
-                                <a role="button" class="collapsed" aria-expanded="true" aria-controls="collapseTwo" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">Maximus vehicula nibh. Prae sent pulvinar porta.
-                                        <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                        <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                        </a>
-                            </h6>
-                            <div id="collapseTwo" class="accordion-content collapse">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis semper finibus ac eget ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vulputate id justo quis facilisis.</p>
-                            </div>
-                        </div>
-                        <!-- single accordian area -->
-                        <div class="panel single-accordion">
-                            <h6>
-                                <a role="button" aria-expanded="true" aria-controls="collapseThree" class="collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapseThree">Pharetr a quis nunc sit amet, maximus vehicula nibh.
-                                        <span class="accor-open"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                        <span class="accor-close"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                    </a>
-                            </h6>
-                            <div id="collapseThree" class="accordion-content collapse">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel lectus eu felis semper finibus ac eget ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vulputate id justo quis facilisis.</p>
+                            <div class="col-12 col-lg-3">
+                                <div class="medilife-contact-info">
+                                    <!-- Single Contact Info -->
+                                    <div class="single-contact-info mb-30">
+                                        <h3 style="color:white;text-align:center;">Prenez un rendez-vous en ligne chez HelloDocteur</h3>
+                                    </div>
+                                   
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Book An Appoinment Area End ***** -->
+
+ <div class="row" style="margin-left:30px;padding:10px;" >
 
 
 
                     <div class="medilife-tabs-content">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+       <ul class="nav nav-tabs" id="myTab" role="tablist" style="width:300px;">
                             <li class="nav-item">
-                                <a class="nav-link" id="institution-tab" data-toggle="tab" href="#institution" role="tab" aria-controls="institution" aria-selected="false">Institution</a>
+                                <a class="nav-link active" id="specialities-tab" data-toggle="tab" href="#specialities" role="tab" aria-controls="specialities" aria-selected="true">Médecins</a>
                             </li>
+
                             <li class="nav-item">
-                                <a class="nav-link" id="faq-tab" data-toggle="tab" href="#faq" role="tab" aria-controls="faq" aria-selected="false">FAQ</a>
+                                <a class="nav-link" id="faq-tab" data-toggle="tab" href="#faq" role="tab" aria-controls="faq" aria-selected="false">Structures</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" id="specialities-tab" data-toggle="tab" href="#specialities" role="tab" aria-controls="specialities" aria-selected="true">Specialities</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="laboratory-tab" data-toggle="tab" href="#laboratory" role="tab" aria-controls="laboratory" aria-selected="false">Laboratory</a>
-                            </li>
-                            
                         </ul>
 
+
                         <div class="tab-content mb-100" id="myTabContent">
-                            <div class="tab-pane fade" id="institution" role="tabpanel" aria-labelledby="institution-tab">
-                                <div class="medilife-tab-content d-md-flex align-items-center">
+                          <div class="tab-pane fade show active row" id="specialities" role="tabpanel" aria-labelledby="specialities-tab">
+                                <div class="medilife-tab-text col-lg-6  d-md-flex align-items-center" style="display:flex;flex-wrap:wrap;margin-left:20px;">
                                     <!-- Medilife Tab Text  -->
-                                    <div class="w3-card-4">
+                                                                         {% for medecin in medecins %}
 
-<header class="w3-container w3-light-grey">
-  <h3>John Doe</h3>
-</header>
+                                    <div class="medilife-tab-text row" style="padding:20px;border:1px solid gray;margin-right:10px;">
+                                    <img src="data:image/png;base64,{{medecin.image}}" style="height:70px;border-radius:50%;" class="col-lg-2" >
 
-<div class="w3-container">
-  <p>1 new friend request</p>
-  <hr>
-  <img src="img_avatar3.png" alt="Avatar" class="w3-left w3-circle">
-  <p>President/CEO at Mighty Schools...</p>
-</div>
+                                     <a href="/detailMedecin/id" <strong class="col-lg-8">{{medecin.prenom}}
+                                        {{medecin.nom}}</strong>  </a>
+                                        <br>
+                                        <strong class="col-lg-6">{{medecin.specialite.libelle}}</strong>
 
-<button class="w3-button w3-block w3-dark-grey">+ Connect</button>
+                              {#   {% for struc in medecin.structure %}
+                                    <span>{{struc.libelle}}</span>
+                                    {% endfor %}  #}
+                                 <strong class="col-lg-6">{{medecin.quartier.libelle}}</strong>
 
-</div>
-                            
-                            <div class="tab-pane fade" id="scolarship" role="tabpanel" aria-labelledby="scolarship-tab">
-                                <div class="medilife-tab-content d-md-flex align-items-center">
-                                    <!-- Medilife Tab Text  -->
-                                    <div class="medilife-tab-text">
-                                        <h2>Take a look at this</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing eli. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing eli sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing eli.</p>
-                                    </div>
-                                    <!-- Medilife Tab Img  -->
-                                    <div class="medilife-tab-img">
-                                        <img src="img/bg-img/medical1.png" alt="">
-                                    </div>
+                                </div>                                {% endfor %}
+
+                                   
                                 </div>
                             </div>
+
+                         <div class="tab-pane fade" id="faq" role="tabpanel" aria-labelledby="faq-tab">
+                                <div class="medilife-tab-text col-lg-6 d-md-flex align-items-center">
+                                {% for structure in structures %}
+                                    
+                                                                       <div class="medilife-tab-text row" style="padding:20px;border:1px solid gray;margin-right:10px;">
+                      {{structure.libelle}}          
+</div>{% endfor %}
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 

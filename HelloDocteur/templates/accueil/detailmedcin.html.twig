@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="tab-content mb-100" id="myTabContent">
+                          <div class="tab-pane fade show active row" id="specialities" role="tabpanel" aria-labelledby="specialities-tab">
+                                <div class="medilife-tab-text col-lg-6  d-md-flex align-items-center" style="display:flex;flex-wrap:wrap;margin-left:20px;">
+                                    <!-- Medilife Tab Text  -->
+                                                                         {% for medecin in medecin %}
+
+                                    <div class="medilife-tab-text row" style="padding:20px;border:1px solid gray;margin-right:10px;">
+                                    <img src="data:image/png;base64,{{medecin.image}}" style="height:70px;border-radius:50%;" class="col-lg-2" >
+
+                                      <strong class="col-lg-8">{{medecin.prenom}}
+                                        {{medecin.nom}}</strong>  
+                                        <br>
+                                        <strong class="col-lg-6">{{medecin.specialite.libelle}}</strong>
+
+                              {% for struc in medecin.structure %}
+                                    <span>{{struc.libelle}}</span>
+                                    {% endfor %}  
+                                 <strong class="col-lg-6">{{medecin.quartier.libelle}}</strong>
+
+                                </div>                                {% endfor %}
+                             <h6>Le docteur Thierry Galtier est spécialiste de la chirurgie de l'oeil depuis plus de 20 ans.
+
+Il vous accueille au sein de son cabinet de Bordeaux, situé au 14 rue Elisée Reclus.
+
+Voici les compétences du Dr Galtier:
+
+SPÉCIALISTE EN OPHTALMOLOGIE
+DIPLOMÉ D'ADAPTATION DE LENTILLES DE CONTACT
+DIPLOMÉ DE CHIRURGIE RÉFRACTIVE ET DE LA CATARACTE
+DIPLOMÉ DE MÉDECINE AERONAUTIQUE
+Conseil de l'ordre des médecins:
+Identifiant RPPS: 10002762721
+
+Le cabinet est conventionné secteur 2.
+
+Pour plus d'informations vous pouvez consulter le site
+ : http://www.ophtalmologiebordeaux.com/</h6>
+                                   
+                                </div>
+                            </div>
+{% endblock %}

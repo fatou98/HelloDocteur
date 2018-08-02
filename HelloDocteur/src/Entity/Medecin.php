@@ -65,14 +65,18 @@ class Medecin
      * @ORM\JoinColumn(nullable=false)
      */
     private $Specialite;
+    
      /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Structure")
+     * @ORM\OneToMany(targetEntity="App\Entity\Structure",mappedBy="medecins")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Structure;
+    private $structure;
 
+    /**
+     * @ORM\Column(type="blob")
+     */
 
-
+    private $image;
 
     public function getId()
     {
@@ -215,22 +219,37 @@ class Medecin
         return $this;
     }
 
+    
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    
+
     /**
-     * Get the value of Structure
+     * Get the value of structure
      */ 
     public function getStructure()
     {
-        return $this->Structure;
+        return $this->structure;
     }
 
     /**
-     * Set the value of Structure
+     * Set the value of structure
      *
      * @return  self
      */ 
-    public function setStructure($Structure)
+    public function setStructure($structure)
     {
-        $this->Structure = $Structure;
+        $this->structure = $structure;
 
         return $this;
     }
