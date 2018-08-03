@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+
+ <h1>Evacuation Sanitaire</h1>
+						<div class="col-lg-6 col-md-6 appointment-right pt-60 pb-60">
+							<form class="form-wrap" Method="POST" >
+                            <input type="text" class="form-control" name="nomcomplet" placeholder="Entrez votre nomcomplet" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Entrez l'heure du rdv'" >
+							<input type="text" class="form-control" name="adresse" placeholder="Entrez votre adresse" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Entrez l'heure du rdv'" >
+							<input type="number" class="form-control" name="telephone" placeholder="Entrez vortre tel" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Entrez l'heure du rdv'" >
+							<input type="file" class="form-control" name="fichemaladie"  onfocus="this.placeholder = ''" onblur="this.placeholder = 'Entrez l'heure du rdv'" >
+                            <input id="datepicker1" name="passport" class="dates form-control"  placeholder="Date delivrance passport" type="date">   
+						    <input id="datepicker1" name="passport" class="dates form-control"  placeholder="Date d'expiration passport" type="date">   
+
+                           
+								
+								<input type="submit" value="Confirmez Votre Rendez-Vous" name="ajouter" class="primary-btn text-uppercase">
+							</form>
+						</div>
+					</div>
+				</div>	
+
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<div class="panel">
+              <div class="panel-heading">
+                <span class="panel-title">Livraison De Medicamment</span>
+              </div>
+              <div class="panel-body">
+
+                <form class="form-horizontal" role="form" Method="POST">
+                  <div class="form-group">
+                   <label for="inputStandard" class="col-lg-3 control-label" >Nom</label>
+                    <div class="col-lg-8">
+                      <div class="bs-component">
+                    <input type="text" id="inputStandard" class="form-control" name"nomcomplet" placeholder="votre nom">
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="inputStandard" class="col-lg-3 control-label" name="adresse">Adresse</label>
+                    <div class="col-lg-8">
+                      <div class="bs-component">
+                        <input type="text" id="inputStandard" class="form-control" placeholder="votre adresse">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputStandard" class="col-lg-3 control-label" name="tel">Tel de Livraison</label>
+                    <div class="col-lg-8">
+                      <div class="bs-component">
+                        <input type="text" id="inputStandard" class="form-control" placeholder="Telephone">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputStandard" class="col-lg-3 control-label" name="ordonnance">Ordonnance</label>
+                    <div class="col-lg-8">
+                      <div class="bs-component">
+                        <input type="file" id="inputStandard" class="form-control" placeholder="votre adresse">
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                		<input type="submit" value="Confirmez Votre Demande" name="Envoyez" class="primary-btn text-uppercase">
+
+                  </div>
+                </form>
+              </div>
+            </div>
+
+
+
+{% endblock %}
