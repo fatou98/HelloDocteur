@@ -85,7 +85,10 @@ class AccueilController extends Controller
     $specialites=$specialiterepo->findAll();
     $regions=$regionrepo->findAll();
     $medecinBYId=$medecinrepo->findById(['id'=>$id]);
-
+    foreach($medecinBYId as $values){
+        $values->setImage(base64_encode(stream_get_contents($values->getImage())));
+    
+}
     return $this->render('accueil/detailmedcin.html.twig', [
         'specialites'=>$specialites,
         'regions'=>$regions,
@@ -120,11 +123,7 @@ class AccueilController extends Controller
                                      $specialite = $this->getDoctrine()->getManager()
                             ->getRepository(Specialite::class)
                                        ->FindAllSpecialite();
-                            $specialite= $this->get('knp_paginator')->paginate(
-                            $specialite,
-                            $request->query->get('page', 1)/*le numéro de la page à afficher*/,
-                              6/*nbre d'éléments par page*/
-                            );
+
                 $specialite = $this->getDoctrine()->getManager()->getRepository(Specialite::class)->findAll();
                 $region = $this->getDoctrine()->getManager()->getRepository(Region::class)
                                 ->findAll();
