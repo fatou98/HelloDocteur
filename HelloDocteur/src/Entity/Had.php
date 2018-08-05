@@ -25,6 +25,10 @@ class Had
      * @ORM\Column(type="string", length=30)
      */
     private $Tel;
+    /**
+    * @ORM\Column(type="string", length=250)
+    */
+   private $motif;
 
     /**
      * @ORM\Column(type="blob", nullable=true)
@@ -96,4 +100,24 @@ class Had
 
         return $this;
     }
+
+   /**
+    * Get the value of motif
+    */ 
+   public function getMotif()
+   {
+      return $this->motif;
+   }
+
+   /**
+    * Set the value of motif
+    *
+    * @return  self
+    */ 
+   public function setMotif($motif)
+   {
+      $this->motif = $motif;
+
+      return $this;
+   }
 }
