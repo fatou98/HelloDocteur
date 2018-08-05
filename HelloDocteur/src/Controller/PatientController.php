@@ -28,7 +28,7 @@ class PatientController extends Controller
         $em = $this->getDoctrine()->getManager();
             $patient=$patientrepo->findAll();
                     if($request->isMethod('POST')) {
-                    if(isset($_POST['Envoyez'])){
+                    if(isset($_POST['ajouter'])){
                         extract($_POST);
                     $patient=$em->getRepository(Patient::class)->findById(array('id'=>$patient));
     
@@ -36,13 +36,13 @@ class PatientController extends Controller
                         $had->setAdresse($adresse);
                         $had->setTel($tel);
                         $had->setMotif($motif);
-                        $had->setClient($patient[0]);
+                        $had->setPatient($patient[0]);
                         $em->persist($had);
                         $em->flush();
                        
                     }
                 }
-                          return $this->render('Patient/had.html.twig',[
+                          return $this->render('patient/had.html.twig',[
                         
                           ]);
                         }
