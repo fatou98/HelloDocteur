@@ -26,12 +26,15 @@ class PatientController extends Controller
     public function had(Request $request,PatientRepository $patientrepo)
     {
         $em = $this->getDoctrine()->getManager();
-            $patient=$patientrepo->findAll();
-                    if($request->isMethod('POST')) {
-                    if(isset($_POST['ajouter'])){
+            $user=$this->getUser();
+            $email=$user->getEmail();
+            $patient=$patientrepo->findBy(['Email'=>$email]);
+           
+            if(isset($_POST['ajouter'])){
+              
+            if($request->isMethod('POST')) {
                         extract($_POST);
-                    $patient=$em->getRepository(Patient::class)->findById(array('id'=>$patient));
-    
+                       
                         $had = new  Had();
                         $had->setAdresse($adresse);
                         $had->setTel($tel);
@@ -39,7 +42,8 @@ class PatientController extends Controller
                         $had->setPatient($patient[0]);
                         $em->persist($had);
                         $em->flush();
-                       
+                        $this->addFlash('success', 'Votre demande a bien été enregistré.');
+
                     }
                 }
                           return $this->render('patient/had.html.twig',[
