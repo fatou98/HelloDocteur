@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MedecinRepository")
  */
@@ -21,16 +24,12 @@ class Medecin
      */
     private $Matricule;
 
-    /**
-     * @ORM\Column(type="string", length=30)
+   /**
+     * @ORM\Column(type="string", length=90, unique=false)
+     * @Assert\NotBlank()
      */
-    private $Prenom;
-
-    /**
-     * @ORM\Column(type="string", length=30)
-     */
-    private $Nom;
-
+    private $nomcomplet;
+    
     /**
      * @ORM\Column(type="string", length=30)
      */
@@ -47,33 +46,34 @@ class Medecin
     private $Adresse;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float",nullable=true)
      */
     private $Latitude;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float",nullable=true)
      */
     private $Longitude;
      /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Quartier")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $Quartier;
      /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Specialite")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $Specialite;
     
      /**
      * @ORM\OneToMany(targetEntity="App\Entity\Structure",mappedBy="medecins")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $structure;
 
     /**
-     * @ORM\Column(type="blob")
+     * 
+     * @ORM\Column(type="blob",nullable=true)
      */
 
     private $image;
@@ -95,30 +95,9 @@ class Medecin
         return $this;
     }
 
-    public function getPrenom(): ?string
-    {
-        return $this->Prenom;
-    }
+  
 
-    public function setPrenom(string $Prenom): self
-    {
-        $this->Prenom = $Prenom;
-
-        return $this;
-    }
-
-    public function getNom(): ?string
-    {
-        return $this->Nom;
-    }
-
-    public function setNom(string $Nom): self
-    {
-        $this->Nom = $Nom;
-
-        return $this;
-    }
-
+    
     public function getEmail(): ?string
     {
         return $this->Email;
@@ -250,6 +229,26 @@ class Medecin
     public function setStructure($structure)
     {
         $this->structure = $structure;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nomcomplet
+     */ 
+    public function getNomcomplet()
+    {
+        return $this->nomcomplet;
+    }
+
+    /**
+     * Set the value of nomcomplet
+     *
+     * @return  self
+     */ 
+    public function setNomcomplet($nomcomplet)
+    {
+        $this->nomcomplet = $nomcomplet;
 
         return $this;
     }

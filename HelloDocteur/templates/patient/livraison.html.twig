@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<style>
+body{
+    background:url(img/img/yenni.jpg);
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position-y:-750px;
+}
+</style>
+<div class="col-12 col-sm-4 col-xl-4" style="padding-top:190px;margin-bottom:30px ;">
+                        <div class="footer-widget-area">
+                            <div class="widget-title">
+                                <h6>Evacuation Sanitaire</h6>
+                            </div>
+                            <div class="footer-contact-form">
+                                <form action="#" method="post">
+                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="nom"  placeholder="Nomcomplet">
+                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="adresse"  placeholder="Adresse">
+                                    <input type="number" class="form-control border-top-0 border-right-0 border-left-0" name="tel"  placeholder="Telephone">
+                                    <input type="file" class="form-control border-top-0 border-right-0 border-left-0" name="ordonnance"  placeholder="Ordonnance">
+                                    <textarea name="message" class="form-control border-top-0 border-right-0 border-left-0"  placeholder="Motif"></textarea>
+                                    <input type="submit" class="btn medilife-btn"value="valider">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+{% endblock %}

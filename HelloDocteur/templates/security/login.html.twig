@@ -1,0 +1,43 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  
+    <style>
+.container1
+{
+    width:50%;
+    margin:auto;
+    padding-top:110px;
+    padding-bottom:110px;
+}
+hr{
+    height:5px;
+    width:300px;
+    background:#008709;
+}
+h2{
+    text-align:center;
+}
+        </style>
+        <div class="container container1 row">
+
+        <h2>Connexion</h2>
+        <hr>
+          {% if error %}
+        <div class="alert alert-danger">
+            <ul class="list-unstyled mb-0">
+                <li><span class="initialism form-error-icon badge badge-danger">Error</span> 
+                    <span class="form-error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+            {{form(form)}}
+            <br>
+            <button class="btn">S'inscrire comme <a href="/register/2">ClIENT </a>|  <a href="/register/1">Berger </a> |  <a href="/register/3">ADMIN </a>
+                   <span class="badge badge-success"></span>
+            </button>
+        </div>
+{% endblock %}

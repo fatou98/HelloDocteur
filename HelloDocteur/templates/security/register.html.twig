@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+        <style>
+.container1
+{
+    width:50%;
+    margin:auto;
+    padding-top:110px;
+} 
+hr{
+    height:5px;
+    width:300px;
+    background:#008709;
+}
+h2{
+    text-align:center;
+}
+        </style>
+        <div class="container container1 row">
+        <h2>Incription</h2>
+        <hr>
+        
+  {% block flash %}
+            {% for flash_message in app.session.flashbag.get('success') %}
+                <div class="container alert alert-success" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('info') %}
+                <div class="container alert alert-info" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('warning') %}
+                <div class="container alert alert-warning" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('danger') %}
+                <div class="container alert alert-danger" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+        {% endblock %}
+
+            {{form(form)}}
+        </div>
+{% endblock %}
