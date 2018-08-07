@@ -30,10 +30,7 @@ class Had
     */
    private $motif;
 
-    /**
-     * @ORM\Column(type="blob", nullable=true)
-     */
-    private $Fichemaladie;
+    
      /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Patient")
      * @ORM\JoinColumn(nullable=false)

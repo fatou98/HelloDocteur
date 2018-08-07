@@ -6,6 +6,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Had;
+use App\Entity\Vsl;
+use App\Entity\Livraison;
 use App\Repository\PatientRepository;
 
 
@@ -56,35 +58,60 @@ class PatientController extends Controller
     public function vsl(Request $request,PatientRepository $patientrepo)
     {
         $em = $this->getDoctrine()->getManager();
-            $patient=$patientrepo->findAll();
-                    if($request->isMethod('POST')) {
-                    if(isset($_POST['valider'])){
-                        extract($_POST);
-                    $patient=$em->getRepository(Patient::class)->findById(array('id'=>$patient));
-    
-                        $vsl = new  Vsl();
-                        $vsl->setNomComplet($nomcomplet);
-                        $vsl->setAdresse($adresse);
-                        $vsl->setTel($telephone);
-                        $vsl->setFichemaladie($fichemaladie);
-                        $vsl->setClient($patient[0]);
-                        $em->persist($vsl);
-                        $em->flush();
-                       
-                    }
+        $user=$this->getUser();
+        $email=$user->getEmail();
+        $patient=$patientrepo->findBy(['Email'=>$email]);
+       
+        if(isset($_POST['ajouter'])){
+          
+        if($request->isMethod('POST')) {
+                    extract($_POST);
+                   
+                    $vsl = new  Vsl();
+                    $vsl->setNomComplet($nom);
+                    $vsl->setAdresse($adresse);
+                    $vsl->setTel($tel);
+                    $vsl->setFicheMaladie($fiche);
+                    $vsl->setMotif($motif);
+                    $vsl->setPatient($patient[0]);
+                    $em->persist($vsl);
+                    $em->flush();
+                    $this->addFlash('success', 'Votre demande a bien été enregistré.');
+
                 }
-                          return $this->render('patient/vsl.html.twig',[
-                            'patients'=>$patient
-                                
-                          ]);
-                        }
+            }
+                      return $this->render('patient/vsl.html.twig',[
+                    
+                      ]);
+                    }
     /**
      * @Route("/livraison", name="livraison")
      */
-    public function livraison()
+    public function livraison(Request $request,PatientRepository $patientrepo)
     {
-        return $this->render('patient/livraison.html.twig', [
-            'controller_name' => 'PatientController',
-        ]);
-    }
-}
+        $em = $this->getDoctrine()->getManager();
+        $user=$this->getUser();
+        $email=$user->getEmail();
+        $patient=$patientrepo->findBy(['Email'=>$email]);
+       
+        if(isset($_POST['ajouter'])){
+          
+        if($request->isMethod('POST')) {
+                    extract($_POST);
+                   
+                    $livraison = new  Livraison();
+                    $livraison->setNomComplet($nom);
+                    $livraison->setAdresse($adresse);
+                    $livraison->setTel($tel);
+                    $livraison->setOrdonnance($ordonnance);
+                    $livraison->setPatient($patient[0]);
+                    $em->persist($livraison);
+                    $em->flush();
+                    $this->addFlash('success', 'Votre demande a bien été enregistré.');
+
+                }
+            }
+                      return $this->render('patient/livraison.html.twig',[
+                    
+                      ]);
+                    }}
