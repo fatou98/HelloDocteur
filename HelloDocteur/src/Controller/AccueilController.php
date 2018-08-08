@@ -117,16 +117,7 @@ class AccueilController extends Controller
     {
 
     
-        $specialite = new Specialite();
-                            if($request->isMethod('POST')){
-                            if(empty($specialite) and empty($lieu)){
-                                     $specialite = $this->getDoctrine()->getManager()
-                            ->getRepository(Specialite::class)
-                                       ->FindAllSpecialite();
-
-                $specialite = $this->getDoctrine()->getManager()->getRepository(Specialite::class)->findAll();
-                $region = $this->getDoctrine()->getManager()->getRepository(Region::class)
-                                ->findAll();
+       
         
         return $this->render('accueil/search.html.twig', [
           'specialites'=>$specialites,
@@ -135,4 +126,4 @@ class AccueilController extends Controller
     ]);
     }
 }
-    }}
+    
