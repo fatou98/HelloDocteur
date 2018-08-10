@@ -23,14 +23,9 @@ class MedecinRepository extends ServiceEntityRepository
 //     * @return Medecin[] Returns an array of Medecin objects
 //     */
     
-    public function findBySpecialite($value)
+    public function findBySpecialiteAndRegion($specialite,$region)
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.specialite.libelle = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getResult()
-        ;
+        $sql='SELECT * FROM `medecin` LEFT JOIN quartier on quartier.id=quartier_id LEFT JOIN region on region.id=quartier.region_id';
     }
     
 

@@ -39,23 +39,32 @@ class AccueilController extends Controller
         public function search(Request $request,MedecinRepository $medecinrepo,StructureRepository $structurerepo,SpecialiteRepository $specialiterepo,RegionRepository $regionrepo)
         {
 
-            $em = $this->getDoctrine()->getManager();
-            $medecins=$medecinrepo->findAll();
-            foreach($medecins as $values){
-                    $values->setImage(base64_encode(stream_get_contents($values->getImage())));
-                
-            }
-            $structures=$structurerepo->findAll();
-            $em = $this->getDoctrine()->getManager();
-            $specialites=$specialiterepo->findAll();
-            $regions=$regionrepo->findAll();
+        //     $em = $this->getDoctrine()->getManager();
+        //     $medecins=$medecinrepo->findAll();
+        //     foreach($medecins as $values){
+        //             $values->setImage(base64_encode(stream_get_contents($values->getImage())));
 
-            return $this->render('accueil/search.html.twig', [
-                'medecins' => $medecins,
-                'structures' => $structures,
-                'specialites'=>$specialites,
-                'regions'=>$regions
-            ]);
+        //     }
+        //     if(isset($_POST['Rechercher'])){
+        //         if($request->idMethod('POST')){
+
+        //         $medecins=$medecinrepo->findBy(['Specialite'=>$specialite,''])
+
+        //         }
+        //     }
+
+        //     $structures=$structurerepo->findAll();
+        //     $em = $this->getDoctrine()->getManager();
+        //     $specialites=$specialiterepo->findAll();
+        //     $regions=$regionrepo->findAll();
+
+        //     return $this->render('accueil/search.html.twig', [
+        //         'medecins' => $medecins,
+        //         'structures' => $structures,
+        //         'specialites'=>$specialites,
+        //         'regions'=>$regions
+        //     ]);
+        // }
         }
         /**
      * @Route("/accueil", name="accueil")
@@ -110,20 +119,6 @@ class AccueilController extends Controller
           
     ]);
     }
-     /**
-     * @Route("/rechercher", name="rechercher")
-     */
-    public function recherche(Request $request,SpecialiteRepository $specialiterepo)
-    {
-
     
-       
-        
-        return $this->render('accueil/search.html.twig', [
-          'specialites'=>$specialites,
-          'region'=>$region,
-          
-    ]);
-    }
 }
     

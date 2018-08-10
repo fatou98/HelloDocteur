@@ -11,7 +11,7 @@
                             <div class="hero-slides-content">
                                 <h2 data-animation="fadeInUp" data-delay="100ms">La Livraison des Medicamments<br>Rapide et Sûre jusqu'a votre domicile</h2>
                                 <h6 data-animation="fadeInUp" data-delay="400ms">Hello Docteur le service qui facilite la vie des malades et vous fait gagner du temps.</h6>
-                                <a href="/search" class="btn medilife-btn mt-50" data-animation="fadeInUp" data-delay="700ms">Vous faire livrer</a>
+                                <a href="/livraison" class="btn medilife-btn mt-50" data-animation="fadeInUp" data-delay="700ms">Vous faire livrer</a>
                             </div>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                                 <h2 data-animation="fadeInUp" data-delay="100ms">Hospitalisation a domicile
                                     <br>A Hello Docteur faites vous suivres a domicile au pres de la famille</h2>
                                 <h6 data-animation="fadeInUp" data-delay="400ms">Hello Docteur le service Qui facilite la vie des malades.</h6>
-                                <a href="#" class="btn medilife-btn mt-50" data-animation="fadeInUp" data-delay="700ms">Demander une HAD</a>
+                                <a href="/had" class="btn medilife-btn mt-50" data-animation="fadeInUp" data-delay="700ms">Demander une HAD</a>
                             </div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
     <!-- ***** Hero Area End ***** -->
 
     <!-- ***** Book An Appoinment Area Start ***** -->
-    <div class="medilife-book-an-appoinment-area">
+    <div class="medilife-book-an-appoinment-area" >
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -75,7 +75,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col-12 col-lg-9">
                                 <div class="medilife-appointment-form">
-                                    <form action="#" method="post">
+                                    <form method="post">
                                         <div class="row align-items-end">
                                             <div class="col-12 col-md-5">
                                                 <div class="form-group">
@@ -91,7 +91,7 @@
                                             </div>
                                             <div class="col-12 col-md-4">
                                                 <div class="form-group">
-                                                    <select class="form-control" id="doctors">
+                                                    <select class="form-control" id="doctors" name="region">
                                                         <option>Lieu</option>
                                                         {% for region in regions %}
                                                             <option value="{{region.id}}">{{region.libelle}}</option>
@@ -103,7 +103,7 @@
 
                                             <div class="col-12 col-md-3">
                                                 <div class="form-group">
-                                                    <input type="submit" style="margin-top:-40px;" class="btn medilife-btn" value="Rechercher">
+                                                    <input type="submit" name="Rechercher" style="margin-top:-40px;" class="btn medilife-btn" value="Rechercher">
                                                 </div>
                                             </div>
                                         </div>
