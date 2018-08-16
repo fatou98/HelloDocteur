@@ -23,11 +23,36 @@ class MedecinRepository extends ServiceEntityRepository
 //     * @return Medecin[] Returns an array of Medecin objects
 //     */
     
-    public function findBySpecialiteAndRegion($specialite,$region)
-    {
-        $sql='SELECT * FROM `medecin` LEFT JOIN quartier on quartier.id=quartier_id LEFT JOIN region on region.id=quartier.region_id';
-    }
-    
+public function findBySpecialiteAndRegion($specialite,$lieu)
+{
+//$sql='SELECT m FROM App\Entity\Medecin m LEFT JOIN App\Entity\Quartier q LEFT JOIN App\Entity\Region r  WHERE m.Specialite=:specialite and r.id=:lieu';    
+$sql='SELECT m FROM App\Entity\Medecin m join m.Quartier q  join q.Region r Where m.Specialite=:specialite and r.id=:lieu';
+
+return $this->getEntityManager()
+->createQuery($sql)
+->setParameters(array('specialite'=>$specialite,'lieu'=>$lieu))
+->execute();
+}
+public function findBySpecialite($specialite)
+{
+//$sql='SELECT m FROM App\Entity\Medecin m LEFT JOIN App\Entity\Quartier q LEFT JOIN App\Entity\Region r  WHERE m.Specialite=:specialite and r.id=:lieu';    
+$sql='SELECT m FROM App\Entity\Medecin m join m.Quartier q  join q.Region r Where m.Specialite=:specialite';
+
+return $this->getEntityManager()
+->createQuery($sql)
+->setParameter('specialite',$specialite)
+->execute();
+}
+public function findByRegion($lieu)
+{
+//$sql='SELECT m FROM App\Entity\Medecin m LEFT JOIN App\Entity\Quartier q LEFT JOIN App\Entity\Region r  WHERE m.Specialite=:specialite and r.id=:lieu';    
+$sql='SELECT m FROM App\Entity\Medecin m join m.Quartier q  join q.Region r Where r.id=:lieu';
+
+return $this->getEntityManager()
+->createQuery($sql)
+->setParameter('lieu',$lieu)
+->execute();
+}
 
     /*
     public function findOneBySomeField($value): ?Medecin

@@ -75,27 +75,24 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col-12 col-lg-9">
                                 <div class="medilife-appointment-form">
-                                    <form method="post">
+                                    <form method="post" action="/search">
                                         <div class="row align-items-end">
                                             <div class="col-12 col-md-5">
                                                 <div class="form-group">
                                                     <select class="form-control" id="speciality" name="specialite">
-                                                        <option>Specialités</option>
+                                                        <option value="">Specialités</option>
                                                         {% for specialite in specialites %}
                                                             <option value="{{specialite.id}}">{{specialite.libelle}}</option>
-
                                                         {% endfor %}
-
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-4">
                                                 <div class="form-group">
-                                                    <select class="form-control" id="doctors" name="region">
-                                                        <option>Lieu</option>
+                                                    <select class="form-control" id="doctors" name="lieu">
+                                                        <option value="">Lieu</option>
                                                         {% for region in regions %}
                                                             <option value="{{region.id}}">{{region.libelle}}</option>
-
                                                         {% endfor %}
                                                     </select>
                                                 </div>

@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Had;
 use App\Entity\Vsl;
 use App\Entity\Livraison;
+use App\Entity\NewsletterRepository;
 use App\Repository\PatientRepository;
 
 
@@ -114,4 +115,9 @@ class PatientController extends Controller
                       return $this->render('patient/livraison.html.twig',[
                     
                       ]);
-                    }}
+                    }
+}
+                     
+                  
+                
+            

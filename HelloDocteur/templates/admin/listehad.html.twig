@@ -1,0 +1,31 @@
+{% extends 'layoutadmin.html.twig' %}
+
+
+    {% block content %}
+    <div>
+  
+  <table class="table table-striped table-hover" id="datatable3" cellspacing="0" width="100%">
+                    <thead>
+
+<th>Adresse</th>
+<th>Telephone</th>
+<th>Patient</th>
+<th>Modifier</th>
+<th>Suprimer</th>
+
+</tr>
+</thead>
+{% for hads in Had %}
+<tbody>
+{# <th>{{ Had.adresse }}</th>
+<th>{{ Had.Telephone }}</th>
+<th>{{ Had.patient_id }}</th>
+<th><a href="{{ path('edit_patient', {'id' : patient.id }) }}" class="btn btn-rounded btn-primary btn-block">Editer</a></th>
+<th><a href="{{ path('delete_patient', {'id' : patient.id }) }}" class="btn btn-rounded btn-danger btn-block">Suprimer</a></th>
+</tbody> #}
+{% endfor %}
+
+
+</table>
+  </div>
+{% endblock %}

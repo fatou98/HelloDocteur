@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Specialite;
+use App\Entity\Newsletter;
 use App\Repository\SpecialiteRepository;
 use App\Repository\QuartierRepository;
 use App\Repository\RegionRepository;
@@ -39,33 +40,59 @@ class AccueilController extends Controller
         public function search(Request $request,MedecinRepository $medecinrepo,StructureRepository $structurerepo,SpecialiteRepository $specialiterepo,RegionRepository $regionrepo)
         {
 
-        //     $em = $this->getDoctrine()->getManager();
-        //     $medecins=$medecinrepo->findAll();
-        //     foreach($medecins as $values){
-        //             $values->setImage(base64_encode(stream_get_contents($values->getImage())));
 
-        //     }
-        //     if(isset($_POST['Rechercher'])){
-        //         if($request->idMethod('POST')){
+            $em = $this->getDoctrine()->getManager();
+            $medecins=$medecinrepo->findAll();
+           
+            if(isset($_POST['Sinscrire'])){
+                if($request->isMethod('POST')) {
+                     extract($_POST);
+                     $newsletter = new  Newsletter();
+                     $newsletter->setEmail($newsletterEmail);
+                     $em->persist($newsletter);
+                     $em->flush();
+                     var_dump('defrgthb');
+                     die();
+                     $this->addFlash('success', 'Votre demande a bien été enregistré.');
 
-        //         $medecins=$medecinrepo->findBy(['Specialite'=>$specialite,''])
+                 }
+            }
 
-        //         }
-        //     }
+            if(isset($_POST['Rechercher'])){
+                extract($_POST);
+                if($request->isMethod('POST')){
+                    if($specialite==null){
+                        $medecins=$medecinrepo->findByRegion($lieu);
+                    }
+                   else if($lieu==null){
+                        
+                        $medecins=$medecinrepo->findBySpecialite($specialite);
+                        
+                    }
+                    else{
+                        $medecins=$medecinrepo->findBySpecialiteAndRegion($specialite,$lieu);
+                    }
 
-        //     $structures=$structurerepo->findAll();
-        //     $em = $this->getDoctrine()->getManager();
-        //     $specialites=$specialiterepo->findAll();
-        //     $regions=$regionrepo->findAll();
+                }
 
-        //     return $this->render('accueil/search.html.twig', [
-        //         'medecins' => $medecins,
-        //         'structures' => $structures,
-        //         'specialites'=>$specialites,
-        //         'regions'=>$regions
-        //     ]);
-        // }
+            }
+            foreach($medecins as $values){
+                $values->setImage(base64_encode(stream_get_contents($values->getImage())));
+            }
+
+            $structures=$structurerepo->findAll();
+            $em = $this->getDoctrine()->getManager();
+            $specialites=$specialiterepo->findAll();
+            $regions=$regionrepo->findAll();
+
+            return $this->render('accueil/search.html.twig', [
+                'medecins' => $medecins,
+                'structures' => $structures,
+                'specialites'=>$specialites,
+                'regions'=>$regions
+            ]);
         }
+        
         /**
      * @Route("/accueil", name="accueil")
      */
@@ -109,14 +136,11 @@ class AccueilController extends Controller
      */
     public function detailstructure(Request $request,$id,StructureRepository $structurerepo)
     {
-
-    
         $em = $this->getDoctrine()->getManager();
         $structures=$structurerepo->findById(['id'=>$id]);
-        
+
         return $this->render('accueil/detailstructure.html.twig', [
-          'structures'=>$structures,
-          
+        'structures'=>$structures,     
     ]);
     }
     
