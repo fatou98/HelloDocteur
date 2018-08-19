@@ -1,0 +1,51 @@
+{% extends 'layoutadmin.html.twig' %}
+
+{% block content %}
+ <!-- recent orders table -->
+            <div class="panel">
+                <div class="panel-body pn">
+                    <div class="table-responsive">
+                    <h2 style="text-align:center;">Liste vsl</h2><hr>
+                        <table class="table admin-form theme-warning tc-checkbox-1 fs13">
+                            <thead>
+                                <tr class="bg-light">
+                                    
+                                    <th class="">NomComplet</th>
+                                    <th class="">Adresse</th>
+                                    <th class="">tel</th>
+                                    <th class="">Ordonnance</th>
+                                    <th class="">Patient</th>
+
+                                    
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for livraisons in livraison %}
+                                
+                                <tr>
+                                   
+                                    </td>
+                                    <td class="">{{livraisons.nomcomplet}}</td>
+                                    <td class="">{{livraisons.adresse}}</td>
+                                    <td class="">{{livraisons.tel}}</td>
+                                    <td class="">{{livraisons.ordonnance}}</td>
+                                    <td class="">{{livraisons.patient.nomcomplet}}</td>
+
+
+                                    <td class="text-right">
+                                        <div class="btn-group text-right">
+                                        <td><a href="{{ path('livraisonedit', {'id' : livraisons.id }) }}" class="btn btn-rounded btn-primary btn-small">Editer</a><a href="#" class="btn btn-rounded btn-danger btn-small">Suprimer</a></td>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                                           {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}

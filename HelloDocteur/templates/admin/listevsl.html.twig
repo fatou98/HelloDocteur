@@ -1,0 +1,54 @@
+{% extends 'layoutadmin.html.twig' %}
+
+{% block content %}
+ <!-- recent orders table -->
+            <div class="panel">
+                <div class="panel-body pn">
+                    <div class="table-responsive">
+                    <h2 style="text-align:center;">Liste vsl</h2><hr>
+                        <table class="table admin-form theme-warning tc-checkbox-1 fs13">
+                            <thead>
+                                <tr class="bg-light">
+                                    
+                                    <th class="">Nom</th>
+                                    <th class="">Adresse</th>
+                                    <th class="">tel</th>
+                                    <th class="">fiche</th>
+                                    <th class="">Motif</th>
+                                    <th class="">Patient</th>
+                                    <th class="">Action</th>
+
+                                    
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for vsls in vsl %}
+                                
+                                <tr>
+                                    
+                                    </td>
+                                    <td class="">{{vsls.nomcomplet}}</td>
+                                    <td class="">{{vsls.adresse}}</td>
+                                    <td class="">{{vsls.tel}}</td>
+                                    <td class="">{{vsls.fichemaladie}}</td>
+                                    <td class="">{{vsls.motif}}</td>
+
+                                    <td class="">{{vsls.patient.nomcomplet}}</td>
+
+
+                                    <td class="text-right">
+                                        <div class="btn-group text-right">
+                                     <td><a href="{{ path('vsledit', {'id' : vsls.id }) }}" class="btn btn-rounded btn-primary btn-small">Editer</a><a href="#" class="btn btn-rounded btn-danger btn-small">Suprimer</a></td>
+                                   </div>
+                                    </td>
+                                </tr>
+                                                           {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}

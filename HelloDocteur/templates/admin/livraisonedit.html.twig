@@ -1,0 +1,50 @@
+{% extends 'layoutadmin.html.twig' %}
+{% block content %}
+<style>
+body{
+    background:url(img/img/yenni.jpg);
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position-y:-750px;
+}
+</style>
+<div class="col-12 col-sm-4 col-xl-4">
+                        <div class="footer-widget-area">
+                            <div class="widget-title">
+                                <h6>Livraison De Medicamment</h6>
+                            </div>
+                            {% block flash %}
+            {% for flash_message in app.session.flashbag.get('success') %}
+                <div class="container alert alert-success" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('info') %}
+                <div class="container alert alert-info" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('warning') %}
+                <div class="container alert alert-warning" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('danger') %}
+                <div class="container alert alert-danger" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+        {% endblock %}
+
+                            <div class="footer-contact-form">
+                                <form  method="POST">
+                                    <div><input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="nom"  placeholder="Nomcomplet"></div>
+                                  <br> <div> <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="adresse"  placeholder="Adresse"></div>
+                                  <br> <div> <input type="number" class="form-control border-top-0 border-right-0 border-left-0" name="tel"  placeholder="Telephone"></div>
+                                  <br> <div> <input type="file" class="form-control border-top-0 border-right-0 border-left-0" name="ordonnance"  placeholder="Ordonnance"></div>
+                                  <br> <div> <input type="submit" class="btn medilife-btn"value="valider" name="modifier"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+{% endblock %}
