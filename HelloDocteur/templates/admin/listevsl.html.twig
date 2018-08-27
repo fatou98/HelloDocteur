@@ -6,6 +6,29 @@
                 <div class="panel-body pn">
                     <div class="table-responsive">
                     <h2 style="text-align:center;">Liste vsl</h2><hr>
+                    {% block flash %}
+            {% for flash_message in app.session.flashbag.get('success') %}
+                <div class="container alert alert-success" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('info') %}
+                <div class="container alert alert-info" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('warning') %}
+                <div class="container alert alert-warning" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('danger') %}
+                <div class="container alert alert-danger" role="alert">
+                    {{ flash_message }}
+                </div>
+                
+            {% endfor %}
+        {% endblock %}
                         <table class="table admin-form theme-warning tc-checkbox-1 fs13">
                             <thead>
                                 <tr class="bg-light">
@@ -39,7 +62,9 @@
 
                                     <td class="text-right">
                                         <div class="btn-group text-right">
-                                     <td><a href="{{ path('vsledit', {'id' : vsls.id }) }}" class="btn btn-rounded btn-primary btn-small">Editer</a><a href="#" class="btn btn-rounded btn-danger btn-small">Suprimer</a></td>
+                                     <td><a href="{{ path('vsledit', {'id' : vsls.id }) }}" class="btn btn-rounded btn-primary btn-small">Editer</a>
+                                         <a href="{{ path('deletevsl', {'id' : vsls.id }) }}" class="btn btn-rounded btn-danger btn-small">Suprimer</a>
+</td>
                                    </div>
                                     </td>
                                 </tr>

@@ -11,6 +11,9 @@ use App\Repository\VslRepository;
 use App\Entity\Vsl;
 use App\Entity\Livraison;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class AdminController extends Controller
 {
@@ -56,20 +59,19 @@ class AdminController extends Controller
         return $this->render('admin/edithad.html.twig', 
         array('Had' => $hads));    
     }
-    /**
-     * @Route("/removeHad/{id}", name="removeHad")
+   /**
+    * @Route("/delete/{id}", requirements={"id": "\d+"}, name="delete")
+    * @Method({"GET"})
     */
-    public function removeHad($id,HadRepository $hadrepo,Request $request)
+    public function deleteHad(Request $request, Had $had): Response
     {
-
         $em = $this->getDoctrine()->getManager();
-        $hads= $hadrepo->findBy(['id'=>$id]);
-        $em->remove($hads);
-        $em->flush();
-        $this->addFlash('info', 'Supprimé avec succes.');
-        return $this->render('admin/listehad.html.twig', 
-        array('Had' => $hads));    
+        $em ->remove($had);
+        $em ->flush();
+        $this->addFlash('info', 'had deleted');
+        return $this->redirectToRoute('listehad');
     }
+
     /**
      * @Route("/listevsl", name="listevsl")
      */
@@ -81,6 +83,18 @@ class AdminController extends Controller
 
         return $this->render('admin/listevsl.html.twig',array('vsl'=>$vsls,'users'=>$user)); 
   }
+   /**
+    * @Route("/deletevsl/{id}", requirements={"id": "\d+"}, name="deletevsl")
+    * @Method({"GET"})
+    */
+    public function deleteVsl(Request $request, Vsl $vsl): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em ->remove($vsl);
+        $em ->flush();
+        $this->addFlash('info', ' vsl deleted');
+        return $this->redirectToRoute('listevsl');
+    }
   /**
      * @Route("/listelivraison", name="listelivraison")
      */
@@ -91,6 +105,18 @@ class AdminController extends Controller
         $livraisons = $this->getDoctrine()->getRepository(Livraison::Class)->findAll();
 
         return $this->render('admin/listelivraison.html.twig',array('livraison'=>$livraisons,'users'=>$user)); 
+    }
+     /**
+    * @Route("/deletelivraison/{id}", requirements={"id": "\d+"}, name="deletelivraison")
+    * @Method({"GET"})
+    */
+    public function deletelivraison(Request $request, Livraison $livraison): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em ->remove($livraison);
+        $em ->flush();
+        $this->addFlash('info', ' livraison deleted');
+        return $this->redirectToRoute('listelivraison');
     }
 
     /**
