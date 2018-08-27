@@ -57,6 +57,20 @@ class AdminController extends Controller
         array('Had' => $hads));    
     }
     /**
+     * @Route("/removeHad/{id}", name="removeHad")
+    */
+    public function removeHad($id,HadRepository $hadrepo,Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $hads= $hadrepo->findBy(['id'=>$id]);
+        $em->remove($hads);
+        $em->flush();
+        $this->addFlash('info', 'Supprimé avec succes.');
+        return $this->render('admin/listehad.html.twig', 
+        array('Had' => $hads));    
+    }
+    /**
      * @Route("/listevsl", name="listevsl")
      */
     public function listevsl()
