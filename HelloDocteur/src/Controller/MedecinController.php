@@ -4,6 +4,12 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Repository\MedecinRepository;
+use App\Entity\Medecin;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class MedecinController extends Controller
 {
@@ -16,11 +22,5 @@ class MedecinController extends Controller
             'controller_name' => 'MedecinController',
         ]);
     }
-    public function listemedcin(MedecinRepository $medecinrepo)
-    {
-        
-        $medecins= $medecinrepo->findAll();
-        return $this->render('medecin/listemedecin.html.twig', 
-        array('Medecin' => $medecins));    
-    }
+   
 }

@@ -15,6 +15,12 @@ class Specialite
      * @ORM\Column(type="integer")
      */
     private $id;
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Structure",inversedBy="specialite")
+     * @ORM\JoinColumn(nullable=false)
+     */
+
+    private $structure;
 
     /**
      * @ORM\Column(type="string", length=50)

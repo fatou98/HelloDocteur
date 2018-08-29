@@ -5,11 +5,16 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Had;
+use App\Entity\Structure;
+use App\Entity\StructureRepository;
 use App\Repository\HadRepository;
 use App\Repository\LivraisonRepository;
 use App\Repository\VslRepository;
 use App\Entity\Vsl;
 use App\Entity\Livraison;
+use App\Entity\TypeStructure;
+use App\Repository\MedecinRepository;
+use App\Entity\Medecin;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,7 +57,10 @@ class AdminController extends Controller
                 $hads[0]->setMotif($motif);
                 $em->persist($hads[0]);
                 $em->flush();
+                
                 $this->addFlash('info', 'Modification enregistré avec succes.');
+        return $this->redirectToRoute('listehad');
+           
             }
         }
 
@@ -137,6 +145,8 @@ class AdminController extends Controller
                 $em->persist($livraisons[0]);
                 $em->flush();
                 $this->addFlash('info', 'Modification enregistré avec succes.');
+        return $this->redirectToRoute('listelivraison');
+           
             }
         }
 
@@ -162,11 +172,114 @@ class AdminController extends Controller
                 $em->persist($vsls[0]);
                 $em->flush();
                 $this->addFlash('info', 'Modification enregistré avec succes.');
+        return $this->redirectToRoute('listevsl');
+           
             }
         }
 
         return $this->render('admin/listevsledit.html.twig', 
         array('Vsl' => $vsls));    
+    }
+     /**
+     * @Route("/listemedecin", name="listemedecin")
+     */
+    public function listemedcin(MedecinRepository $medecinrepo)
+    {
+        
+        $medecins= $medecinrepo->findAll();
+        return $this->render('admin/listemedecin.html.twig', 
+        array('Medecin' => $medecins));    
+    }
+    /**
+     * @Route("/AddTypeStructure", name="AddTypeStructure")
+     */
+    public function AddTypeStructure(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $typestructure= new TypeStructure();
+        if(isset($_POST['Ajouter'])){
+            if($request->isMethod('POST')){
+            extract($_POST);
+            $typestructure->setLibelle(strtoupper($libelle));
+            $em->persist($typestructure);
+            $em->flush();
+            $this->addFlash('info', 'Enregistré avec succes.');
+
+            }
+            }
+        return $this->render('admin/addtypestructure.html.twig');    
+   
+    }
+    /**
+     * @Route("/AddStructure", name="AddStructure")
+     */
+    public function AddStructure(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $structure= new Structure();
+        if(isset($_POST['Ajouter'])){
+            if($request->isMethod('POST')){
+        $structure->setLibelle($libelle);
+        $structure->setEmail($email);
+        $structure->setTel($tel);
+        $structure->setAdresse($adresse);
+        $structure->setLatitude($latitude);
+        $structure->setLongitude($longitude);
+        $em->persist($structure);
+        $em->flush();
+        $this->addFlash('info', 'Enregistré avec succes.');
+
+                }
+            }
+            return $this->render('admin/addstructure.html.twig');    
+        }
+        /**
+     * @Route("/editstructure/{id}", name="editstructure")
+    */
+        public function EditStructure(Request $request)
+        {
+            $em = $this->getDoctrine()->getManager();
+    
+            $structure= new Structure();
+            if(isset($_POST['Modifier'])){
+                if($request->isMethod('POST')){
+            $structure->setLibelle($libelle);
+            $structure->setEmail($email);
+            $structure->setTel($tel);
+            $structure->setAdresse($adresse);
+            $structure->setLatitude($latitude);
+            $structure->setLongitude($longitude);
+            $em->persist($structure);
+            $em->flush();
+            $this->addFlash('info', 'Modifier avec succes.');
+    
+                    }
+                }
+                return $this->render('admin/listestructure.html.twig');    
+            }
+             /**
+    * @Route("/deletestructure/{id}", requirements={"id": "\d+"}, name="deletestructure")
+    * @Method({"GET"})
+    */
+    public function deletesrtucture(Request $request, Structure $stucture): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em ->remove($structure);
+        $em ->flush();
+        $this->addFlash('info', ' structure deleted');
+        return $this->redirectToRoute('listestructure');
+    }
+    /**
+     * @Route("/listestructure", name="listestructure")
+     */
+    public function listestructure(StructureRepository $structurerepo)
+    {
+        
+        $structures= $structurerepo->findAll();
+        return $this->render('admin/listestructure.html.twig', 
+        array('Structure' => $structures));    
     }
 }
 
