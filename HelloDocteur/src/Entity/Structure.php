@@ -69,7 +69,7 @@ class Structure
      * @ORM\OneToMany(targetEntity="App\Entity\Specialite",mappedBy="structure")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $specialites;
+    private $specialite;
     
 
 
@@ -213,9 +213,9 @@ class Structure
     /**
      * Get the value of specialites
      */ 
-    public function getSpecialites()
+    public function getSpecialite()
     {
-        return $this->specialites;
+        return $this->specialite;
     }
 
     /**
@@ -223,9 +223,9 @@ class Structure
      *
      * @return  self
      */ 
-    public function setSpecialites($specialites)
+    public function setSpecialite($specialite)
     {
-        $this->specialites = $specialites;
+        $this->specialite = $specialite;
 
         return $this;
     }
