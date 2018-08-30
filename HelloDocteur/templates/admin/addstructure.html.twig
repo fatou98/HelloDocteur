@@ -47,12 +47,32 @@
             </div><br><br><br>
             <div class="col-md-12 col-lg-8 col-lg-offset-2">
             <select class="form-control" name="typestructure" >
-  <option value="">typestructures</option>
-  {% for typestructure in typestructures %}
+  <option value="">typestructure</option>
+  {% for typestructure in typesstructures %}
 		<option value="{{typestructure.id}}">{{typestructure.libelle}}</option>
 
 			{% endfor %}
 </div><br><br><br>
+<div class="col-md-12 col-lg-8 col-lg-offset-2">
+            <select class="form-control" name="medecin" >
+  <option value="">Medecin</option>
+  {% for medecin in medecins %}
+
+		<option value="{{medecin.id}}">{{medecin.nomcomplet}}</option>
+        </select>
+			{% endfor %}
+
+</div><br><br><br>
+<div class="col-md-12 col-lg-8 col-lg-offset-2">
+            <select class="form-control" name="quartier" >
+  <option value="">Quartier</option>
+  {% for quartier in quartiers %}
+		<option value="{{quartier.id}}">{{quartier.libelle}}</option>
+
+			{% endfor %}
+</div><br><br><br>
+
+
             <div class="col-md-12 col-lg-8 col-lg-offset-4">
                  <br><input type="submit" class="col-lg-6 btn medilife-btn btn-primary" value="Ajouter" name="Ajouter">
          </div>

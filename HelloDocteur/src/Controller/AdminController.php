@@ -6,14 +6,16 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Had;
 use App\Entity\Structure;
-use App\Entity\StructureRepository;
+use App\Repository\TypeStructureRepository;
+use App\Repository\MedecinRepository;
+use App\Repository\QuartierRepository;
+use App\Repository\StructureRepository;
 use App\Repository\HadRepository;
 use App\Repository\LivraisonRepository;
 use App\Repository\VslRepository;
 use App\Entity\Vsl;
 use App\Entity\Livraison;
 use App\Entity\TypeStructure;
-use App\Repository\MedecinRepository;
 use App\Entity\Medecin;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -214,7 +216,7 @@ class AdminController extends Controller
     /**
      * @Route("/AddStructure", name="AddStructure")
      */
-    public function AddStructure(Request $request)
+    public function AddStructure(Request $request,TypeStructureRepository $typerepo,MedecinRepository $medecinrepo,QuartierRepository $quartierrepo)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -233,8 +235,11 @@ class AdminController extends Controller
 
                 }
             }
-            return $this->render('admin/addstructure.html.twig');    
-        }
+            return $this->render('admin/addstructure.html.twig',[
+            'typesstructures'=>$typerepo->findAll(),
+            'medecins'=>$medecinrepo->findAll(),
+             'quartiers'=>$quartierrepo->findAll(),
+            ]);}
         /**
      * @Route("/editstructure/{id}", name="editstructure")
     */
@@ -274,12 +279,14 @@ class AdminController extends Controller
     /**
      * @Route("/listestructure", name="listestructure")
      */
-    public function listestructure(StructureRepository $structurerepo)
-    {
+     public function listestructure(StructureRepository $structurerepo)
+     {
         
         $structures= $structurerepo->findAll();
-        return $this->render('admin/listestructure.html.twig', 
-        array('Structure' => $structures));    
-    }
-}
+        return $this->render('accueil/listestructure.html.twig', [
+            'structures'=>$structures,
+            'typesstructures'=>$typestructures
+        ]);
+ }
 
+}

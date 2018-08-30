@@ -51,8 +51,6 @@ class AccueilController extends Controller
                      $newsletter->setEmail($newsletterEmail);
                      $em->persist($newsletter);
                      $em->flush();
-                     var_dump('defrgthb');
-                     die();
                      $this->addFlash('success', 'Votre demande a bien été enregistré.');
 
                  }
