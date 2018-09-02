@@ -16,10 +16,13 @@ class MedecinController extends Controller
     /**
      * @Route("/medecin", name="medecin")
      */
-    public function index()
+    public function index(MedecinRepository $medecinrepo)
     {
+        $usermedecin= $this->getUser();
+        $emailmedecin=$usermedecin->getEmail();
+        $medecinloggedIn=$medecinrepo->findBy(['Email'=>$emailmedecin]);
         return $this->render('medecin/index.html.twig', [
-            'controller_name' => 'MedecinController',
+            'controller_name' => 'MedecinController','medecinloggedIn'=>$medecinloggedIn
         ]);
     }
    

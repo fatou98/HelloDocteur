@@ -21,6 +21,7 @@ class TypeStructure
      */
     private $libelle;
 
+   
     public function getId()
     {
         return $this->id;

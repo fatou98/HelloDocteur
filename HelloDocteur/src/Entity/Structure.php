@@ -277,4 +277,16 @@ class Structure
 
         return $this;
     }
+
+    /**
+     * Set the value of Longitude
+     *
+     * @return  self
+     */ 
+    public function setLongitude($Longitude)
+    {
+        $this->Longitude = $Longitude;
+
+        return $this;
+    }
 }

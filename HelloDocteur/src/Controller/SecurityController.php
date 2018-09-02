@@ -32,6 +32,7 @@ class SecurityController extends Controller
         $user = new User();
         $medecin= new Medecin();
         $patient= new Patient();
+
         $form = $this->createForm(UserType::class, $user);
         
         if ($etat=='medecin'){
@@ -75,6 +76,7 @@ class SecurityController extends Controller
             //return $this->redirectToRoute('login');
         }
         }
+            
         else if ($etat=='admin'){
      
         // 2) handle the submit (will only happen on POST)
@@ -165,6 +167,62 @@ class SecurityController extends Controller
             }
        
         return $this->render('security/register.html.twig', ['form' => $form->createView(), 'mainNavRegistration' => true, 'title' => 'Inscription']);
+
+}
+
+
+/**
+     * @Route("/register/admin/medecin")
+     */
+    public function registerAdminAction(Request $request, UserPasswordEncoderInterface $passwordEncoder) {
+        // 1) build the form
+        $user = new User();
+        $medecin= new Medecin();
+        $patient= new Patient();
+
+        $form = $this->createForm(UserType::class, $user);
+    
+           
+        // 2) handle the submit (will only happen on POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // 3) Encode the password (you could also do this via Doctrine listener)
+            $password = $passwordEncoder->encodePassword($user,'passer');
+            $user->setPassword($password);
+            //on active par défaut
+            $characts = 'abcdefghijklmnopqrstuvwxyz'; 
+            $characts .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';	
+            $characts .= '1234567890'; 
+            $code_aleatoire = ''; 
+
+            for($i=0;$i < 7;$i++) 
+            { 
+            $code_aleatoire .=$characts[ rand() % strlen($characts) ]; 
+            } 
+            $matricule='MD'.$code_aleatoire;
+            $user->setIsActive(true);
+           
+            $user->addRole("ROLE_MEDECIN");
+            // 4) save the User!
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+            $medecin->setMatricule($matricule);
+            $medecin->setNomcomplet($user->getNomcomplet());
+            $medecin->setEmail($user->getEmail());
+            $medecin->setTel($user->getTel());
+            $medecin->setAdresse($user->getAdresse());
+
+            $entityManager->persist($medecin);
+            $entityManager->flush();
+            // ... do any other work - like sending them an email, etc
+            // maybe set a "flash" success message for the user
+            $this->redirectToRoute('accueil');
+            $this->addFlash('success', 'Le compte à bien été enregistré.');
+            //return $this->redirectToRoute('login');
+        }
+    
+        return $this->render('security/registeradmin.html.twig', ['form' => $form->createView(), 'mainNavRegistration' => true, 'title' => 'Inscription']);
 
 }
 /**

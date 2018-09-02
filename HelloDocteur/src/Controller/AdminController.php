@@ -189,6 +189,9 @@ class AdminController extends Controller
     {
         
         $medecins= $medecinrepo->findAll();
+        foreach($medecins as $values){
+            $values->setImage(base64_encode(stream_get_contents($values->getImage())));
+        }
         return $this->render('admin/listemedecin.html.twig', 
         array('Medecin' => $medecins));    
     }
@@ -223,12 +226,15 @@ class AdminController extends Controller
         $structure= new Structure();
         if(isset($_POST['Ajouter'])){
             if($request->isMethod('POST')){
+            extract($_POST);
+                $typestructid=$typerepo->findBy(['id'=>$typestructure]);
         $structure->setLibelle($libelle);
         $structure->setEmail($email);
         $structure->setTel($tel);
         $structure->setAdresse($adresse);
         $structure->setLatitude($latitude);
         $structure->setLongitude($longitude);
+        $structure->setTypeStructure($typestructid[0]);
         $em->persist($structure);
         $em->flush();
         $this->addFlash('info', 'Enregistré avec succes.');
@@ -243,13 +249,15 @@ class AdminController extends Controller
         /**
      * @Route("/editstructure/{id}", name="editstructure")
     */
-        public function EditStructure(Request $request)
+        public function EditStructure($id,StructureRepository $structrepo,Request $request)
         {
             $em = $this->getDoctrine()->getManager();
     
             $structure= new Structure();
             if(isset($_POST['Modifier'])){
                 if($request->isMethod('POST')){
+                    extract($_POST);
+                    $typestructid=$typerepo->findBy(['id'=>$typestructure]);
             $structure->setLibelle($libelle);
             $structure->setEmail($email);
             $structure->setTel($tel);
@@ -262,7 +270,8 @@ class AdminController extends Controller
     
                     }
                 }
-                return $this->render('admin/listestructure.html.twig');    
+                return $this->redirectToRoute('listestructure');
+                              
             }
              /**
     * @Route("/deletestructure/{id}", requirements={"id": "\d+"}, name="deletestructure")
@@ -283,10 +292,22 @@ class AdminController extends Controller
      {
         
         $structures= $structurerepo->findAll();
-        return $this->render('accueil/listestructure.html.twig', [
+        return $this->render('admin/listestructure.html.twig', [
             'structures'=>$structures,
-            'typesstructures'=>$typestructures
+            
         ]);
  }
+ /**
+     * @Route("/listetypestructure", name="listetypestructure")
+     */
+    public function listtypestruct(TypeStructureRepository $typerepo)
+    {
+       
+       $typestructures= $typerepo->findAll();
+       return $this->render('admin/listetypestructure.html.twig', [
+           'typestructures'=>$typestructures,
+           
+       ]);
+}
 
 }

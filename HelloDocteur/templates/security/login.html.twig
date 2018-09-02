@@ -5,16 +5,38 @@
 {% block body %}
   
     <style>
-.container1
+
+body
 {
     background-image:url('img/img/r.jpg');
     background-size:cover;
     background-repeat:no-repeat;
-    background-position-y:-750px;
-    width:50%;
-    margin:auto;
-    padding-top:190px;
-    padding-bottom:190px;
+    
+}
+.form4{
+    margin-top:220px;
+    margin-bottom:100px;
+    margin-left:40%;
+    margin-right:20%;
+    width:450px;
+    background:rgba(0, 108, 255, 0.5);
+    padding:10px;
+    border-radius:20px;
+    -webkit-border-radius:20px;
+    -moz-border-radius:20px; 
+}
+.form4 label{
+    width:150px;
+    color:white;
+    font-size:20px bold;
+}
+.form4 input{
+    background:none;
+    border:none;
+    outline:none;
+    border-bottom: solid 1px white;
+    width:250px;
+    color:white;
 }
 hr{
     margin-left:20%;
@@ -23,11 +45,11 @@ hr{
 }
 h2{
     text-align:center;
+    color:white;
 }
 input{
     border:none;
     outline:none;
-    background:white;
     border-bottom: solid 1px white;
     color:black;
 }
@@ -37,14 +59,24 @@ button{
     font-size:20px;
     margin:10px;
     border-radius:5px;
-    
-    color:white;
+}
+#inscrire{
+    color:#007bff;
 }
 
+#ok{
+    background:#006cff;
+     border:none;
+   height:38px;
+    font-size:20px;
+    margin:10px;
+    border-radius:5px;
+    width:95%;
+}
 
         </style>
         <div class="container container1 row">
-
+        <div class="form4">
         <h2>Connexion</h2>
         <hr>
           {% if error %}
@@ -58,8 +90,11 @@ button{
     {% endif %}
             {{form(form)}}
             <br>
-            <button class="btn">S'inscrire comme <a href="/register/2">ClIENT </a>|  <a href="/register/1">Berger </a> |  <a href="/register/3">ADMIN </a>
+            <center>
+            <button id="inscrire" class="btn">S'inscrire comme <a href="/register/2">ClIENT </a>|  <a href="/register/1">Berger </a> |  <a href="/register/3">ADMIN </a>
                    <span class="badge badge-success"></span>
             </button>
+            </center>
+        </div>
         </div>
 {% endblock %}

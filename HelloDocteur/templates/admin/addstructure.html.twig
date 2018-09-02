@@ -52,15 +52,17 @@
 		<option value="{{typestructure.id}}">{{typestructure.libelle}}</option>
 
 			{% endfor %}
+            </select>
 </div><br><br><br>
 <div class="col-md-12 col-lg-8 col-lg-offset-2">
             <select class="form-control" name="medecin" >
   <option value="">Medecin</option>
-  {% for medecin in medecins %}
+                 {% for medecin in medecins %}
 
 		<option value="{{medecin.id}}">{{medecin.nomcomplet}}</option>
+        			{% endfor %}
+
         </select>
-			{% endfor %}
 
 </div><br><br><br>
 <div class="col-md-12 col-lg-8 col-lg-offset-2">

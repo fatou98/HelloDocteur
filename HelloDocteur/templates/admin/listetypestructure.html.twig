@@ -31,22 +31,17 @@
                     <thead>
 <tr>
 
-<th>NomComplet</th>
-<th>Telephone</th>
-<th>Maticule</th>
-<th>Specialite</th>
-<th>Image</th>
+<th>Libelle</th>
 <th>Editer</th>
 </tr>
 </thead><tbody>
 
-{% for medecins in Medecin %}
+{% for typestructure in typestructures %}
 <tr>
- <td>{{ medecins.nomcomplet }}</td>
-<td>{{ medecins.tel }}</td>
-<td>{{ medecins.matricule }}</td>
-<td>{{ medecins.specialite.libelle }}</td>
-<td><img src="data:image/png;base64,{{medecins.image}}" style="height:50px;width:50px;border-radius:50%;"></td>
+ <td>{{ typestructure.libelle }}</td>
+
+<td>
+</td>
 </tr>
 {% endfor %}
 </tbody> 

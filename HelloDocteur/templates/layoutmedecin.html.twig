@@ -753,8 +753,8 @@
         </li>
         <li class="dropdown menu-merge">
           <a href="#" class="dropdown-toggle fw600 p15" data-toggle="dropdown">
-          	<img src="{{asset('assets/img/avatars/1.jpg')}}" alt="avatar" class="mw30 br64">
-          	<span class="hidden-xs pl15"> Michael .R </span>
+          	<img src="data:image/png;base64,{{medecinloggedIn[0].image}}" alt="avatar" class="mw30 br64">
+          	<span class="hidden-xs pl15"> {{medecinloggedIn[0].nomcomplet}} </span>
             <span class="caret caret-tp hidden-xs"></span>
           </a>
           <ul class="dropdown-menu list-group dropdown-persist w250" role="menu">
@@ -841,7 +841,7 @@
                 <div class="media-links">
                    <a href="#" class="sidebar-menu-toggle">User Menu -</a> <a href="/logout">Deconnexion</a>
                 </div>
-                <div class="media-author">Michael Richards</div>
+                <div class="media-author">{{medecinloggedIn[0].nomcomplet}}</div>
               </div>
             </div>
           </div>
@@ -904,30 +904,24 @@
                 <span class="sidebar-title">Accueil</span>
               </a>
             </li>
-            <li>
-              <a href="../README/index.html">
-                <span class="glyphicon glyphicon-book"></span>
-                <span class="sidebar-title">Documentation</span>
-              </a>
-            </li>
+            
                         <li>
               <a class="accordion-toggle" href="#">
                 <span class="fa fa-columns"></span>
-                <span class="sidebar-title">Médecin</span>
+                <span class="sidebar-title">Patient</span>
                 <span class="caret"></span>
               </a>
               <ul class="nav sub-nav">
                 <li>
-                  <a  href="/register/admin/medecin">
+                  <a  href="#">
                     <span class="fa fa fa-arrows-h"></span>
-                     Ajouter Médecin
+                     Liste de mes patients
                   </a>
                    </li>
                 <li>
-                  <a href="/listemedecin">
+                  <a href="#">
                     <span class="fa fa-arrows-v"></span>
-Lister Médecin              
-                  </a>
+Ajouter un patient                  </a>
                   
                 </li>
                 
@@ -936,71 +930,48 @@ Lister Médecin
             <li>
               <a class="accordion-toggle" href="#">
                 <span class="glyphicon glyphicon-fire"></span>
-                <span class="sidebar-title">Structure</span>
+                <span class="sidebar-title">Creneau</span>
                 <span class="caret"></span>
               </a>
               <ul class="nav sub-nav">
               <li>
-                <a  href="/listestructure">
+                <a  href="#">
                   <span class="fa fa-hand-o-up"></span>
-Liste Structure                </a>
+Liste de mes creneau         </a>
                
               </li>
               <li>
-                <a  href="/AddTypeStructure">
+                <a  href="#">
                   <span class="fa fa-hand-o-up"></span>
-                  Ajouter type de structure
+                  Ajouter un creneau
                 </a>
                 </li>
-                 <li>
-                <a  href="/listetypestructure">
-                  <span class="fa fa-hand-o-up"></span>
-                  Lister Type de structure
-                </a>
-                </li>
-
-                <li>
-                <a  href="/AddStructure">
-                  <span class="fa fa-hand-o-up"></span>
-                  Ajouter structure
-                </a>
-               
-                </li>
+                 
               </ul>
             </li>
             <li>
               <a  href="#"  class="accordion-toggle">
                 <span class="glyphicon glyphicon-check"></span>
-                <span class="sidebar-title">Liste des Services</span>
+                <span class="sidebar-title">Mes rendez-vous</span>
                 <span class="caret"></span>
               </a>
               <ul class="nav sub-nav">
               <li>
-                <a href="/listehad">
+                <a href="#">
                   <span class="fa fa-hand-o-up"></span>
-                  Hospitalisation à Domicile
+                  Liste des rendez-vous validés
                 </a>
                 </li>
               <li>
-                <a href="/listelivraison">
-                  <span class="fa fa-hand-o-up"></span>
-                  Livraison de Médicaments
-                </a>
-                </li> <li>
-                <a href="/listevsl">
-                  <span class="fa fa-hand-o-up"></span>
-                  V S L(Véhicule Sanitaire Leger)
-                </a>
-                </li> <li>
                 <a href="#">
                   <span class="fa fa-hand-o-up"></span>
-                 Prise De Rendez-Vous
+                  Liste des demandes de RDV
                 </a>
-                </li>
+                </li> 
                 </ul>
 
               </li>
-                 </ul>
+             </ul>
           <!-- End: Sidebar Menu -->
 
 	      <!-- Start: Sidebar Collapse Button -->

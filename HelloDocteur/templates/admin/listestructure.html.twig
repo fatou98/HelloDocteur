@@ -39,14 +39,16 @@
 </tr>
 </thead><tbody>
 
-{% for structures in Structure %}
+{% for structure in structures %}
 <tr>
- <td>{{ structures.libelle }}</td>
-<td>{{ structures.email }}</td>
-<td>{{ structures.tel }}</td>
-<td>{{ structures.adresse }}</td>
-
+ <td>{{ structure.libelle }}</td>
+<td>{{ structure.email }}</td>
+<td>{{ structure.tel }}</td>
+<td>{{ structure.adresse }}</td>
 <td>
+<a href="{{ path('editstructure', {'id' : structure.id }) }}" class="btn btn-rounded btn-primary btn-small">Editer</a>
+<a href="{{ path('deletestructure', {'id' : structure.id }) }}" class="btn btn-rounded btn-danger btn-small">Suprimer</a>
+
 </td>
 </tr>
 {% endfor %}

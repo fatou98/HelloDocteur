@@ -1,0 +1,83 @@
+{% extends 'layoutadmin.html.twig' %}
+{% block content %}
+    <div class="container">
+    <h1>Ajouter  structure</h1>
+    <br><br>
+   {% block flash %}
+            {% for flash_message in app.session.flashbag.get('success') %}
+                <div class="container alert alert-success" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('info') %}
+                <div class="container alert alert-info" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('warning') %}
+                <div class="container alert alert-warning" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('danger') %}
+                <div class="container alert alert-danger" role="alert">
+                    {{ flash_message }}
+                </div>
+                
+            {% endfor %}
+        {% endblock %}
+
+        <form class="row" method="Post">
+            <div class="col-md-12 col-lg-8 col-lg-offset-2">
+                <input type="text" id="inputStandard" name="libelle" class="form-control" placeholder="Entrer la structure">
+            </div><br><br><br>
+            <div class="col-md-12 col-lg-8 col-lg-offset-2">
+                <input type="text" id="inputStandard" name="email" class="form-control" placeholder="Entrer l'email de la structure">
+            </div><br><br><br><div class="col-md-12 col-lg-8 col-lg-offset-2">
+                <input type="text" id="inputStandard" name="tel" class="form-control" placeholder="Entrer le telephone de la structure">
+            </div><br><br><br>
+            <div class="col-md-12 col-lg-8 col-lg-offset-2">
+                <input type="text" id="inputStandard" name="adresse" class="form-control" placeholder="Entrer l'adresse de la structure">
+            </div><br><br><br>
+            <div class="col-md-12 col-lg-8 col-lg-offset-2">
+                <input type="text" id="inputStandard" name="latitude" class="form-control" placeholder="latitude">
+            </div><br><br><br>
+            <div class="col-md-12 col-lg-8 col-lg-offset-2">
+                <input type="text" id="inputStandard" name="longitude" class="form-control" placeholder="longitude">
+            </div><br><br><br>
+            <div class="col-md-12 col-lg-8 col-lg-offset-2">
+            <select class="form-control" name="typestructure" >
+  <option value="">typestructure</option>
+  {% for typestructure in typesstructures %}
+		<option value="{{typestructure.id}}">{{typestructure.libelle}}</option>
+
+			{% endfor %}
+            </select>
+</div><br><br><br>
+<div class="col-md-12 col-lg-8 col-lg-offset-2">
+            <select class="form-control" name="medecin" >
+  <option value="">Medecin</option>
+                 {% for medecin in medecins %}
+
+		<option value="{{medecin.id}}">{{medecin.nomcomplet}}</option>
+        			{% endfor %}
+
+        </select>
+
+</div><br><br><br>
+<div class="col-md-12 col-lg-8 col-lg-offset-2">
+            <select class="form-control" name="quartier" >
+  <option value="">Quartier</option>
+  {% for quartier in quartiers %}
+		<option value="{{quartier.id}}">{{quartier.libelle}}</option>
+
+			{% endfor %}
+</div><br><br><br>
+
+
+            <div class="col-md-12 col-lg-8 col-lg-offset-4">
+                 <br><input type="submit" class="col-lg-6 btn medilife-btn btn-primary" value="Ajouter" name="Ajouter">
+         </div>
+        </form>
+    </div>
+{% endblock %}
