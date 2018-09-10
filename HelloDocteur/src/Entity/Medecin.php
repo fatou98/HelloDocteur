@@ -64,13 +64,18 @@ class Medecin
      * @ORM\JoinColumn(nullable=true)
      */
     private $Specialite;
-    
+
+
      /**
      * @ORM\OneToMany(targetEntity="App\Entity\Structure",mappedBy="medecins")
      * @ORM\JoinColumn(nullable=true)
      */
     private $structure;
-
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Creneau",mappedBy="medecin")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $creneau;
     /**
      * 
      * @ORM\Column(type="blob",nullable=true)
@@ -249,6 +254,27 @@ class Medecin
     public function setNomcomplet($nomcomplet)
     {
         $this->nomcomplet = $nomcomplet;
+
+        return $this;
+    }
+
+
+    /**
+     * Get the value of creneau
+     */ 
+    public function getCreneau()
+    {
+        return $this->creneau;
+    }
+
+    /**
+     * Set the value of creneau
+     *
+     * @return  self
+     */ 
+    public function setCreneau($creneau)
+    {
+        $this->creneau = $creneau;
 
         return $this;
     }

@@ -10,32 +10,32 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col-12 col-lg-9">
                                 <div class="medilife-appointment-form">
-                                    <form method="post" >
+                                    <form method="post">
                                         <div class="row align-items-end">
                                             <div class="col-12 col-md-5">
                                                 <div class="form-group">
                                                     <select class="form-control" id="speciality" name="specialite">
-                                                    <option value="">Specialités</option>
-                                                    {% for specialite in specialites %}
-												<option value="{{specialite.id}}">{{specialite.libelle}}</option>
+                                                        <option value="">Specialités</option>
+                                                        {% for specialite in specialites %}
+                                                            <option value="{{specialite.id}}">{{specialite.libelle}}</option>
 
-									{% endfor %}
-										
-                                                </select>
+                                                        {% endfor %}
+
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-4">
                                                 <div class="form-group">
                                                     <select class="form-control" id="doctors" name="lieu">
-                                                    <option value="">Lieu</option>
- {% for region in regions %}
-												<option value="{{region.id}}">{{region.libelle}}</option>
+                                                        <option value="">Lieu</option>
+                                                        {% for region in regions %}
+                                                            <option value="{{region.id}}">{{region.libelle}}</option>
 
-									{% endfor %}
-                                                </select>
+                                                        {% endfor %}
+                                                    </select>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-12 col-md-3">
                                                 <div class="form-group">
                                                     <input type="submit" style="margin-top:-40px;" class="btn medilife-btn" value="Rechercher" name="Rechercher">
@@ -51,8 +51,7 @@
                                     <div class="single-contact-info mb-30">
                                         <h3 style="color:white;text-align:center;">Prenez un rendez-vous en ligne chez HelloDocteur</h3>
                                     </div>
-                                   
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -63,68 +62,84 @@
     </div>
     <!-- ***** Book An Appoinment Area End ***** -->
 
- <div class="row" style="margin-left:30px;padding:10px;" >
+    <div class="row" style="margin-left:30px;padding:10px;">
 
+        <div class="medilife-tabs-content col-lg-6">
+            <ul class="nav nav-tabs" id="myTab" role="tablist" style="width:300px;">
+                <li class="nav-item">
+                    <a class="nav-link active" id="specialities-tab" data-toggle="tab" href="#specialities" role="tab" aria-controls="specialities" aria-selected="true">Médecins</a>
+                </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" id="faq-tab" data-toggle="tab" href="#faq" role="tab" aria-controls="faq" aria-selected="false">Structures</a>
+                </li>
+            </ul>
 
-                    <div class="medilife-tabs-content col-lg-6">
-       <ul class="nav nav-tabs" id="myTab" role="tablist" style="width:300px;">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="specialities-tab" data-toggle="tab" href="#specialities" role="tab" aria-controls="specialities" aria-selected="true">Médecins</a>
-                            </li>
+            <div class="tab-content mb-100" id="myTabContent">
+                <div class="tab-pane fade show active row" id="specialities" role="tabpanel" aria-labelledby="specialities-tab">
+                    <div class="medilife-tab-text col-lg-12  d-md-flex align-items-center" style="display:flex;flex-wrap:wrap;margin-left:20px;">
+                        <!-- Medilife Tab Text -->
+                        {% if medecins == null %}
+                            <h1 ><br>Desolé pas de medecin de ces criteres.</h1>
 
-                            <li class="nav-item">
-                                <a class="nav-link" id="faq-tab" data-toggle="tab" href="#faq" role="tab" aria-controls="faq" aria-selected="false">Structures</a>
-                            </li>
-                        </ul>
+                        {% endif %}
 
+{% for medecin in medecins %}
 
-                        <div class="tab-content mb-100" id="myTabContent">
-                          <div class="tab-pane fade show active row" id="specialities" role="tabpanel" aria-labelledby="specialities-tab">
-                                <div class="medilife-tab-text col-lg-12  d-md-flex align-items-center" style="display:flex;flex-wrap:wrap;margin-left:20px;">
-                                    <!-- Medilife Tab Text  -->
-{% if medecins == null %}
-<h1 ><br>Desolé pas de medecin de ces criteres.</h1>                    
+    <div class="medilife-tab-text card" style="width:100%;padding:20px;margin-right:10px;display:flex;margin:10px;">
+        <div class="col-lg-6 col-md-12">
+        <img src="data:image/png;base64,{{medecin.image}}" style="height:70px;border-radius:50%;" class="">
 
-{% endif %}
+        <a href="/detailMedecin/{{medecin.id}}">
+            <strong class="">{{medecin.nomcomplet}}
+            </strong>
+        </a>
+        <br>
+        <strong>{{medecin.Specialite.libelle}}</strong>
+    </div>
+        <div class="col-lg-12 col-md-12" style="display:flex;">
+                    {% for item in medecin.creneau %}
 
-                                                                         {% for medecin in medecins %}
+        <div >
+            
+        <span style="background-color:blue;margin:5px;padding:5px;">{{item.creneauitem.datecreneau | date("m-d-Y")}}</span>
+<ul> <li>
+                    {{item.heuredebut}}-{{item.heurefin}}
+                </li>
+</ul>
+        </div>
 
-                                    <div class="medilife-tab-text row" style="padding:20px;border:1px solid gray;margin-right:10px;">
-                                    <img src="data:image/png;base64,{{medecin.image}}" style="height:70px;border-radius:50%;" class="col-lg-2" >
+               
+            {% endfor %}
+        </div>
+        {#   {% for struc in medecin.structure %}
+            <span>{{struc.libelle}}</span>
+            {% endfor %}  #}
+        <strong>{{medecin.quartier.libelle}}</strong>
 
-                                     <a href="/detailMedecin/{{medecin.id}}"> <strong class="col-lg-8">{{medecin.nomcomplet}}
-                                        </strong>  </a>
-                                        <br>
-                                        <strong class="col-lg-6">{{medecin.specialite.libelle}}</strong>
+    </div>
+{% endfor %}
 
-                              {#   {% for struc in medecin.structure %}
-                                    <span>{{struc.libelle}}</span>
-                                    {% endfor %}  #}
-                                 <strong class="col-lg-6">{{medecin.quartier.libelle}}</strong>
-
-                                </div>                                {% endfor %}
-
-                                   
-                                </div>
-                            </div>
-
-                         <div class="tab-pane fade" id="faq" role="tabpanel" aria-labelledby="faq-tab">
-                                <div class="medilife-tab-text col-lg-12 d-md-flex align-items-center">
-                                {% for structure in structures %}
-                                    
-                                                                       <div class="medilife-tab-text row" style="padding:20px;border:1px solid gray;margin-right:10px;">
-                      {{structure.libelle}}          
-</div>{% endfor %}
-                                </div>
-                            </div>
-
-                        </div>
                     </div>
-                                       <div class="medilife-tabs-content col-lg-6">
-                                            <iframe id="carte-reseau-yenni" src="https://umap.openstreetmap.fr/fr/map/reseau-de-soin-yenni_199584?scaleControl=false&amp;miniMap=false&amp;scrollWheelZoom=true&amp;zoomControl=true&amp;allowEdit=false&amp;moreControl=true&amp;searchControl=null&amp;tilelayersControl=null&amp;embedControl=null&amp;datalayersControl=true&amp;onLoadPanel=undefined&amp;captionBar=false#17/#LATITUDE/#LONGITUDE" width="100%" height="500px" frameborder="0"></iframe>
-</div>
                 </div>
+
+                <div class="tab-pane fade" id="faq" role="tabpanel" aria-labelledby="faq-tab">
+                    <div class="medilife-tab-text col-lg-12 d-md-flex align-items-center">
+                        {% for structure in structures %}
+
+                            <div class="medilife-tab-text row" style="padding:20px;border:1px solid gray;margin-right:10px;">
+                                {{structure.libelle}}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
             </div>
+        </div>
+        <div class="medilife-tabs-content col-lg-6">
+            <iframe id="carte-reseau-yenni" src="https://umap.openstreetmap.fr/fr/map/reseau-de-soin-yenni_199584?scaleControl=false&amp;miniMap=false&amp;scrollWheelZoom=true&amp;zoomControl=true&amp;allowEdit=false&amp;moreControl=true&amp;searchControl=null&amp;tilelayersControl=null&amp;embedControl=null&amp;datalayersControl=true&amp;onLoadPanel=undefined&amp;captionBar=false#17/#LATITUDE/#LONGITUDE" width="100%" height="500px" frameborder="0"></iframe>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'layoutmedecin.html.twig' %}
+
+
+    {% block content %}
+    <div>
+   {% block flash %}
+            {% for flash_message in app.session.flashbag.get('success') %}
+                <div class="container alert alert-success" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('info') %}
+                <div class="container alert alert-info" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('warning') %}
+                <div class="container alert alert-warning" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('danger') %}
+                <div class="container alert alert-danger" role="alert">
+                    {{ flash_message }}
+                </div>
+                
+            {% endfor %}
+        {% endblock %}
+
+  <table class="table table-striped table-hover" id="datatable3" cellspacing="0" width="100%">
+                    <thead>
+<tr>
+
+
+<th>Creneau</th>
+<th>Date creneau</th>
+<th>Actions</th>
+
+</tr>
+</thead><tbody>
+
+{% for crene in creneau %}
+<tr>
+<td>{{ crene.heuredebut }}-{{ crene.heurefin }}</td>
+<td>{{ crene.creneauitem.datecreneau | date }}</td>
+<td>
+<a href="{{ path('creneauedit', {'id' : crene.id }) }}" class="btn btn-rounded btn-primary btn-small">Editer</a>
+
+</td>
+</tr>
+{% endfor %}
+</tbody> 
+
+
+
+</table>
+  </div>
+{% endblock %}

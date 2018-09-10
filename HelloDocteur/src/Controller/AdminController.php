@@ -12,6 +12,7 @@ use App\Repository\QuartierRepository;
 use App\Repository\StructureRepository;
 use App\Repository\HadRepository;
 use App\Repository\LivraisonRepository;
+use App\Repository\PriseDeRendezvousRepository;
 use App\Repository\VslRepository;
 use App\Entity\Vsl;
 use App\Entity\Livraison;
@@ -33,6 +34,44 @@ class AdminController extends Controller
             'controller_name' => 'AdminController',
         ]);
     }
+     /**
+     * @Route("/listeprv", name="listeprv")
+     */
+    public function listeprv(PriseDeRendezvousRepository $prvrepo)
+    {
+        
+        $prvs= $prvrepo->findAll();
+        return $this->render('admin/listeprv.html.twig', 
+        array('PriseDeRendezvous' => $prvs));    
+    }
+    /**
+     * @Route("/editprv/{id}", name="editprv")
+    */
+    public function editprv($id,PriseDeRendezvousRepository $prvrepo,Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $prvs= $prvrepo->findBy(['id'=>$id]);
+        if(isset($_POST['modifier'])){
+            if($request->isMethod('POST')){
+                extract($_POST);
+                $prvs[0]->setMotif($motif);
+                $prvs[0]->setCreneau($creneau);
+                $prvs[0]->setMedecin($medecin);
+                $prvs[0]->setPatient($patient);
+                $em->persist($prvs[0]);
+                $em->flush();
+                
+                $this->addFlash('info', 'Modification enregistré avec succes.');
+        return $this->redirectToRoute('listehad');
+           
+            }
+        }
+
+        return $this->render('admin/edithad.html.twig', 
+        array('Had' => $hads));    
+    }
+    
      /**
      * @Route("/listehad", name="listehad")
      */
@@ -201,7 +240,7 @@ class AdminController extends Controller
     public function AddTypeStructure(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
+        
         $typestructure= new TypeStructure();
         if(isset($_POST['Ajouter'])){
             if($request->isMethod('POST')){

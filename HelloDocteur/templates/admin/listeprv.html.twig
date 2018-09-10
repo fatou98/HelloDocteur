@@ -1,0 +1,69 @@
+{% extends 'layoutadmin.html.twig' %}
+
+{% block content %}
+ <!-- recent orders table -->
+            <div class="panel">
+                <div class="panel-body pn">
+                    <div class="table-responsive">
+                    <h2 style="text-align:center;">Liste Prise De Rendezvous</h2><hr>
+                    {% block flash %}
+            {% for flash_message in app.session.flashbag.get('success') %}
+                <div class="container alert alert-success" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('info') %}
+                <div class="container alert alert-info" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('warning') %}
+                <div class="container alert alert-warning" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('danger') %}
+                <div class="container alert alert-danger" role="alert">
+                    {{ flash_message }}
+                </div>
+                
+            {% endfor %}
+        {% endblock %}
+                        <table class="table admin-form theme-warning tc-checkbox-1 fs13">
+                            <thead>
+                                <tr class="bg-light">
+                                    
+                                    <th class="">Nom</th>
+                                    <th class="">Motif</th>
+                                    <th class="">Action</th>
+
+                                    
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for prvs in PriseDeRendezvous %}
+                                
+                                <tr>
+                                    
+                                    </td>
+                                    <td class="">{{prvs.patient.nomcomplet}}</td>
+                                    <td class="">{{prvs.motif}}</td>
+                                    
+
+
+                                    <td class="text-right">
+                                        <div class="btn-group text-right">
+                                     
+                                   </div>
+                                    </td>
+                                </tr>
+                                                           {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}

@@ -39,11 +39,9 @@ class AccueilController extends Controller
          */
         public function search(Request $request,MedecinRepository $medecinrepo,StructureRepository $structurerepo,SpecialiteRepository $specialiterepo,RegionRepository $regionrepo)
         {
-
-
+            setlocale(LC_TIME, 'fr_FR.UTF8', 'fr.UTF8', 'fr_FR.UTF-8', 'fr.UTF-8');
             $em = $this->getDoctrine()->getManager();
             $medecins=$medecinrepo->findAll();
-           
             if(isset($_POST['Sinscrire'])){
                 if($request->isMethod('POST')) {
                      extract($_POST);
@@ -77,7 +75,6 @@ class AccueilController extends Controller
             foreach($medecins as $values){
                 $values->setImage(base64_encode(stream_get_contents($values->getImage())));
             }
-
             $structures=$structurerepo->findAll();
             $em = $this->getDoctrine()->getManager();
             $specialites=$specialiterepo->findAll();

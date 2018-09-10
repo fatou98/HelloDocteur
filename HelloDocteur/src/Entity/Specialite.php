@@ -15,9 +15,10 @@ class Specialite
      * @ORM\Column(type="integer")
      */
     private $id;
+    
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Structure",inversedBy="specialite")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
 
     private $structure;
@@ -40,6 +41,26 @@ class Specialite
     public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of structure
+     */ 
+    public function getStructure()
+    {
+        return $this->structure;
+    }
+
+    /**
+     * Set the value of structure
+     *
+     * @return  self
+     */ 
+    public function setStructure($structure)
+    {
+        $this->structure = $structure;
 
         return $this;
     }

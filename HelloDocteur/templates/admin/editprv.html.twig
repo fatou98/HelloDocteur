@@ -1,0 +1,58 @@
+
+
+
+{% extends 'layoutadmin.html.twig' %}
+{% block content %}
+<div class="col-12 col-sm-6 col-xl-4">
+                        <div class="footer-widget-area">
+                            <div class="widget-title">
+                                <h1>Modifier Hospitalisation a Domicile</h6>
+                            </div>
+                             {% block flash %}
+            {% for flash_message in app.session.flashbag.get('success') %}
+                <div class="container alert alert-success" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('info') %}
+                <div class="container alert alert-info" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('warning') %}
+                <div class="container alert alert-warning" role="alert">
+                    {{ flash_message }}
+                </div>
+            {% endfor %}
+            {% for flash_message in app.session.flashbag.get('danger') %}
+                <div class="container alert alert-danger" role="alert">
+                    {{ flash_message }}
+                </div>
+                
+            {% endfor %}
+        {% endblock %}
+
+                            <div class="footer-contact-form">
+                                <form  method="POST">
+                                <div class="col-md-12 col-lg-8 col-lg-offset-2">
+            <select class="form-control" name="medecin" >
+  <option value="">Creneau</option>
+                 {% for creneau in creneaus %}
+
+		<option value="{{creneau.id}}">{{creneau.heuredebut}} {{creneau.heurefin}}</option>
+        			{% endfor %}
+
+        </select>
+
+</div><br><br><br>
+
+
+                                   <br> <input type="number" class="form-control border-top-0 border-right-0 border-left-0" name="tel"  placeholder="Tel" value="{{Had[0].tel}}">
+                                   <br> <textarea name="motif" class="form-control border-top-0 border-right-0 border-left-0"  placeholder="Motif">{{Had[0].motif}}</textarea>
+                                    <br><input type="submit" class="btn medilife-btn" value="valider" name="modifier">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+{% endblock %}
+
