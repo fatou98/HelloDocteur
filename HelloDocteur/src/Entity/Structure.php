@@ -66,7 +66,7 @@ class Structure
      */
     private $Quartier;
      /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Specialite",mappedBy="structure")
+     * @ORM\OneToMany(targetEntity="App\Entity\Specialite" , mappedBy="structure")
      * @ORM\JoinColumn(nullable=true)
      */
     private $specialite;

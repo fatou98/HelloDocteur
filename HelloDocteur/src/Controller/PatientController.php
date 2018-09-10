@@ -53,7 +53,38 @@ class PatientController extends Controller
                         
                           ]);
                         }
+   
     /**
+     * @Route("/prisederdv/{idmedecin}/{idcreneau}", name="had")
+     */
+    public function prisederdv(Request $request,PatientRepository $patientrepo,$idmedecin,$idcreneau)
+    {
+        $em = $this->getDoctrine()->getManager();
+            $user=$this->getUser();
+            $email=$user->getEmail();
+            $patient=$patientrepo->findBy(['Email'=>$email]);
+           
+            if(isset($_POST['ajouter'])){
+              
+            if($request->isMethod('POST')) {
+                        extract($_POST);
+                       
+                        $had = new  Had();
+                        $had->setAdresse($adresse);
+                        $had->setTel($tel);
+                        $had->setMotif($motif);
+                        $had->setPatient($patient[0]);
+                        $em->persist($had);
+                        $em->flush();
+                        $this->addFlash('success', 'Votre demande a bien été enregistré.');
+
+                    }
+                }
+                          return $this->render('patient/had.html.twig',[
+                        
+                          ]);
+                        }
+                  /**
      * @Route("/vsl", name="vsl")
      */
     public function vsl(Request $request,PatientRepository $patientrepo)

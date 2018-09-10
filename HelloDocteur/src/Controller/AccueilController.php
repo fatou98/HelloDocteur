@@ -41,6 +41,8 @@ class AccueilController extends Controller
         {
             setlocale(LC_TIME, 'fr_FR.UTF8', 'fr.UTF8', 'fr_FR.UTF-8', 'fr.UTF-8');
             $em = $this->getDoctrine()->getManager();
+            $precedent=0;
+            $suivant=4;
             $medecins=$medecinrepo->findAll();
             if(isset($_POST['Sinscrire'])){
                 if($request->isMethod('POST')) {
@@ -57,7 +59,10 @@ class AccueilController extends Controller
             if(isset($_POST['Rechercher'])){
                 extract($_POST);
                 if($request->isMethod('POST')){
-                    if($specialite==null){
+                    if($specialite==null && $lieu==null ){
+                        $medecins=$medecinrepo->findAll();
+                    }
+                     else if($specialite==null){
                         $medecins=$medecinrepo->findByRegion($lieu);
                     }
                    else if($lieu==null){
@@ -84,7 +89,9 @@ class AccueilController extends Controller
                 'medecins' => $medecins,
                 'structures' => $structures,
                 'specialites'=>$specialites,
-                'regions'=>$regions
+                'regions'=>$regions,
+                'precedent'=>0,
+                'suivant'=>4
             ]);
         }
         
@@ -137,7 +144,19 @@ class AccueilController extends Controller
         return $this->render('accueil/detailstructure.html.twig', [
         'structures'=>$structures,     
     ]);
-    }
+    }/** 
+   * @Route("/precedent") 
+*/ 
+public function precedentAction(Request $request) {  
+  
+    if ($request->isXmlHttpRequest()) {  
+       $precedent=0;  
+      
+       return $precedent; 
+    } else { 
+       return $this->render('accueil/search.html.twig'); 
+    } 
+ }     
     
 }
     

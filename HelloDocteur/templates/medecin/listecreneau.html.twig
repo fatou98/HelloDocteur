@@ -34,6 +34,7 @@
 
 <th>Creneau</th>
 <th>Date creneau</th>
+<th>Etat</th>
 <th>Actions</th>
 
 </tr>
@@ -43,6 +44,8 @@
 <tr>
 <td>{{ crene.heuredebut }}-{{ crene.heurefin }}</td>
 <td>{{ crene.creneauitem.datecreneau | date }}</td>
+<td>{{ crene.etat ? 'Validé' : 'Non Validé' }}</td>
+
 <td>
 <a href="{{ path('creneauedit', {'id' : crene.id }) }}" class="btn btn-rounded btn-primary btn-small">Editer</a>
 

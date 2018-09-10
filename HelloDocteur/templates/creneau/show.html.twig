@@ -1,0 +1,34 @@
+{% extends 'layoutmedecin.html.twig' %}
+
+{% block title %}Creneau{% endblock %}
+
+{% block content %}
+    <h1>Creneau</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ creneau.id }}</td>
+            </tr>
+            <tr>
+                <th>Heuredebut</th>
+                <td>{{ creneau.heuredebut }}</td>
+            </tr>
+            <tr>
+                <th>Heurefin</th>
+                <td>{{ creneau.heurefin }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ creneau.etat ? 'Validé' : 'Non Validé' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('creneau_index') }}">back to list</a>
+
+    <a href="{{ path('creneau_edit', {'id': creneau.id}) }}">edit</a>
+
+    {{ include('creneau/_delete_form.html.twig') }}
+{% endblock %}

@@ -121,4 +121,10 @@ class Creneau
 
         return $this;
     }
+    
+    public function __toString() {
+      
+        return $this->creneauitem;
+
+    }
 }

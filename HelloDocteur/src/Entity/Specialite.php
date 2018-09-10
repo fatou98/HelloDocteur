@@ -17,7 +17,7 @@ class Specialite
     private $id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Structure",inversedBy="specialite")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Structure", inversedBy="specialite")
      * @ORM\JoinColumn(nullable=true)
      */
 
