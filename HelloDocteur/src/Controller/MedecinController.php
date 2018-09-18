@@ -89,7 +89,7 @@ class MedecinController extends Controller
         $idmedecin=$medecinloggedIn[0]->getId();
         $listecreneauitem=$creneauitemrepo->findAll();
 
-        if(isset($_POST['MOdifier'])){
+        if(isset($_POST['Modifier'])){
             if($request->isMethod('POST')){
                 extract($_POST);
         $lecreneauitem=$creneauitemrepo->findBy(['id'=>$id]);
