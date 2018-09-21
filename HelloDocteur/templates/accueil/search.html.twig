@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
- 
+
     <!-- ***** Book An Appoinment Area Start ***** -->
     <div class="medilife-book-an-appoinment-area" style="padding-top:190px;margin-bottom:30px;background:url(img/blog-img/3.jpg);
     padding-bottom:50px">
@@ -63,7 +63,6 @@
         </div>
     </div>
     <!-- ***** Book An Appoinment Area End ***** -->
-
     <div class="row" style="margin-left:30px;padding:10px;">
 
         <div class="medilife-tabs-content col-lg-8">
@@ -101,24 +100,23 @@
                                     <strong>{{medecin.quartier.libelle}}</strong>
                                 </div>
                                 <div class="col-lg-4 col-md-12">
-                                    <div class="col-lg-12" style="display:flex;width:100%;">
-                                   
-                                        {% for item in medecin.creneau | slice(0,5) %}
-                                        <div class="col-lg-6" style="display:flex;flex-direction:column;">
-                                            <div style="background-color:blue;margin:2px;padding:10px;height:60px;text-align:center;width:80px;">{{item.creneauitem.datecreneau | date("m-d-Y")}}</div>
-                                            <br>
-                                            {% for item2 in item.creneauitem.creneau %}
-                                                <a href="/prisederdv/{{medecin.id}}/{{item.id}}" style="background-color:gray;height:30px;padding:5px;text-align:center;color:white;">
-                                                    {{item2.heuredebut}}-{{item2.heurefin}}
-                                                </a>
-                                            {% endfor %}
-                                        </div>
-                                        {% endfor %}
-                                                <div class="text-center">{{ knp_pagination_render(medecins) }}</div>
+                                    <div class="col-lg-12 reservations" style="display:flex;width:100%;">
 
-                                        
+                                        {% for item in medecin.creneau %}
+                                            <div class="col-lg-6" style="display:flex;flex-direction:column;">
+                                                <div style="background-color:blue;margin:2px;padding:10px;height:60px;text-align:center;width:80px;">{{item.creneauitem.datecreneau | date("m-d-Y")}}</div>
+                                                <br>
+                                                {% for item2 in item.creneauitem.creneau %}
+                                                    <a href="/prisederdv/{{medecin.id}}/{{item.id}}" style="background-color:gray;height:30px;padding:5px;text-align:center;color:white;">
+                                                        {{item2.heuredebut}}-{{item2.heurefin}}
+                                                    </a>
+                                                {% endfor %}
+                                            </div>
+                                        {% endfor %}
+
                                     </div>
-                                    
+                                    <div class="text-center">{{ knp_pagination_render(medecin.creneau) }}</div>
+
                                 </div>
 
                             </div>

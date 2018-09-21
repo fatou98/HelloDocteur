@@ -43,7 +43,7 @@ class AccueilController extends Controller
             $em = $this->getDoctrine()->getManager();
             $precedent=0;
             $suivant=4;
-            $medecinlist=$medecinrepo->findAll();
+            $medecins=$medecinrepo->findAll();
             
            
             if(isset($_POST['Sinscrire'])){
@@ -79,13 +79,13 @@ class AccueilController extends Controller
                 }
 
             }
-            $medecins = $this->get('knp_paginator')->paginate(
-                $medecinlist,
-                $request->query->get('page', 1)/*le numéro de la page à afficher*/,
-                  4/*nbre d'éléments par page*/
-            );
+            
             foreach ($medecins as $values) {
-               
+                $values->setCreneau($this->get('knp_paginator')->paginate(
+                    $values->getCreneau(),
+                    $request->query->get('page', 1)/*le numéro de la page à afficher*/,
+                      4/*nbre d'éléments par page*/
+                ));
                 $values->setImage(base64_encode(stream_get_contents($values->getImage())));
 
             }
@@ -131,7 +131,7 @@ class AccueilController extends Controller
     $em = $this->getDoctrine()->getManager();
     $specialites=$specialiterepo->findAll();
     $regions=$regionrepo->findAll();
-    $medecinBYId=$medecinrepo->findById(['id'=>$id]);
+    $medecinBYId=$medecinrepo->findOneBy(['id'=>$id]);
     foreach($medecinBYId as $values){
         $values->setImage(base64_encode(stream_get_contents($values->getImage())));
     

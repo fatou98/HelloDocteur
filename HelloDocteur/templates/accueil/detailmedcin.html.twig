@@ -1,43 +1,156 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<div class="tab-content mb-100" id="myTabContent" style="padding-top:190px;margin-bottom:30px;">
-                          <div class="tab-pane fade show active row" id="specialities" role="tabpanel" aria-labelledby="specialities-tab">
-                                <div class="medilife-tab-text col-lg-6  d-md-flex align-items-center" style="display:flex;flex-wrap:wrap;margin-left:20px;">
-                                    <!-- Medilife Tab Text  -->
-                                                                         {% for medecin in medecin %}
+ <style>
+ 
+        .header1 {
+            height: 100px;
+            background-color: rgb(97, 97, 102);
+        }
 
-                                    <div class="medilife-tab-text row" style="padding:20px;border:1px solid gray;margin-right:10px;">
-                                    <img src="data:image/png;base64,{{medecin.image}}" style="height:70px;border-radius:50%;" class="col-lg-2" >
+        .header2 {
+            height: 50px;
+            background-color: rgb(224, 217, 204);
+            margin-top: -20px;
+            padding-top: 5px;
 
-                                      <strong class="col-lg-8">{{medecin.nomcomplet}}
-                                        {{medecin.adresse}}</strong>  
-                                        <br>
-                                        <strong class="col-lg-6">{{medecin.specialite.libelle}}</strong>
+        }
 
-                              {% for struc in medecin.structure %}
-                                    <span>{{struc.libelle}}</span>
-                                    {% endfor %}  
-                                 <strong class="col-lg-6">{{medecin.quartier.libelle}}</strong>
+        .nav {
+            display: flex;
+            list-style-type: none;
+            width: 50%;
+            margin: auto;
+        }
 
-                                </div>                                {% endfor %}
-                             <h6>Le docteur Thierry Galtier est spécialiste de la chirurgie de l'oeil depuis plus de 20 ans.
+        .lien {
+            text-decoration: none;
+            margin: 10px;
+            color: black;
+            font-weight: bold;
+            font-size: 18px;
+        }
 
-Il vous accueille au sein de son cabinet de Bordeaux, situé au 14 rue Elisée Reclus.
+        .lien:hover {
+            border-bottom: 3px solid blue;
+        }
 
-Voici les compétences du Dr Galtier:
+        .logo {
+            height: 100px;
+            width: 100px;
+            border-radius: 25px;
+            padding: 10px;
+            margin-left: 150px;
+        }
 
-SPÉCIALISTE EN OPHTALMOLOGIE
-DIPLOMÉ D'ADAPTATION DE LENTILLES DE CONTACT
-DIPLOMÉ DE CHIRURGIE RÉFRACTIVE ET DE LA CATARACTE
-DIPLOMÉ DE MÉDECINE AERONAUTIQUE
-Conseil de l'ordre des médecins:
-Identifiant RPPS: 10002762721
+        .section {
+            width: 80%;
+            margin: auto;
+        }
+        .specialite{
+            padding: 10px;
+            color: blue;
+            background-color: white;
+            border:2px solid #0000ff;
+            width: auto;
+            max-width: 300px;
+            border-radius: 10px;
+            margin: 10px;
 
-Le cabinet est conventionné secteur 2.
+        }
+        .spec{
+            display: flex;
+            list-style-type: none;
+        }
+        .addresse{
+            font-size: 18px;
+            padding: 5px;
+        }
+        .horaires{
+            list-style-type: none;
 
-Pour plus d'informations vous pouvez consulter le site
- : http://www.ophtalmologiebordeaux.com/</h6>
-                                   
-                                </div>
-                            </div>
+        }
+        .card{
+          margin-bottom:30px;
+          padding:20px;
+        }
+    </style>
+
+    <div class="container" style="padding-top:200px;">
+        <header class="">
+            <div class="header1">
+
+                                    <img src="img/medecin.jpg" class="col-lg-2" alt="" >
+                <h3 class="col-lg-4">{{medecin.nomcomplet}}</h3>
+
+            </div>
+            <div class="header2">
+                <ul class="nav">
+                    <li><a class="lien" href="#presentation">Presentation</a></li>
+                    <li><a class="lien" href="#carteetcoordonnees">Carte et Coordonnées</a></li>
+                    <li><a class="lien" href="#horaires">Horaires</a></li>
+                    <li><a class="lien" href="#tarif">Tarif</a></li>
+                </ul>
+            </div>
+        </header>
+        <section class="section">
+            <div class="card" id="presentation">
+                <h3>Présentation</h3>
+                <p>
+                    Le docteur Thierry Galtier est spécialiste de la chirurgie de l'oeil depuis plus de 20 ans. Il vous
+                    accueille au sein de son cabinet de Bordeaux, situé au 14 rue Elisée Reclus. </p>
+                    <hr>
+                    <h3>Spécialités</h3>
+                    <ul class="spec">
+                        <li class="specialite">
+{{medecin.specialite.libelle}}                        </li>   
+                    </ul>
+                    <hr><h3>Structures</h3>
+                    <ul class="spec">
+                     {% for struc in medecin.structure %}
+                        <li class="specialite">
+          {{struc.libelle}}                        </li> 
+                                    {% endfor %} 
+                         
+                    </ul>
+                    <hr>
+                </div>
+            <div class="card" id="carteetcoordonnees">
+                <h3>Carte et coordonéées</h3>
+                <ul>
+                        <li class="addresse"><strong>Pays:</strong> {{medecin.quartier.region.pays.libelle}} </li>
+                        <li class="addresse"><strong>Region:</strong>{{medecin.quartier.region.libelle}} </li>
+                        <li class="addresse"><strong>Quartier:</strong>{{medecin.quartier.libelle}} </li>
+                        <li class="addresse"><strong>Adresse:</strong>{{medecin.adresse}} </li>
+                        <li class="addresse"><strong>Téléphone:</strong>{{medecin.tel}} </li>
+                </ul>
+            </div>
+            <div class="card" id="horaires">
+                <h3>Horaires</h3>
+                <p>Horaires et contacts <br>   
+                                       Contact du secrétariat
+                    04 66 23 32 21 </p>
+                <ul class="horaires"><li>                    Ouverture du secrétariat
+                </li>
+                    <li>Lundi :
+                        08h30 - 18h00</li><li>Mardi :
+                            08h30 - 18h00</li><li>Mercredi :
+                                08h30 - 18h00</li><li>jeudi :
+                                    08h30 - 18h00</li><li>Vendredi :
+                                        08h30 - 18h00</li>
+                </ul>
+               
+            </div>
+            <div class="card" id="tarif">
+                <h3>Tarifs</h3>
+ 
+
+           <ul>
+               <li>
+                Première consultation 
+                3000 Fcfa<hr>
+               </li>
+               <li>Enfant - Première consultation 4000Fcfa<hr></li><li>Enfant - Consultation de suivi 3000Fcfa<hr></li>
+           </ul> </div>
+        </section>
+    </div>
 {% endblock %}

@@ -1,19 +1,18 @@
+
+
+
 {% extends 'base.html.twig' %}
 {% block body %}
 <style>
 body{
-    background:url(img/img/yenni.jpg);
-    background-size:cover;
-    background-repeat:no-repeat;
-    background-position-y:-750px;
+    background:#fff;
 }
-</style>
-<div class="col-12 col-sm-4 col-xl-4" style="padding-top:190px;margin-bottom:30px ;">
-                        <div class="footer-widget-area">
-                            <div class="widget-title">
-                                <h6>Evacuation Sanitaire</h6>
-                            </div>
-                            {% block flash %}
+</style><div class="widget-title" style="padding-top:200px;">
+                                <h2 style="text-align:center;">Livraison à Domicile</h2>
+                            </div><hr>
+                        <div class="footer-widget-area" style="width:90%;margin:auto;padding-bottom:50px;display:flex;">
+                            
+                             {% block flash %}
             {% for flash_message in app.session.flashbag.get('success') %}
                 <div class="container alert alert-success" role="alert">
                     {{ flash_message }}
@@ -35,9 +34,12 @@ body{
                 </div>
             {% endfor %}
         {% endblock %}
-
-                            <div class="footer-contact-form">
-                                <form action="#" method="post">
+<div>
+<img src="img/img/yenni.jpg" alt="" >
+</div>
+                            <div class="footer-contact-form" style="width:90%">
+                            <h6 style="color:white;text-align:center;">Veuillez remplir les informations ci-dessous pour faire une demande de livraison .</h6>
+                                  <form action="#" method="post">
                                     <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="nom"  placeholder="Nomcomplet">
                                     <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="adresse"  placeholder="Adresse">
                                     <input type="number" class="form-control border-top-0 border-right-0 border-left-0" name="tel"  placeholder="Telephone">
