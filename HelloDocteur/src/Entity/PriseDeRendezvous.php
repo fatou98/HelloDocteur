@@ -34,6 +34,11 @@ class PriseDeRendezvous
      * @ORM\JoinColumn(nullable=true)
      */
     private $patient;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $etat;
      
     public function getId()
     {
@@ -119,4 +124,17 @@ class PriseDeRendezvous
 
         return $this;
     }
-}
+
+    public function getEtat(): ?bool
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(bool $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+   }

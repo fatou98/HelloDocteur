@@ -102,10 +102,8 @@
                                 </div>
                                 <div class="col-lg-4 col-md-12">
                                     <div class="col-lg-12" style="display:flex;width:100%;">
-                                    <div class="col-lg-2">
-<button type="submit" class="btn" id="precedent" style="margin-right:10px;" ><i class="fa fa-angle-left" style="font-size:48px;"></i></button>
-                                    </div>
-                                        {% for item in medecin.creneau | slice(precedent,suivant) %}
+                                   
+                                        {% for item in medecin.creneau | slice(0,5) %}
                                         <div class="col-lg-6" style="display:flex;flex-direction:column;">
                                             <div style="background-color:blue;margin:2px;padding:10px;height:60px;text-align:center;width:80px;">{{item.creneauitem.datecreneau | date("m-d-Y")}}</div>
                                             <br>
@@ -116,9 +114,9 @@
                                             {% endfor %}
                                         </div>
                                         {% endfor %}
-                                         <div class="col-lg-2">
-<button type="submit" class="btn" style=""><i class="fa fa-angle-right" style="font-size:48px;"></i></button>
-                                    </div>
+                                                <div class="text-center">{{ knp_pagination_render(medecins) }}</div>
+
+                                        
                                     </div>
                                     
                                 </div>

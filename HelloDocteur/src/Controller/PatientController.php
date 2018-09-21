@@ -8,8 +8,11 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Had;
 use App\Entity\Vsl;
 use App\Entity\Livraison;
+use App\Entity\PriseDeRendezvous;
 use App\Entity\NewsletterRepository;
 use App\Repository\PatientRepository;
+use App\Repository\MedecinRepository;
+use App\Repository\CreneauRepository;
 
 
 class PatientController extends Controller
@@ -55,33 +58,36 @@ class PatientController extends Controller
                         }
    
     /**
-     * @Route("/prisederdv/{idmedecin}/{idcreneau}", name="had")
+     * @Route("/prisederdv/{idmedecin}/{idcreneau}", name="prisederdv")
      */
-    public function prisederdv(Request $request,PatientRepository $patientrepo,$idmedecin,$idcreneau)
+    public function prisederdv(Request $request,PatientRepository $patientrepo,
+    CreneauRepository $creneaurepo,
+    MedecinRepository $medecinrepo,$idmedecin,$idcreneau)
     {
         $em = $this->getDoctrine()->getManager();
             $user=$this->getUser();
             $email=$user->getEmail();
-            $patient=$patientrepo->findBy(['Email'=>$email]);
-           
-            if(isset($_POST['ajouter'])){
-              
+            $patient=$patientrepo->findOneBy(['Email'=>$email]);
+           $medecin = $medecinrepo->findOneBy(['id'=>$idmedecin]);
+           $creneau= $creneaurepo->findOneBy(['id'=>$idcreneau]);
+            if(isset($_POST['valider'])){
             if($request->isMethod('POST')) {
                         extract($_POST);
-                       
-                        $had = new  Had();
-                        $had->setAdresse($adresse);
-                        $had->setTel($tel);
-                        $had->setMotif($motif);
-                        $had->setPatient($patient[0]);
-                        $em->persist($had);
+                        $prisederdv = new  PriseDeRendezvous();
+                        $prisederdv->setMotif($motif);
+                        $prisederdv->setPatient($patient);
+                        $prisederdv->setCreneau($creneau);
+                        $prisederdv->setMedecin($medecin);
+                        $prisederdv->setEtat(false);
+                        $em->persist($prisederdv);
                         $em->flush();
                         $this->addFlash('success', 'Votre demande a bien été enregistré.');
 
                     }
                 }
-                          return $this->render('patient/had.html.twig',[
-                        
+                          return $this->render('patient/prisederdv.html.twig',[
+                        'medecin'=>$medecin,
+                        'creneau'=>$creneau
                           ]);
                         }
                   /**

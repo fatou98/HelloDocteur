@@ -43,7 +43,9 @@ class AccueilController extends Controller
             $em = $this->getDoctrine()->getManager();
             $precedent=0;
             $suivant=4;
-            $medecins=$medecinrepo->findAll();
+            $medecinlist=$medecinrepo->findAll();
+            
+           
             if(isset($_POST['Sinscrire'])){
                 if($request->isMethod('POST')) {
                      extract($_POST);
@@ -77,9 +79,17 @@ class AccueilController extends Controller
                 }
 
             }
-            foreach($medecins as $values){
+            $medecins = $this->get('knp_paginator')->paginate(
+                $medecinlist,
+                $request->query->get('page', 1)/*le numéro de la page à afficher*/,
+                  4/*nbre d'éléments par page*/
+            );
+            foreach ($medecins as $values) {
+               
                 $values->setImage(base64_encode(stream_get_contents($values->getImage())));
+
             }
+           
             $structures=$structurerepo->findAll();
             $em = $this->getDoctrine()->getManager();
             $specialites=$specialiterepo->findAll();
@@ -90,8 +100,7 @@ class AccueilController extends Controller
                 'structures' => $structures,
                 'specialites'=>$specialites,
                 'regions'=>$regions,
-                'precedent'=>0,
-                'suivant'=>4
+                
             ]);
         }
         
