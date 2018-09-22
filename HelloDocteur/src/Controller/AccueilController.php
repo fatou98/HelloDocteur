@@ -20,8 +20,10 @@ class AccueilController extends Controller
      */
     public function index()
     {
+        $user=$this->getUser();
         return $this->render('accueil/layoutaccueil.html.twig', [
             'controller_name' => 'AccueilController',
+            'user'=>$user
         ]);
     }
     
@@ -30,8 +32,12 @@ class AccueilController extends Controller
          */
         public function contact()
         {
+        $user=$this->getUser();
+
             return $this->render('accueil/contact.html.twig', [
                 'controller_name' => 'AccueilController',
+            'user'=>$user
+
             ]);
         }
           /**
@@ -39,6 +45,8 @@ class AccueilController extends Controller
          */
         public function search(Request $request,MedecinRepository $medecinrepo,StructureRepository $structurerepo,SpecialiteRepository $specialiterepo,RegionRepository $regionrepo)
         {
+        $user=$this->getUser();
+
             setlocale(LC_TIME, 'fr_FR.UTF8', 'fr.UTF8', 'fr_FR.UTF-8', 'fr.UTF-8');
             $em = $this->getDoctrine()->getManager();
             $precedent=0;
@@ -100,6 +108,8 @@ class AccueilController extends Controller
                 'structures' => $structures,
                 'specialites'=>$specialites,
                 'regions'=>$regions,
+            'user'=>$user
+
                 
             ]);
         }
@@ -109,6 +119,7 @@ class AccueilController extends Controller
      */
     public function specialite(MedecinRepository $medecinrepo,Request $request,SpecialiteRepository $specialiterepo,RegionRepository $regionrepo)
     {
+        $user=$this->getUser();
 
     
     $em = $this->getDoctrine()->getManager();
@@ -118,7 +129,9 @@ class AccueilController extends Controller
 
     return $this->render('accueil/layoutaccueil.html.twig', [
         'specialites'=>$specialites,
-        'regions'=>$regions
+        'regions'=>$regions,
+        'user'=>$user
+
     ]);
     }
       /**
@@ -127,6 +140,7 @@ class AccueilController extends Controller
     public function detailmedecin(Request $request,$id,SpecialiteRepository $specialiterepo,RegionRepository $regionrepo,MedecinRepository $medecinrepo)
     {
 
+        $user=$this->getUser();
     
     $em = $this->getDoctrine()->getManager();
     $specialites=$specialiterepo->findAll();
@@ -139,21 +153,27 @@ class AccueilController extends Controller
     return $this->render('accueil/detailmedcin.html.twig', [
         'specialites'=>$specialites,
         'regions'=>$regions,
-        'medecin'=>$medecinBYId
+        'medecin'=>$medecinBYId,
+        'user'=>$user
+        
     ]);
     }
     /**
      * @Route("/detailstructure/{id}", name="detailstructure")
      */
     public function detailstructure(Request $request,$id,StructureRepository $structurerepo)
-    {
+    {    $user=$this->getUser();
+
         $em = $this->getDoctrine()->getManager();
         $structures=$structurerepo->findById(['id'=>$id]);
 
         return $this->render('accueil/detailstructure.html.twig', [
-        'structures'=>$structures,     
+        'structures'=>$structures,  
+        'user'=>$user
+
     ]);
-    }/** 
+    }
+    /** 
    * @Route("/precedent") 
 */ 
 public function precedentAction(Request $request) {  

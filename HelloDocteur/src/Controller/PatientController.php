@@ -22,8 +22,12 @@ class PatientController extends Controller
      */
     public function index()
     {
+        $user=$this->getUser();
+
         return $this->render('patient/index.html.twig', [
             'controller_name' => 'PatientController',
+        'user'=>$user
+
         ]);
     }
     /**
@@ -53,6 +57,7 @@ class PatientController extends Controller
                     }
                 }
                           return $this->render('patient/had.html.twig',[
+        'user'=>$user
                         
                           ]);
                         }
@@ -64,6 +69,8 @@ class PatientController extends Controller
     CreneauRepository $creneaurepo,
     MedecinRepository $medecinrepo,$idmedecin,$idcreneau)
     {
+        $user=$this->getUser();
+
         $em = $this->getDoctrine()->getManager();
             $user=$this->getUser();
             $email=$user->getEmail();
@@ -87,7 +94,9 @@ class PatientController extends Controller
                 }
                           return $this->render('patient/prisederdv.html.twig',[
                         'medecin'=>$medecin,
-                        'creneau'=>$creneau
+                        'creneau'=>$creneau,
+        'user'=>$user
+
                           ]);
                         }
                   /**
@@ -95,6 +104,8 @@ class PatientController extends Controller
      */
     public function vsl(Request $request,PatientRepository $patientrepo)
     {
+        $user=$this->getUser();
+
         $em = $this->getDoctrine()->getManager();
         $user=$this->getUser();
         $email=$user->getEmail();
@@ -119,6 +130,7 @@ class PatientController extends Controller
                 }
             }
                       return $this->render('patient/vsl.html.twig',[
+        'user'=>$user
                     
                       ]);
                     }
@@ -127,6 +139,8 @@ class PatientController extends Controller
      */
     public function livraison(Request $request,PatientRepository $patientrepo)
     {
+        $user=$this->getUser();
+
         $em = $this->getDoctrine()->getManager();
         $user=$this->getUser();
         $email=$user->getEmail();
@@ -150,6 +164,7 @@ class PatientController extends Controller
                 }
             }
                       return $this->render('patient/livraison.html.twig',[
+        'user'=>$user
                     
                       ]);
                     }

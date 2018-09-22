@@ -34,75 +34,86 @@
         <div id="preloader">
             <div class="medilife-load"></div>
         </div>
-
-        <!-- ***** Header Area Start ***** -->
-        <header class="header-area">
-            <!-- Top Header Area -->
-            <div class="top-header-area">
-                <div class="container h-100">
-                    <div class="row h-100">
-                        <div class="col-12 h-100">
-                            <div class="h-100 d-md-flex justify-content-between align-items-center">
-                                <p>Bienvenue dans
-                                    <span>HelloDocteur</span></p>
-                                <p>Ouvert du : Lundi au Vendredi - 8am a 10pm Contact :
-                                    <span>+221772688933</span></p>
-                            </div>
+  <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <!-- Top Header Area -->
+        <div class="top-header-area">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="h-100 d-md-flex justify-content-between align-items-center">
+                            <p>Bienvenue dans <span>HelloDocteur</span></p>
+                            <p>Ouvert du : Lundi au Vendredi  - 8am a 10pm Contact : <span>+221772688933</span></p>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Main Header Area -->
-            <div class="main-header-area" id="stickyHeader">
-                <div class="container h-100">
-                    <div class="row h-100 align-items-center">
-                        <div class="col-12 h-100">
-                            <div class="main-menu h-100">
-                                <nav class="navbar h-100 navbar-expand-lg">
-                                    <!-- Logo Area -->
-                                    <a class="navbar-brand" href="#"><img src="{{asset('img/img/logo.png')}}" alt="Logo"></a>
+        <!-- Main Header Area -->
+        <div class="main-header-area" id="stickyHeader">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 h-100">
+                        <div class="main-menu h-100">
+                            <nav class="navbar h-100 navbar-expand-lg">
+                                <!-- Logo Area  -->
+                                <a class="navbar-brand" href="#"><img src="../img/img/logo.png" alt="Logo"></a>
 
-                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#medilifeMenu" aria-controls="medilifeMenu" aria-expanded="false" aria-label="Toggle navigation">
-                                        <span class="navbar-toggler-icon"></span></button>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#medilifeMenu" aria-controls="medilifeMenu" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 
-                                    <div class="collapse navbar-collapse" id="medilifeMenu">
-                                        <!-- Menu Area -->
-                                        <ul class="navbar-nav ml-auto">
-                                            <li class="nav-item active">
-                                                <a class="nav-link" href="/accueil">Accueil
-                                                    <span class="sr-only">(current)</span></a>
-                                            </li>
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon Espace</a>
-                                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                    <a class="dropdown-item" href="#">Connexion</a>
-                                                    <a class="dropdown-item" href="#">Inscription</a>
-
-                                                </div>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/accueil#propos">A Propos</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="blog.html">Annuaire</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="/contact">Contact</a>
-                                            </li>
-                                        </ul>
-                                        <!-- Appointment Button -->
-                                        <!--<a href="#" class="btn medilife-appoint-btn ml-30">For <span>emergencies</span> Click here</a>-->
-                                    </div>
-                                </nav>
-                            </div>
+                                <div class="collapse navbar-collapse" id="medilifeMenu">
+                                    <!-- Menu Area -->
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="/accueil">Accueil <span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/accueil#propos">A Propos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/annulaire">Annuaire</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/contact">Contact</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/medecin">Vous étes médecin?</a>
+                                        </li>
+                                        
+                                        
+                                        {% if is_granted('ROLE_PATIENT') %}
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.nomcomplet}}</a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="#">Mes demandes </a>
+                                                <a class="dropdown-item" href="/logout">Deconnexion</a>
+                                            </div>
+                                        </li>
+                                        {% else %}
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon Espace</a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="/patient">Connexion</a>
+                                                <a class="dropdown-item" href="/register/patient">Inscription</a>
+                                                
+                                            </div>
+                                        </li>
+                                        {% endif %}
+                                        
+                                    </ul>
+                                    <!-- Appointment Button -->
+                                    <!--<a href="#" class="btn medilife-appoint-btn ml-30">For <span>emergencies</span> Click here</a>-->
+                                </div>
+                            </nav>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
-        <!-- ***** Header Area End ***** -->
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
         <br>
         <br>
         <br>

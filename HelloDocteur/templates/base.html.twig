@@ -50,24 +50,47 @@
                                         <li class="nav-item active">
                                             <a class="nav-link" href="/accueil">Accueil <span class="sr-only">(current)</span></a>
                                         </li>
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon Espace</a>
-                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="#">Connexion</a>
-                                                <a class="dropdown-item" href="#">Inscription</a>
-                                                
-                                            </div>
-                                        </li>
-                                        
                                         <li class="nav-item">
                                             <a class="nav-link" href="/accueil#propos">A Propos</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="blog.html">Annuaire</a>
+                                            <a class="nav-link" href="/annulaire">Annuaire</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="/contact">Contact</a>
                                         </li>
+                                        {% if is_granted('ROLE_MEDECIN') %}
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.nomcomplet}}</a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="/medecin">Mon compte </a>
+                                                <a class="dropdown-item" href="/logout">Deconnexion</a>
+                                            </div>
+                                        </li>
+                                        {% else %}
+                                       <li class="nav-item">
+                                            <a class="nav-link" href="/medecin">Vous étes médecin?</a>
+                                        </li>
+                                        {% endif %}
+                                        {% if is_granted('ROLE_PATIENT') %}
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.nomcomplet}}</a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="#">Mes demandes </a>
+                                                <a class="dropdown-item" href="/logout">Deconnexion</a>
+                                            </div>
+                                        </li>
+                                        {% else %}
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon Espace</a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="/patient">Connexion</a>
+                                                <a class="dropdown-item" href="/register/patient">Inscription</a>
+                                                
+                                            </div>
+                                        </li>
+                                        {% endif %}
+                                        
                                     </ul>
                                     <!-- Appointment Button -->
                                     <!--<a href="#" class="btn medilife-appoint-btn ml-30">For <span>emergencies</span> Click here</a>-->
