@@ -179,7 +179,7 @@ class PatientController extends Controller
                     $livraison->setNomComplet($nom);
                     $livraison->setAdresse($adresse);
                     $livraison->setTel($tel);
-                    $livraison->setOrdonnance($ordonnance);
+                    $livraison->setOrdonnance(file_get_contents($_FILES['ordonnance']['tmp_name']));
                     $livraison->setPatient($patient[0]);
                     $livraison->setEtat(false);
                     $livraison->setDatedemande(new \DateTime('now'));

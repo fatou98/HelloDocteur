@@ -59,10 +59,11 @@
                                     <td class="text-right">
                                         <div class="btn-group text-right">
                                 <td>
+                             <a href="{{ path('validerlivraison', {'id' : livraisons.id }) }}" class="btn btn-rounded btn-primary btn-small">Valider</a>
                              <a href="{{ path('livraisonedit', {'id' : livraisons.id }) }}" class="btn btn-rounded btn-primary btn-small">Editer</a>
                              <a href="{{ path('deletelivraison', {'id' : livraisons.id }) }}" class="btn btn-rounded btn-danger btn-small">Suprimer</a>
                              </td>
-                                        </div>
+                                    </div>
                                     </td>
                                 </tr>
                                                            {% endfor %}

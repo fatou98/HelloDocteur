@@ -114,7 +114,6 @@
     <thead>
       <tr>
         <th>#id</th>
-        <th>Motif</th>
         <th>Date de demande</th>
         <th>Etat</th>
       </tr>
@@ -123,7 +122,6 @@
     {% for item in listelivraison %}
         <tr>
         <td>{{item.id}}</td>
-        <td>{{item.motif}}</td>
         <td>{{item.datedemande | date('d-m-Y H:m')}}</td>
 <td>{{ item.etat ? 'Validé' : 'Non Validé' }}</td>
         <td>

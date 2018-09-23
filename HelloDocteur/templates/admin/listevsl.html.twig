@@ -62,7 +62,10 @@
 
                                     <td class="text-right">
                                         <div class="btn-group text-right">
-                                     <td><a href="{{ path('vsledit', {'id' : vsls.id }) }}" class="btn btn-rounded btn-primary btn-small">Editer</a>
+                                     <td>
+                             <a href="{{ path('validervsl', {'id' : vsls.id }) }}" class="btn btn-rounded btn-primary btn-small">Valider</a>
+
+                                     <a href="{{ path('vsledit', {'id' : vsls.id }) }}" class="btn btn-rounded btn-primary btn-small">Editer</a>
                                          <a href="{{ path('deletevsl', {'id' : vsls.id }) }}" class="btn btn-rounded btn-danger btn-small">Suprimer</a>
 </td>
                                    </div>

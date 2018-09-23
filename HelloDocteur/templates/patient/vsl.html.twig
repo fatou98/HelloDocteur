@@ -11,7 +11,12 @@ body{
                                 <h2 style="text-align:center;">Véhicule sanitaire léger</h2>
                             </div><hr>
                         <div class="footer-widget-area" style="width:90%;margin:auto;padding-bottom:50px;display:flex;">
-                            
+                      
+<div>
+<img src="img/img/yenni.jpg" alt="" >
+</div>
+                            <div class="footer-contact-form" style="width:90%">
+                                  
                              {% block flash %}
             {% for flash_message in app.session.flashbag.get('success') %}
                 <div class="container alert alert-success" role="alert">
@@ -34,10 +39,6 @@ body{
                 </div>
             {% endfor %}
         {% endblock %}
-<div>
-<img src="img/img/yenni.jpg" alt="" >
-</div>
-                            <div class="footer-contact-form" style="width:90%">
                             <h6 style="color:white;text-align:center;">Veuillez remplir les informations ci-dessous pour faire une demande de vehicule sanitaire leger.</h6>
                                  <form action="#" method="post">
                                     <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="nom"  placeholder="Nomcomplet">

@@ -35,6 +35,7 @@
 <th>Telephone</th>
 <th>Patient</th>
 <th>Motif</th>
+<th>Etat</th>
 <th>Actions</th>
 
 </tr>
@@ -45,8 +46,13 @@
  <td>{{ hads.adresse }}</td>
 <td>{{ hads.Tel }}</td>
 <td>{{ hads.patient.nomcomplet }}</td>
+
 <td>{{ hads.motif }}</td>
+<td>{{ hads.etat ? 'Validé' : 'Non Validé' }}</td>
+
 <td>
+ <a href="{{ path('validerhad', {'id' : hads.id }) }}" class="btn btn-rounded btn-success btn-small">Valider</a>
+
 <a href="{{ path('editHad', {'id' : hads.id }) }}" class="btn btn-rounded btn-primary btn-small">Editer</a>
 <a href="{{ path('delete', {'id' : hads.id }) }}" class="btn btn-rounded btn-danger btn-small">Suprimer</a>
 </td>
