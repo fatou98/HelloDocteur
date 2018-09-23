@@ -82,19 +82,16 @@ class MedecinController extends Controller
     */
     public function creneauedit($id,MedecinRepository $medecinrepo,CreneauItemRepository $creneauitemrepo,CreneauRepository $creneaurepo,Request $request)
     {
-
         $usermedecin= $this->getUser();
         $emailmedecin=$usermedecin->getEmail();
         $medecinloggedIn=$medecinrepo->findBy(['Email'=>$emailmedecin]);
         $idmedecin=$medecinloggedIn[0]->getId();
-        $listecreneauitem=$creneauitemrepo->findAll();
-
+        $creneau=$creneaurepo->findOneBy(['id'=>$id]);
+        $listecreneauitem= $creneauitemrepo->findAll();
         if(isset($_POST['Modifier'])){
             if($request->isMethod('POST')){
                 extract($_POST);
-        $lecreneauitem=$creneauitemrepo->findBy(['id'=>$id]);
-
-        $creneau= new Creneau();
+        $lecreneauitem = $creneauitemrepo->findOneBy(['id'=>$idlecreneau]);
         $creneau->setHeuredebut($heuredebut);
         $creneau->setHeurefin($heurefin);
         $creneau->setEtat(false);
@@ -110,7 +107,8 @@ class MedecinController extends Controller
     }
         return $this->render('medecin/editcreneau.html.twig', [
             'medecinloggedIn'=>$medecinloggedIn,
-            'listecreneauitem'=>$listecreneauitem
+            'listecreneauitem'=>$listecreneauitem,
+            'creneau'=>$creneau
         ]);
 }
 }

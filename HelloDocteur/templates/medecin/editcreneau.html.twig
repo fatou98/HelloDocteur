@@ -29,29 +29,25 @@
 
         <form class="row" method="post">
             <div class="col-md-12 col-lg-8 col-lg-offset-2">
-                <input type="text" id="inputStandard" name="heuredebut" class="form-control" placeholder="Entrer l'heure de debut">
+                <input type="text" value="{{creneau.heuredebut}}" id="inputStandard" name="heuredebut" class="form-control" placeholder="Entrer l'heure de debut">
             </div>
             <br><br>
             <br>
             <div class="col-md-12 col-lg-8 col-lg-offset-2">
-                <input type="text" id="inputStandard" name="heurefin" class="form-control" placeholder="Entrer l'heure de fin">
+                <input type="text" value="{{creneau.heurefin}}" id="inputStandard" name="heurefin" class="form-control" placeholder="Entrer l'heure de fin">
             </div>
             <br><br>
             <br>
-
             <div class="col-md-12 col-lg-8 col-lg-offset-2">
-                <select class="form-control" name="un">
-                    <option value="">Date creneau</option>
+                <select class="form-control" name="idlecreneau" >
+                    <option value="{{creneau.creneauitem.id}}">{{creneau.creneauitem.datecreneau | date('d-m-Y')}}</option>
                     {% for creneauitem in listecreneauitem %}
-
                         <option value="{{creneauitem.id}}">{{creneauitem.datecreneau | date}}</option>
                     {% endfor %}
-
                 </select>
-
             </div><br><br><br>
             <div class="col-md-12 col-lg-8 col-lg-offset-4">
-                <br><input type="submit" class="col-lg-6 btn medilife-btn btn-primary" value="Modifier" name="MOdifier">
+                <br><input type="submit" class="col-lg-6 btn medilife-btn btn-primary" value="Modifier" name="Modifier">
             </div>
         </form>
     </div>
