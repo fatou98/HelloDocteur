@@ -35,6 +35,8 @@
                                     
                                     <th class="">Nom</th>
                                     <th class="">Motif</th>
+                                    <th class="">Date demande</th>
+                                    <th class="">Etat</th>
                                     <th class="">Action</th>
 
                                     
@@ -49,12 +51,15 @@
                                     </td>
                                     <td class="">{{prvs.patient.nomcomplet}}</td>
                                     <td class="">{{prvs.motif}}</td>
+                                    <td class="">{{prvs.datedemande | date('d-m-Y H:m')}}</td>
+                                    <td class="">{{prvs.etat}}</td>
                                     
 
 
                                     <td class="text-right">
                                         <div class="btn-group text-right">
-                                     
+                              <a href="{{ path('editprv', {'id' : prvs.id }) }}" class="btn btn-rounded btn-primary btn-small">Editer</a>
+                            
                                    </div>
                                     </td>
                                 </tr>

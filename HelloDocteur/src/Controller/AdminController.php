@@ -108,6 +108,50 @@ class AdminController extends Controller
         return $this->render('admin/edithad.html.twig', 
         array('Had' => $hads));    
     }
+
+    /**
+     * @Route("/validerhad/{id}", name="validerhad")
+    */
+    public function validerhad($id,HadRepository $hadrepo,Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $hads= $hadrepo->findOneBy(['id'=>$id]);
+        $hads->setEtat(true);
+        $em->persist($hads);
+        $em->flush();
+                $this->addFlash('info', 'Had  validé avec succes.');
+        return $this->redirectToRoute('listehad');
+    }
+
+    /**
+     * @Route("/validerlivraison/{id}", name="validerlivraison")
+    */
+    public function validerlivraison($id,LivraisonRepository $livraisonrepo,Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $livraison= $livraisonrepo->findOneBy(['id'=>$id]);
+        $livraison->setEtat(true);
+        $em->persist($livraison);
+        $em->flush();
+                $this->addFlash('info', 'Livraison  validé avec succes.');
+        return $this->redirectToRoute('listelivraison');
+    }
+    /**
+     * @Route("/validervsl/{id}", name="validervsl")
+    */
+    public function validervsl($id,VslRepository $vslrepo,Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $vsl= $vslrepo->findOneBy(['id'=>$id]);
+        $vsl->setEtat(true);
+        $em->persist($vsl);
+        $em->flush();
+                $this->addFlash('info', 'Vsl  validé avec succes.');
+        return $this->redirectToRoute('listevsl');
+    }
+
+    
+
    /**
     * @Route("/delete/{id}", requirements={"id": "\d+"}, name="delete")
     * @Method({"GET"})
