@@ -6,6 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Repository\MedecinRepository;
 use App\Repository\CreneauRepository;
+use App\Repository\PriseDeRendezvousRepository;
 use App\Repository\CreneauItemRepository;
 use App\Entity\Creneau;
 use App\Entity\Medecin;
@@ -111,4 +112,37 @@ class MedecinController extends Controller
             'creneau'=>$creneau
         ]);
 }
+/**
+     * @Route("/ListedemandeRV", name="ListedemandeRV")
+     */
+    public function getAlldemandeRV(MedecinRepository $medecinrepo,PriseDeRendezvousRepository $rvrepo,Request $request) {
+        $usermedecin= $this->getUser();
+        $emailmedecin=$usermedecin->getEmail();
+        $medecinloggedIn=$medecinrepo->findBy(['Email'=>$emailmedecin]);
+        $idmedecin=$medecinloggedIn[0]->getId();
+
+        $listedemanderv=$rvrepo->findBy(['medecin'=>$idmedecin,'etat'=>false]);
+        
+        return $this->render('medecin/listedemanderv.html.twig', [
+            'listerendezvous'=>$listedemanderv,
+            'medecinloggedIn'=>$medecinloggedIn
+        ]);
+    }
+/**
+     * @Route("/ListeRVvalider", name="ListeRVvalider")
+     */
+    public function getAllvalideRV(MedecinRepository $medecinrepo,PriseDeRendezvousRepository $rvrepo,Request $request) {
+        $usermedecin= $this->getUser();
+        $emailmedecin=$usermedecin->getEmail();
+        $medecinloggedIn=$medecinrepo->findBy(['Email'=>$emailmedecin]);
+        $idmedecin=$medecinloggedIn[0]->getId();
+
+        $listevaliderv=$rvrepo->findBy(['medecin'=>$idmedecin,'etat'=>true]);
+        
+        return $this->render('medecin/listervvalider.html.twig', [
+            'listervvalider'=>$listevaliderv,
+            'medecinloggedIn'=>$medecinloggedIn
+        ]);
+    }
+
 }
