@@ -39,6 +39,11 @@ class PriseDeRendezvous
      * @ORM\Column(type="boolean")
      */
     private $etat;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $datedemande;
      
     public function getId()
     {
@@ -133,6 +138,18 @@ class PriseDeRendezvous
     public function setEtat(bool $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getDatedemande(): ?\DateTimeInterface
+    {
+        return $this->datedemande;
+    }
+
+    public function setDatedemande(\DateTimeInterface $datedemande): self
+    {
+        $this->datedemande = $datedemande;
 
         return $this;
     }

@@ -14,19 +14,34 @@ use App\Repository\PatientRepository;
 use App\Repository\MedecinRepository;
 use App\Repository\CreneauRepository;
 
+use App\Repository\HadRepository;
+use App\Repository\LivraisonRepository;
+use App\Repository\PriseDeRendezvousRepository;
+use App\Repository\VslRepository;
 
 class PatientController extends Controller
 {
     /**
      * @Route("/patient", name="patient")
      */
-    public function index()
+    public function index(HadRepository $hadrepo,LivraisonRepository $livraisonrepo,
+    PriseDeRendezvousRepository $prisederdvrepo,VslRepository $vslrepo ,PatientRepository $patientrepo)
     {
         $user=$this->getUser();
-
+        $email=$user->getEmail();
+        $patient=$patientrepo->findOneBy(['Email'=>$email]);
+        $iduser=$patient->getId();
+        $listerdv = $prisederdvrepo->findBy(['patient'=>$iduser]);
+        $listehad = $hadrepo->findBy(['Patient'=>$iduser]);
+        $listelivraison = $livraisonrepo->findBy(['Patient'=>$iduser]);
+        $listevsl = $vslrepo->findBy(['Patient'=>$iduser]);
         return $this->render('patient/index.html.twig', [
-            'controller_name' => 'PatientController',
-        'user'=>$user
+        'controller_name' => 'PatientController',
+        'user'=>$user,
+        'listehad'=>$listehad,
+        'listerdv'=>$listerdv,
+        'listelivraison'=>$listelivraison,
+        'listevsl'=>$listevsl
 
         ]);
     }
@@ -50,6 +65,8 @@ class PatientController extends Controller
                         $had->setTel($tel);
                         $had->setMotif($motif);
                         $had->setPatient($patient[0]);
+                        $had->setEtat(false);
+                        $had->setDatedemande(new \DateTime('now'));
                         $em->persist($had);
                         $em->flush();
                         $this->addFlash('success', 'Votre demande a bien été enregistré.');
@@ -86,6 +103,8 @@ class PatientController extends Controller
                         $prisederdv->setCreneau($creneau);
                         $prisederdv->setMedecin($medecin);
                         $prisederdv->setEtat(false);
+
+                        $prisederdv->setDatedemande(new \DateTime('now'));
                         $em->persist($prisederdv);
                         $em->flush();
                         $this->addFlash('success', 'Votre demande a bien été enregistré.');
@@ -123,6 +142,9 @@ class PatientController extends Controller
                     $vsl->setFicheMaladie($fiche);
                     $vsl->setMotif($motif);
                     $vsl->setPatient($patient[0]);
+
+                    $vsl->setEtat(false);
+                    $vsl->setDatedemande(new \DateTime('now'));
                     $em->persist($vsl);
                     $em->flush();
                     $this->addFlash('success', 'Votre demande a bien été enregistré.');
@@ -157,6 +179,8 @@ class PatientController extends Controller
                     $livraison->setTel($tel);
                     $livraison->setOrdonnance($ordonnance);
                     $livraison->setPatient($patient[0]);
+                    $livraison->setEtat(false);
+                    $livraison->setDatedemande(new \DateTime('now'));
                     $em->persist($livraison);
                     $em->flush();
                     $this->addFlash('success', 'Votre demande a bien été enregistré.');

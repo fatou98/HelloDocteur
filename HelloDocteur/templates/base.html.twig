@@ -5,17 +5,14 @@
         <title>{% block title %}HelloDocteur!{% endblock %}</title>
         {% block stylesheets %} <!-- Favicon  -->
     <link rel="icon" href="{{asset('img/img/favicon.png')}}">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{asset('style.css')}}">
-
 {% endblock %}
       <!-- Preloader -->
     <div id="preloader">
         <div class="medilife-load"></div>
     </div>
-
     <!-- ***** Header Area Start ***** -->
     <header class="header-area">
         <!-- Top Header Area -->
@@ -31,7 +28,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Main Header Area -->
         <div class="main-header-area" id="stickyHeader">
             <div class="container h-100">
@@ -76,7 +72,7 @@
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.nomcomplet}}</a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="#">Mes demandes </a>
+                                                <a class="dropdown-item" href="/patient">Mes demandes </a>
                                                 <a class="dropdown-item" href="/logout">Deconnexion</a>
                                             </div>
                                         </li>
@@ -103,9 +99,8 @@
         </div>
     </header>
     <!-- ***** Header Area End ***** -->
-
         {% block body %}
-      
+    
         {% endblock %}
     <!-- ***** Footer Area Start ***** -->
     <footer class="footer-area section-padding-100">
@@ -114,7 +109,7 @@
             <div class="container-fluid">
                 <div class="row">
 
-                    <div class="col-12 col-sm-6 col-xl-4">
+                    <div class="col-12 col-sm-6 col-xl-6">
                         <div class="footer-widget-area">
                             <div class="footer-logo">
                                 <img src="img/img/logo.png" alt="">
@@ -130,23 +125,8 @@
                     </div>
 
                     
-                    <div class="col-12 col-sm-6 col-xl-4">
-                        <div class="footer-widget-area">
-                            <div class="widget-title">
-                                <h6>Contact Form</h6>
-                            </div>
-                            <div class="footer-contact-form">
-                                <form action="#" method="post">
-                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="footer-name" id="footer-name" placeholder="Name">
-                                    <input type="email" class="form-control border-top-0 border-right-0 border-left-0" name="footer-email" id="footer-email" placeholder="Email">
-                                    <textarea name="message" class="form-control border-top-0 border-right-0 border-left-0" id="footerMessage" placeholder="Message"></textarea>
-                                    <input type="submit" class="btn medilife-btn" name="contact" value="Envoyez">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-sm-6 col-xl-4">
+                    
+                    <div class="col-12 col-sm-6 col-xl-6">
                         <div class="footer-widget-area">
                             <div class="widget-title">
                                 <h6>News Letter</h6>

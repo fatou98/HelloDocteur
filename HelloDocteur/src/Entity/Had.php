@@ -36,7 +36,16 @@ class Had
      * @ORM\JoinColumn(nullable=false)
      */
     private $Patient;
+ /**
+     * @ORM\Column(type="boolean")
+     */
+    private $etat;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $datedemande;
+     
     public function getId()
     {
         return $this->id;
@@ -117,4 +126,36 @@ class Had
 
       return $this;
    }
+
+    /**
+     * Get the value of etat
+     */ 
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * Set the value of etat
+     *
+     * @return  self
+     */ 
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getDatedemande(): ?\DateTimeInterface
+    {
+        return $this->datedemande;
+    }
+
+    public function setDatedemande(\DateTimeInterface $datedemande): self
+    {
+        $this->datedemande = $datedemande;
+
+        return $this;
+    }
 }
