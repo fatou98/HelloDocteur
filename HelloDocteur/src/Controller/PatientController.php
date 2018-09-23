@@ -13,6 +13,7 @@ use App\Entity\NewsletterRepository;
 use App\Repository\PatientRepository;
 use App\Repository\MedecinRepository;
 use App\Repository\CreneauRepository;
+use App\Repository\CreneauItemRepository;
 
 use App\Repository\HadRepository;
 use App\Repository\LivraisonRepository;
@@ -80,11 +81,12 @@ class PatientController extends Controller
                         }
    
     /**
-     * @Route("/prisederdv/{idmedecin}/{idcreneau}", name="prisederdv")
+     * @Route("/prisederdv/{idmedecin}/{idcreneau}/{iddatecreneau}", name="prisederdv")
      */
     public function prisederdv(Request $request,PatientRepository $patientrepo,
     CreneauRepository $creneaurepo,
-    MedecinRepository $medecinrepo,$idmedecin,$idcreneau)
+    CreneauItemRepository $creneauitemrepo,
+    MedecinRepository $medecinrepo,$idmedecin,$idcreneau,$iddatecreneau)
     {
         $user=$this->getUser();
 
@@ -92,8 +94,8 @@ class PatientController extends Controller
             $user=$this->getUser();
             $email=$user->getEmail();
             $patient=$patientrepo->findOneBy(['Email'=>$email]);
-           $medecin = $medecinrepo->findOneBy(['id'=>$idmedecin]);
-           $creneau= $creneaurepo->findOneBy(['id'=>$idcreneau]);
+            $medecin = $medecinrepo->findOneBy(['id'=>$idmedecin]);
+            $creneau = $creneaurepo->findOneBy(['id'=>$idcreneau,'creneauitem'=>$iddatecreneau]);
             if(isset($_POST['valider'])){
             if($request->isMethod('POST')) {
                         extract($_POST);

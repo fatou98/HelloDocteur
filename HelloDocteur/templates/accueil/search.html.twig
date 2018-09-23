@@ -5,7 +5,7 @@
     <!-- ***** Book An Appoinment Area Start ***** -->
     <div class="medilife-book-an-appoinment-area" style="padding-top:190px;margin-bottom:30px;background:url(img/blog-img/3.jpg);
     padding-bottom:50px">
-        <div class="container" style="opacity:0.7">
+        <div class="container" style="">
             <div class="row">
                 <div class="col-12">
                     <div class="appointment-form-content">
@@ -87,7 +87,7 @@
 
                         {% for medecin in medecins %}
 
-                            <div class="medilife-tab-text" style="padding:20px;margin-right:10px;display:flex;margin:10px;">
+                            <div class="medilife-tab-text" style="padding:20px;margin-right:10px;display:flex;margin:10px;background-color:#cdcdcd;width:100%;">
                                 <div class="col-lg-4 col-md-12">
                                     <img src="data:image/png;base64,{{medecin.image}}" style="height:70px;border-radius:50%;" class="">
 
@@ -107,7 +107,7 @@
                                                 <div style="background-color:blue;margin:2px;padding:10px;height:60px;text-align:center;width:80px;">{{item.creneauitem.datecreneau | date("m-d-Y")}}</div>
                                                 <br>
                                                 {% for item2 in item.creneauitem.creneau %}
-                                                    <a href="/prisederdv/{{medecin.id}}/{{item.id}}" style="background-color:gray;height:30px;padding:5px;text-align:center;color:white;">
+                                                    <a href="/prisederdv/{{medecin.id}}/{{item2.id}}/{{item.creneauitem.id}}" style="background-color:gray;height:30px;width:80px;padding:5px;margin:5px;text-align:center;color:white;">
                                                         {{item2.heuredebut}}-{{item2.heurefin}}
                                                     </a>
                                                 {% endfor %}
@@ -115,6 +115,7 @@
                                         {% endfor %}
 
                                     </div>
+                                    
                                     <div class="text-center">{{ knp_pagination_render(medecin.creneau) }}</div>
 
                                 </div>
@@ -126,13 +127,31 @@
                 </div>
 
                 <div class="tab-pane fade" id="faq" role="tabpanel" aria-labelledby="faq-tab">
-                    <div class="medilife-tab-text col-lg-12 d-md-flex align-items-center">
-                        {% for structure in structures %}
+                    <div class="medilife-tab-text col-lg-12 align-items-center">
 
-                            <div class="medilife-tab-text row" style="padding:20px;border:1px solid gray;margin-right:10px;">
-                                {{structure.libelle}}
+                     {% for structure in structures %}
+
+                            <div class="medilife-tab-text" style="padding:20px;margin-right:10px;display:flex;margin:10px;background-color:#cdcdcd;width:100%;">
+                                
+                                <div class="col-lg-6 col-md-12">
+                                    <img src="{{asset('img/img/m.jpg')}}" style="height:70px;border-radius:50%;" class="">
+
+                                    <a href="/detailStructure/{{structure.id}}">
+                                        <strong class=""> {{structure.libelle}}
+                                        </strong>
+                                    </a>
+                                    <br>
+                                    {% for row in structure.specialite %}
+                              <strong>{{row.libelle}}</strong><br>
+
+                                    {% endfor %}
+                                    <strong>{{structure.adresse}}</strong>
+                                </div>
                             </div>
+                       
                         {% endfor %}
+                                    <div class="text-center">{{ knp_pagination_render(structures) }}</div>
+
                     </div>
                 </div>
 

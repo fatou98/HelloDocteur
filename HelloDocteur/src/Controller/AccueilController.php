@@ -98,7 +98,12 @@ class AccueilController extends Controller
 
             }
            
-            $structures=$structurerepo->findAll();
+            $structureslist=$structurerepo->findAll();
+            $structures = $this->get('knp_paginator')->paginate(
+                $structureslist,
+                $request->query->get('page', 1)/*le numéro de la page à afficher*/,
+                  10/*nbre d'éléments par page*/
+            );
             $em = $this->getDoctrine()->getManager();
             $specialites=$specialiterepo->findAll();
             $regions=$regionrepo->findAll();
