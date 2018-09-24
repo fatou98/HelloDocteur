@@ -19,6 +19,9 @@ use App\Repository\HadRepository;
 use App\Repository\LivraisonRepository;
 use App\Repository\PriseDeRendezvousRepository;
 use App\Repository\VslRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Response;
+
 
 use App\Repository\SpecialiteRepository;
 use App\Repository\RegionRepository;
@@ -143,10 +146,9 @@ class PatientController extends Controller
                     $vsl->setNomComplet($nom);
                     $vsl->setAdresse($adresse);
                     $vsl->setTel($tel);
-                    $vsl->setFicheMaladie($fiche);
+                    $vsl->setFicheMaladie(file_get_contents($_FILES['fiche']['tmp_name']));
                     $vsl->setMotif($motif);
                     $vsl->setPatient($patient[0]);
-
                     $vsl->setEtat(false);
                     $vsl->setDatedemande(new \DateTime('now'));
                     $em->persist($vsl);
@@ -176,7 +178,6 @@ class PatientController extends Controller
           
         if($request->isMethod('POST')) {
                     extract($_POST);
-                   
                     $livraison = new  Livraison();
                     $livraison->setNomComplet($nom);
                     $livraison->setAdresse($adresse);
@@ -202,7 +203,7 @@ class PatientController extends Controller
      */
     public function specialite(MedecinRepository $medecinrepo,Request $request,SpecialiteRepository $specialiterepo,RegionRepository $regionrepo)
     {
-    
+    $user=$this->getUser();
     $specialites=$specialiterepo->findAll();
     $regions=$regionrepo->findAll();
 
@@ -212,9 +213,58 @@ $medecins=$medecinrepo->findAll();
             'medecins'=>$medecins,
             'specialites'=>$specialites,
         'regions'=>$regions,
+        'user'=>$user,
                      
                           ]);
 
+    }
+     /**
+    * @Route("/deletelivraison/{id}", requirements={"id": "\d+"}, name="deletelivraison")
+    * @Method({"GET"})
+    */
+    public function deletelivraison(Request $request, Livraison $livraison): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em ->remove($livraison);
+        $em ->flush();
+        $this->addFlash('info', ' livraison deleted');
+        return $this->redirectToRoute('patient');
+    }
+     /**
+    * @Route("/deletevsl/{id}", requirements={"id": "\d+"}, name="deletevsl")
+    * @Method({"GET"})
+    */
+    public function deleteVsl(Request $request, Vsl $vsl): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em ->remove($vsl);
+        $em ->flush();
+        $this->addFlash('info', ' vsl deleted');
+        return $this->redirectToRoute('patient');
+    }
+    /**
+    * @Route("/delete/{id}", requirements={"id": "\d+"}, name="delete")
+    * @Method({"GET"})
+    */
+    public function deleteHad(Request $request, Had $had): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em ->remove($had);
+        $em ->flush();
+        $this->addFlash('info', 'had deleted');
+        return $this->redirectToRoute('patient');
+    }
+    /**
+    * @Route("/delete/{id}", requirements={"id": "\d+"}, name="delete")
+    * @Method({"GET"})
+    */
+    public function deleteRV(Request $request, PriseDeRendezvous $rv): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em ->remove($rv);
+        $em ->flush();
+        $this->addFlash('info', 'rendez vous deleted');
+        return $this->redirectToRoute('patient');
     }
 }
                      

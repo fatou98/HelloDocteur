@@ -30,8 +30,11 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $user= $this->getUser();
+
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
+            'user'=>$user
         ]);
     }
      /**
@@ -39,16 +42,21 @@ class AdminController extends Controller
      */
     public function listeprv(PriseDeRendezvousRepository $prvrepo)
     {
+        $user= $this->getUser();
         
         $prvs= $prvrepo->findAll();
         return $this->render('admin/listeprv.html.twig', 
-        array('PriseDeRendezvous' => $prvs));    
+        array('PriseDeRendezvous' => $prvs,
+        'user'=>$user
+
+    ));    
     }
     /**
      * @Route("/editprv/{id}", name="editprv")
     */
     public function editprv($id,PriseDeRendezvousRepository $prvrepo,Request $request)
     {
+        $user= $this->getUser();
 
         $em = $this->getDoctrine()->getManager();
         $prvs= $prvrepo->findBy(['id'=>$id]);
@@ -69,7 +77,10 @@ class AdminController extends Controller
         }
 
         return $this->render('admin/edithad.html.twig', 
-        array('Had' => $hads));    
+        array('Had' => $hads,
+        'user'=>$user
+    
+    ));    
     }
     
      /**
@@ -77,16 +88,22 @@ class AdminController extends Controller
      */
     public function listehad(HadRepository $hadrepo)
     {
+        $user= $this->getUser();
+
         //$em = $this->getDoctrine()->getManager();
         $hads= $hadrepo->findAll();
         return $this->render('admin/listehad.html.twig', 
-        array('Had' => $hads));    
+        array('Had' => $hads,
+        'user'=>$user
+    
+    ));    
     }
     /**
      * @Route("/editHad/{id}", name="editHad")
     */
     public function edithad($id,HadRepository $hadrepo,Request $request)
     {
+        $user= $this->getUser();
 
         $em = $this->getDoctrine()->getManager();
         $hads= $hadrepo->findBy(['id'=>$id]);
@@ -106,7 +123,10 @@ class AdminController extends Controller
         }
 
         return $this->render('admin/edithad.html.twig', 
-        array('Had' => $hads));    
+        array('Had' => $hads,
+        'user'=>$user
+    
+    ));    
     }
 
     /**
@@ -114,6 +134,8 @@ class AdminController extends Controller
     */
     public function validerhad($id,HadRepository $hadrepo,Request $request)
     {
+        $user= $this->getUser();
+
         $em = $this->getDoctrine()->getManager();
         $hads= $hadrepo->findOneBy(['id'=>$id]);
         $hads->setEtat(true);
@@ -128,6 +150,8 @@ class AdminController extends Controller
     */
     public function validerlivraison($id,LivraisonRepository $livraisonrepo,Request $request)
     {
+        $user= $this->getUser();
+
         $em = $this->getDoctrine()->getManager();
         $livraison= $livraisonrepo->findOneBy(['id'=>$id]);
         $livraison->setEtat(true);
@@ -141,6 +165,8 @@ class AdminController extends Controller
     */
     public function validervsl($id,VslRepository $vslrepo,Request $request)
     {
+        $user= $this->getUser();
+
         $em = $this->getDoctrine()->getManager();
         $vsl= $vslrepo->findOneBy(['id'=>$id]);
         $vsl->setEtat(true);
@@ -149,7 +175,22 @@ class AdminController extends Controller
                 $this->addFlash('info', 'Vsl  validé avec succes.');
         return $this->redirectToRoute('listevsl');
     }
+/**
+     * @Route("/validerrv/{id}", name="validerrv")
+    */
+    public function validerrv($id,PriseDeRendezvousRepository $rvrepo,Request $request)
+    {
 
+        $user= $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $rv= $rvrepo->findOneBy(['id'=>$id]);
+        $rv->setEtat(true);
+        $em->persist($rv);
+        $em->flush();
+                $this->addFlash('info', 'Rendez Vous  validé avec succes.');
+        return $this->redirectToRoute('listeprv');
+    }
+ 
     
 
    /**
@@ -158,7 +199,9 @@ class AdminController extends Controller
     */
     public function deleteHad(Request $request, Had $had): Response
     {
+
         $em = $this->getDoctrine()->getManager();
+        $user= $this->getUser();
         $em ->remove($had);
         $em ->flush();
         $this->addFlash('info', 'had deleted');
@@ -174,7 +217,10 @@ class AdminController extends Controller
 
         $vsls = $this->getDoctrine()->getRepository(Vsl::Class)->findAll();
 
-        return $this->render('admin/listevsl.html.twig',array('vsl'=>$vsls,'users'=>$user)); 
+        return $this->render('admin/listevsl.html.twig',array('vsl'=>$vsls,
+        'users'=>$user,
+        'user'=>$user
+    )); 
   }
    /**
     * @Route("/deletevsl/{id}", requirements={"id": "\d+"}, name="deletevsl")
@@ -182,6 +228,7 @@ class AdminController extends Controller
     */
     public function deleteVsl(Request $request, Vsl $vsl): Response
     {
+        $user= $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $em ->remove($vsl);
         $em ->flush();
@@ -196,14 +243,48 @@ class AdminController extends Controller
         $user=$this->getUser();
 
         $livraisons = $this->getDoctrine()->getRepository(Livraison::Class)->findAll();
-        return $this->render('admin/listelivraison.html.twig',array('livraison'=>$livraisons,'users'=>$user)); 
+        foreach ($livraisons as $value) {
+            $value->setOrdonnance(base64_encode(stream_get_contents($value->getOrdonnance())));
+        }
+
+        return $this->render('admin/listelivraison.html.twig',
+        array('livraison'=>$livraisons,'user'=>$user)); 
+    }
+    /**
+     * @Route("/viewOrdonnance/{id}", name="viewOrdonnance")
+     */
+    public function viewOrdonnance($id)
+    {
+        $user= $this->getUser();
+
+        $livraison = $this->getDoctrine()->getRepository(Livraison::Class)->findOneBy(['id'=>$id]);
+            $livraison->setOrdonnance(base64_encode(stream_get_contents($livraison->getOrdonnance())));
+        
+
+     $html = $this->render('admin/ordonnancefile.html.twig', array('file' => $livraison->getOrdonnance(),
+     'user'=>$user
+    ));
+   /*  $snappy = $this->get('knp_snappy.pdf');
+
+$output= "Ordonnance";
+    // Generate PDF file
+    return new Response(
+        $snappy->getOutputFromHtml($html),
+        200,
+        array(
+            'Content-Type'          => 'application/pdf',
+            'Content-Disposition'   => 'inline; filename="'.$output.'.pdf"'
+        )
+    ); */
+return $html;
     }
      /**
-    * @Route("/deletelivraison/{id}", requirements={"id": "\d+"}, name="deletelivraison")
+    * @Route("/deleteadminlivraison/{id}", requirements={"id": "\d+"}, name="deleteadminlivraison")
     * @Method({"GET"})
     */
     public function deletelivraison(Request $request, Livraison $livraison): Response
     {
+        $user= $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $em ->remove($livraison);
         $em ->flush();
@@ -216,6 +297,7 @@ class AdminController extends Controller
     */
     public function livraisonedit($id,LivraisonRepository $livraisonrepo,Request $request)
     {
+        $user= $this->getUser();
 
         $em = $this->getDoctrine()->getManager();
         $livraisons= $livraisonrepo->findBy(['id'=>$id]);
@@ -235,13 +317,17 @@ class AdminController extends Controller
         }
 
         return $this->render('admin/livraisonedit.html.twig', 
-        array('Livraison' => $livraisons));    
+        array('Livraison' => $livraisons,
+    
+        'user'=>$user
+    ));    
     }
     /**
      * @Route("/vsledit/{id}", name="vsledit")
     */
     public function vsledit($id,VslRepository $vslrepo,Request $request)
     {
+        $user= $this->getUser();
 
         $em = $this->getDoctrine()->getManager();
         $vsls= $vslrepo->findBy(['id'=>$id]);
@@ -262,20 +348,27 @@ class AdminController extends Controller
         }
 
         return $this->render('admin/listevsledit.html.twig', 
-        array('Vsl' => $vsls));    
+        array('Vsl' => $vsls,
+        'user'=>$user
+    
+    ));    
     }
      /**
      * @Route("/listemedecin", name="listemedecin")
      */
     public function listemedcin(MedecinRepository $medecinrepo)
     {
+        $user= $this->getUser();
         
         $medecins= $medecinrepo->findAll();
         foreach($medecins as $values){
             $values->setImage(base64_encode(stream_get_contents($values->getImage())));
         }
         return $this->render('admin/listemedecin.html.twig', 
-        array('Medecin' => $medecins));    
+        array('Medecin' => $medecins,
+        'user'=>$user
+    
+    ));    
     }
     /**
      * @Route("/AddTypeStructure", name="AddTypeStructure")
@@ -283,6 +376,7 @@ class AdminController extends Controller
     public function AddTypeStructure(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $user= $this->getUser();
         
         $typestructure= new TypeStructure();
         if(isset($_POST['Ajouter'])){
@@ -295,7 +389,11 @@ class AdminController extends Controller
 
             }
             }
-        return $this->render('admin/addtypestructure.html.twig');    
+        return $this->render('admin/addtypestructure.html.twig',
+    [
+        'user'=>$user
+
+    ]);    
    
     }
     /**
@@ -303,6 +401,8 @@ class AdminController extends Controller
      */
     public function AddStructure(Request $request,TypeStructureRepository $typerepo,MedecinRepository $medecinrepo,QuartierRepository $quartierrepo)
     {
+
+        $user= $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
         $structure= new Structure();
@@ -327,6 +427,8 @@ class AdminController extends Controller
             'typesstructures'=>$typerepo->findAll(),
             'medecins'=>$medecinrepo->findAll(),
              'quartiers'=>$quartierrepo->findAll(),
+            'user'=>$user
+
             ]);}
         /**
      * @Route("/editstructure/{id}", name="editstructure")
@@ -335,6 +437,8 @@ class AdminController extends Controller
         {
             $em = $this->getDoctrine()->getManager();
     
+
+            $user= $this->getUser();
             $structure= new Structure();
             if(isset($_POST['Modifier'])){
                 if($request->isMethod('POST')){
@@ -361,6 +465,7 @@ class AdminController extends Controller
     */
     public function deletesrtucture(Request $request, Structure $stucture): Response
     {
+        $user= $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $em ->remove($structure);
         $em ->flush();
@@ -372,10 +477,12 @@ class AdminController extends Controller
      */
      public function listestructure(StructureRepository $structurerepo)
      {
+        $user= $this->getUser();
         
         $structures= $structurerepo->findAll();
         return $this->render('admin/listestructure.html.twig', [
             'structures'=>$structures,
+            'user'=>$user
             
         ]);
  }
@@ -385,9 +492,11 @@ class AdminController extends Controller
     public function listtypestruct(TypeStructureRepository $typerepo)
     {
        
+        $user= $this->getUser();
        $typestructures= $typerepo->findAll();
        return $this->render('admin/listetypestructure.html.twig', [
            'typestructures'=>$typestructures,
+           'user'=>$user
            
        ]);
 }

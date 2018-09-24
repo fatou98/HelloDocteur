@@ -52,16 +52,16 @@
                                     <td class="">{{livraisons.nomcomplet}}</td>
                                     <td class="">{{livraisons.adresse}}</td>
                                     <td class="">{{livraisons.tel}}</td>
-                                    <td class=""><a href="data:application/pdf;base64,{{livraisons.ordonnance}}"></a></td>
-                                    <td class="">{{livraisons.patient.nomcomplet}}</td>
 
+                                    <td class=""><a href="{{ path('viewOrdonnance', {'id' : livraisons.id }) }}" target="BLANK">Voir l'ordonnance</a></td>
+                                    <td class="">{{livraisons.patient.nomcomplet}}</td>
 
                                     <td class="text-right">
                                         <div class="btn-group text-right">
                                 <td>
-                             <a href="{{ path('validerlivraison', {'id' : livraisons.id }) }}" class="btn btn-rounded btn-primary btn-small">Valider</a>
+                             <a href="{{ path('validerlivraison', {'id' : livraisons.id }) }}" class="btn btn-rounded btn-success btn-small">Valider</a>
                              <a href="{{ path('livraisonedit', {'id' : livraisons.id }) }}" class="btn btn-rounded btn-primary btn-small">Editer</a>
-                             <a href="{{ path('deletelivraison', {'id' : livraisons.id }) }}" class="btn btn-rounded btn-danger btn-small">Suprimer</a>
+                             <a href="{{ path('deleteadminlivraison', {'id' : livraisons.id }) }}" class="btn btn-rounded btn-danger btn-small">Suprimer</a>
                              </td>
                                     </div>
                                     </td>
