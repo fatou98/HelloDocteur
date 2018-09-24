@@ -25,6 +25,8 @@ class MedecinController extends Controller
         $usermedecin= $this->getUser();
         $emailmedecin=$usermedecin->getEmail();
         $medecinloggedIn=$medecinrepo->findBy(['Email'=>$emailmedecin]);
+        $medecinloggedIn[0]->setImage(base64_encode(stream_get_contents($medecinloggedIn[0]->getImage())));
+
         return $this->render('medecin/index.html.twig', [
             'controller_name' => 'MedecinController','medecinloggedIn'=>$medecinloggedIn
         ]);

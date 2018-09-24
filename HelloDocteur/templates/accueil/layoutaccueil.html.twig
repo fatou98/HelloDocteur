@@ -79,11 +79,14 @@
                                         <div class="row align-items-end">
                                             <div class="col-12 col-md-5">
                                                 <div class="form-group">
-                                                    <select class="form-control" id="speciality" name="specialite">
+                                                    <select class="form-control" id="speciality" name="specialite" >
+                                                       
+                                                       <div class="form-group" style="z-index:4;height:300px;overflow:scroll;">
                                                         <option value="">Specialités</option>
                                                         {% for specialite in specialites %}
                                                             <option value="{{specialite.id}}">{{specialite.libelle}}</option>
                                                         {% endfor %}
+                                                        </div>
                                                     </select>
                                                 </div>
                                             </div>

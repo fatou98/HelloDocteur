@@ -54,7 +54,7 @@
         <td>{{item.datedemande | date('d-m-Y H:m')}}</td>
 <td>{{ item.etat ? 'Validé' : 'Non Validé' }}</td>
         <td>
-        <a href="" class="btn btn-rounded btn-danger btn-small">Annuler</a>
+        <a href="{{ path('delete', {'id' : item.id }) }}" class="btn btn-rounded btn-danger btn-small">Annuler</a>
 
         </td>
       </tr>

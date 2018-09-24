@@ -71,9 +71,10 @@ class SecurityController extends Controller
             $entityManager->flush();
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
-            $this->redirectToRoute('medecin');
             $this->addFlash('success', 'Votre compte à bien été enregistré.');
             //return $this->redirectToRoute('login');
+            return $this->redirectToRoute('medecin');
+
         }
         }
             
@@ -98,7 +99,7 @@ class SecurityController extends Controller
 
             $this->addFlash('success', 'Votre compte à bien été enregistré.');
             //return $this->redirectToRoute('login');
-            $this->redirectToRoute('admin');
+           return $this->redirectToRoute('admin');
 
         }
         }
@@ -116,7 +117,6 @@ class SecurityController extends Controller
                
                 $user->addRole("ROLE_PATIENT");
                 // 4) save the User!
-                $this->redirectToRoute('patient');
 
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
@@ -132,7 +132,7 @@ class SecurityController extends Controller
                 // maybe set a "flash" success message for the user
                 $this->addFlash('success', 'Votre compte à bien été enregistré.');
                 //return $this->redirectToRoute('login');
-            $this->redirectToRoute('patient');
+                return $this->redirectToRoute('patient');
 
             }
             }

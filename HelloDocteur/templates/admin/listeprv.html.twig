@@ -58,8 +58,10 @@
 
                                     <td class="text-right">
                                         <div class="btn-group text-right">
+                              <a href="{{ path('validerrv', {'id' : prvs.id }) }}" class="btn btn-rounded btn-success btn-small">Valider</a>
                               <a href="{{ path('editprv', {'id' : prvs.id }) }}" class="btn btn-rounded btn-primary btn-small">Editer</a>
-                            
+                              <a href="{{ path('delete', {'id' : prvs.id }) }}" class="btn btn-rounded btn-danger btn-small">Suprimer</a>
+
                                    </div>
                                     </td>
                                 </tr>

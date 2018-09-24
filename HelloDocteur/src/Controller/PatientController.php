@@ -146,10 +146,9 @@ class PatientController extends Controller
                     $vsl->setNomComplet($nom);
                     $vsl->setAdresse($adresse);
                     $vsl->setTel($tel);
-                    $vsl->setFicheMaladie($fiche);
+                    $vsl->setFicheMaladie(file_get_contents($_FILES['fiche']['tmp_name']));
                     $vsl->setMotif($motif);
                     $vsl->setPatient($patient[0]);
-
                     $vsl->setEtat(false);
                     $vsl->setDatedemande(new \DateTime('now'));
                     $em->persist($vsl);
@@ -179,12 +178,11 @@ class PatientController extends Controller
           
         if($request->isMethod('POST')) {
                     extract($_POST);
-                   
                     $livraison = new  Livraison();
                     $livraison->setNomComplet($nom);
                     $livraison->setAdresse($adresse);
                     $livraison->setTel($tel);
-                    $livraison->setOrdonnance($ordonnance);
+                    $livraison->setOrdonnance(file_get_contents($_FILES['ordonnance']['tmp_name']));
                     $livraison->setPatient($patient[0]);
                     $livraison->setEtat(false);
                     $livraison->setDatedemande(new \DateTime('now'));
