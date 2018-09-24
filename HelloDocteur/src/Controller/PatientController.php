@@ -19,6 +19,9 @@ use App\Repository\HadRepository;
 use App\Repository\LivraisonRepository;
 use App\Repository\PriseDeRendezvousRepository;
 use App\Repository\VslRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class PatientController extends Controller
 {
@@ -179,7 +182,7 @@ class PatientController extends Controller
                     $livraison->setNomComplet($nom);
                     $livraison->setAdresse($adresse);
                     $livraison->setTel($tel);
-                    $livraison->setOrdonnance(file_get_contents($_FILES['ordonnance']['tmp_name']));
+                    $livraison->setOrdonnance($ordonnance);
                     $livraison->setPatient($patient[0]);
                     $livraison->setEtat(false);
                     $livraison->setDatedemande(new \DateTime('now'));
@@ -194,6 +197,54 @@ class PatientController extends Controller
                     
                       ]);
                     }
+                                 /**
+    * @Route("/deleterv/{id}", requirements={"id": "\d+"}, name="deleterv")
+    * @Method({"GET"})
+    */
+    // public function deleterv(Request $request, PriseDeRendezous $rv): Response
+    // {
+    //     $em = $this->getDoctrine()->getManager();
+    //     $em ->remove($rv);
+    //     $em ->flush();
+    //     $this->addFlash('info', ' rendez vous deleted');
+    //     return $this->redirectToRoute('');
+    // }
+    /**
+    * @Route("/delete/{id}", requirements={"id": "\d+"}, name="delete")
+    * @Method({"GET"})
+    */
+    public function deleteHad(Request $request, Had $had): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em ->remove($had);
+        $em ->flush();
+        $this->addFlash('info', 'had deleted');
+        return $this->redirectToRoute('listehad');
+    }
+    /**
+    * @Route("/deletevsl/{id}", requirements={"id": "\d+"}, name="deletevsl")
+    * @Method({"GET"})
+    */
+    public function deleteVsl(Request $request, Vsl $vsl): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em ->remove($vsl);
+        $em ->flush();
+        $this->addFlash('info', ' vsl deleted');
+        return $this->redirectToRoute('listevsl');
+    }
+     /**
+    * @Route("/deletelivraison/{id}", requirements={"id": "\d+"}, name="deletelivraison")
+    * @Method({"GET"})
+    */
+    public function deletelivraison(Request $request, Livraison $livraison): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em ->remove($livraison);
+        $em ->flush();
+        $this->addFlash('info', ' livraison deleted');
+        return $this->redirectToRoute('patient');
+    }
 }
                      
                   
