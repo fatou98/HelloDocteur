@@ -37,6 +37,9 @@
 <th>adresse</th>
 <th>date</th>
 <th>heure</th>
+<th>etat</th>
+<th>Actions</th>
+
 
 </tr>
 </thead><tbody>
@@ -48,8 +51,11 @@
 <td>{{ prise.patient.adresse }}</td>
 <td>{{ prise.creneau.creneauitem.datecreneau | date }}</td> 
 <td>{{ prise.creneau.heuredebut }} -{{ prise.creneau.heurefin }}</td>
+<td>{{ prise.etat ? 'Validé' : 'Non Validé' }}</td>
 
 <td>
+                             <a href="{{ path('validerrdv', {'id' : prise.id }) }}" class="btn btn-rounded btn-primary btn-small">Valider</a>
+
 </td>
 </tr>
 {% endfor %}

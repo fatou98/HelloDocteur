@@ -145,4 +145,18 @@ class MedecinController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/validerrdv/{id}", name="validerrdv")
+    */
+    public function validerrdv($id,PriseDeRendezvousRepository $rdvrepo,Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $rdv= $rdvrepo->findOneBy(['id'=>$id]);
+        $rdv->setEtat(true);
+        $em->persist($rdv);
+        $em->flush();
+                $this->addFlash('info', 'Rendez-vous validé avec success  validé avec succes.');
+        return $this->redirectToRoute('ListeRVvalider');
+    }
+
 }

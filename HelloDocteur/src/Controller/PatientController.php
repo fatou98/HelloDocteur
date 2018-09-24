@@ -23,6 +23,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
 
 
+use App\Repository\SpecialiteRepository;
+use App\Repository\RegionRepository;
 class PatientController extends Controller
 {
     /**
@@ -197,6 +199,7 @@ class PatientController extends Controller
                     
                       ]);
                     }
+<<<<<<< HEAD
                                  /**
     * @Route("/deleterv/{id}", requirements={"id": "\d+"}, name="deleterv")
     * @Method({"GET"})
@@ -244,6 +247,27 @@ class PatientController extends Controller
         $em ->flush();
         $this->addFlash('info', ' livraison deleted');
         return $this->redirectToRoute('patient');
+=======
+
+                     /**
+     * @Route("/annulaire", name="annulaire")
+     */
+    public function specialite(MedecinRepository $medecinrepo,Request $request,SpecialiteRepository $specialiterepo,RegionRepository $regionrepo)
+    {
+    
+    $specialites=$specialiterepo->findAll();
+    $regions=$regionrepo->findAll();
+
+
+$medecins=$medecinrepo->findAll();
+        return $this->render('patient/annulaire.html.twig',[
+            'medecins'=>$medecins,
+            'specialites'=>$specialites,
+        'regions'=>$regions,
+                     
+                          ]);
+
+>>>>>>> 9de84903f00961e82e6826e9e121bb573ede917b
     }
 }
                      

@@ -99,9 +99,11 @@
                                     <strong>{{medecin.Specialite.libelle}}</strong><br>
                                     <strong>{{medecin.quartier.libelle}}</strong>
                                 </div>
+                                
                                 <div class="col-lg-4 col-md-12">
-                                    <div class="col-lg-12 reservations" style="display:flex;width:100%;">
+                                <h6>Veuillez choisir un créneau pour votre demande de rendez-vous.</h6>
 
+                                    <div class="col-lg-12 reservations" style="display:flex;width:100%;">
                                         {% for item in medecin.creneau %}
                                             <div class="col-lg-6" style="display:flex;flex-direction:column;">
                                                 <div style="background-color:blue;margin:2px;padding:10px;height:60px;text-align:center;width:80px;">{{item.creneauitem.datecreneau | date("m-d-Y")}}</div>
@@ -136,7 +138,7 @@
                                 <div class="col-lg-6 col-md-12">
                                     <img src="{{asset('img/img/m.jpg')}}" style="height:70px;border-radius:50%;" class="">
 
-                                    <a href="/detailStructure/{{structure.id}}">
+                                    <a href="/detailstructure/{{structure.id}}">
                                         <strong class=""> {{structure.libelle}}
                                         </strong>
                                     </a>

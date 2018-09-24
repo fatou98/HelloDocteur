@@ -77,10 +77,10 @@
 
     <div class="container" style="padding-top:200px;">
         <header class="">
-            <div class="header1">
+            <div class="header1" style="display:flex;">
 
-                                    <img src="img/medecin.jpg" class="col-lg-2" alt="" >
-                <h3 class="col-lg-4">{{medecin.nomcomplet}}</h3>
+                                    <img src="{{asset('img/img/medecin.jpg')}}" style="height:70px;width:70px;border-radius:50%;" class="col-lg-2" alt="" >
+                <h3 class="col-lg-4" style="color:white;"><br>{{medecin.nomcomplet}}</h3>
 
             </div>
             <div class="header2">
@@ -104,6 +104,7 @@
                         <li class="specialite">
 {{medecin.specialite.libelle}}                        </li>   
                     </ul>
+                    {% if medecin.structure  != null %}
                     <hr><h3>Structures</h3>
                     <ul class="spec">
                      {% for struc in medecin.structure %}
@@ -111,7 +112,7 @@
           {{struc.libelle}}                        </li> 
                                     {% endfor %} 
                          
-                    </ul>
+                    </ul>{% endif %}
                     <hr>
                 </div>
             <div class="card" id="carteetcoordonnees">

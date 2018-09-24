@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+  <!-- ***** Breadcumb Area Start ***** -->
+    <section class="breadcumb-area bg-img gradient-background-overlay" style="background-image: url(img/bg-img/breadcumb2.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h5 class="breadcumb-title" style="text-align:center;">Votre annulaire de médecins prés de vous partout</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Breadcumb Area End ***** -->
+
+<br>
+<br>
+<br>
+
+
+     <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nomcomplet</th>
+        <th>Tel</th>
+        <th>Adresse</th>
+        <th>Spécialité</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for item in medecins %}
+         <tr>
+        <td>{{item.nomcomplet}}</td>
+        <td>{{item.tel}}</td>
+        <td>{{item.adresse}}</td>
+        <td>{{item.Specialite.libelle}}</td>
+       
+      </tr>
+      {% else %}
+      
+      <tr><td colspan="5">Pas de Médecins</td>
+      </tr>
+    {% endfor %}
+     
+
+
+         </tbody>
+  </table>
+{% endblock %}
