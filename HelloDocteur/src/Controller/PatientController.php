@@ -199,42 +199,26 @@ class PatientController extends Controller
                     
                       ]);
                     }
-<<<<<<< HEAD
-                                 /**
-    * @Route("/deleterv/{id}", requirements={"id": "\d+"}, name="deleterv")
-    * @Method({"GET"})
-    */
-    // public function deleterv(Request $request, PriseDeRendezous $rv): Response
-    // {
-    //     $em = $this->getDoctrine()->getManager();
-    //     $em ->remove($rv);
-    //     $em ->flush();
-    //     $this->addFlash('info', ' rendez vous deleted');
-    //     return $this->redirectToRoute('');
-    // }
-    /**
-    * @Route("/delete/{id}", requirements={"id": "\d+"}, name="delete")
-    * @Method({"GET"})
-    */
-    public function deleteHad(Request $request, Had $had): Response
+
+                     /**
+     * @Route("/annulaire", name="annulaire")
+     */
+    public function specialite(MedecinRepository $medecinrepo,Request $request,SpecialiteRepository $specialiterepo,RegionRepository $regionrepo)
     {
-        $em = $this->getDoctrine()->getManager();
-        $em ->remove($had);
-        $em ->flush();
-        $this->addFlash('info', 'had deleted');
-        return $this->redirectToRoute('listehad');
-    }
-    /**
-    * @Route("/deletevsl/{id}", requirements={"id": "\d+"}, name="deletevsl")
-    * @Method({"GET"})
-    */
-    public function deleteVsl(Request $request, Vsl $vsl): Response
-    {
-        $em = $this->getDoctrine()->getManager();
-        $em ->remove($vsl);
-        $em ->flush();
-        $this->addFlash('info', ' vsl deleted');
-        return $this->redirectToRoute('listevsl');
+    $user=$this->getUser();
+    $specialites=$specialiterepo->findAll();
+    $regions=$regionrepo->findAll();
+
+
+$medecins=$medecinrepo->findAll();
+        return $this->render('patient/annulaire.html.twig',[
+            'medecins'=>$medecins,
+            'specialites'=>$specialites,
+        'regions'=>$regions,
+        'user'=>$user,
+                     
+                          ]);
+
     }
      /**
     * @Route("/deletelivraison/{id}", requirements={"id": "\d+"}, name="deletelivraison")
@@ -247,27 +231,42 @@ class PatientController extends Controller
         $em ->flush();
         $this->addFlash('info', ' livraison deleted');
         return $this->redirectToRoute('patient');
-=======
-
-                     /**
-     * @Route("/annulaire", name="annulaire")
-     */
-    public function specialite(MedecinRepository $medecinrepo,Request $request,SpecialiteRepository $specialiterepo,RegionRepository $regionrepo)
+    }
+     /**
+    * @Route("/deletevsl/{id}", requirements={"id": "\d+"}, name="deletevsl")
+    * @Method({"GET"})
+    */
+    public function deleteVsl(Request $request, Vsl $vsl): Response
     {
-    
-    $specialites=$specialiterepo->findAll();
-    $regions=$regionrepo->findAll();
-
-
-$medecins=$medecinrepo->findAll();
-        return $this->render('patient/annulaire.html.twig',[
-            'medecins'=>$medecins,
-            'specialites'=>$specialites,
-        'regions'=>$regions,
-                     
-                          ]);
-
->>>>>>> 9de84903f00961e82e6826e9e121bb573ede917b
+        $em = $this->getDoctrine()->getManager();
+        $em ->remove($vsl);
+        $em ->flush();
+        $this->addFlash('info', ' vsl deleted');
+        return $this->redirectToRoute('patient');
+    }
+    /**
+    * @Route("/delete/{id}", requirements={"id": "\d+"}, name="delete")
+    * @Method({"GET"})
+    */
+    public function deleteHad(Request $request, Had $had): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em ->remove($had);
+        $em ->flush();
+        $this->addFlash('info', 'had deleted');
+        return $this->redirectToRoute('patient');
+    }
+    /**
+    * @Route("/delete/{id}", requirements={"id": "\d+"}, name="delete")
+    * @Method({"GET"})
+    */
+    public function deleteRV(Request $request, PriseDeRendezvous $rv): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em ->remove($rv);
+        $em ->flush();
+        $this->addFlash('info', 'rendez vous deleted');
+        return $this->redirectToRoute('patient');
     }
 }
                      
