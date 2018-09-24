@@ -170,7 +170,7 @@ class AccueilController extends Controller
     {    $user=$this->getUser();
 
         $em = $this->getDoctrine()->getManager();
-        $structures=$structurerepo->findById(['id'=>$id]);
+        $structures=$structurerepo->findOneBy(['id'=>$id]);
 
         return $this->render('accueil/detailstructure.html.twig', [
         'structures'=>$structures,  

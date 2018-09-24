@@ -20,6 +20,8 @@ use App\Repository\LivraisonRepository;
 use App\Repository\PriseDeRendezvousRepository;
 use App\Repository\VslRepository;
 
+use App\Repository\SpecialiteRepository;
+use App\Repository\RegionRepository;
 class PatientController extends Controller
 {
     /**
@@ -194,6 +196,26 @@ class PatientController extends Controller
                     
                       ]);
                     }
+
+                     /**
+     * @Route("/annulaire", name="annulaire")
+     */
+    public function specialite(MedecinRepository $medecinrepo,Request $request,SpecialiteRepository $specialiterepo,RegionRepository $regionrepo)
+    {
+    
+    $specialites=$specialiterepo->findAll();
+    $regions=$regionrepo->findAll();
+
+
+$medecins=$medecinrepo->findAll();
+        return $this->render('patient/annulaire.html.twig',[
+            'medecins'=>$medecins,
+            'specialites'=>$specialites,
+        'regions'=>$regions,
+                     
+                          ]);
+
+    }
 }
                      
                   

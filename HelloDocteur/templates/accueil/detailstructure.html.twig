@@ -1,30 +1,160 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+ <style>
+ 
+        .header1 {
+            height: 100px;
+            background-color: rgb(97, 97, 102);
+        }
 
+        .header2 {
+            height: 50px;
+            background-color: rgb(224, 217, 204);
+            margin-top: -20px;
+            padding-top: 5px;
 
-<div class="tab-pane fade" id="faq" role="tabpanel" aria-labelledby="faq-tab" style="padding-top:190px;margin-bottom:30px;">
-                                <div class="medilife-tab-text col-lg-6 d-md-flex align-items-center">
-                                {% for structure in structures %}
-                                    
-                                                                       <div class="medilife-tab-text row" style="padding:20px;border:1px solid gray;margin-right:10px;">
-                      {{structure.libelle}}          
-</div>{% endfor %}
-                                </div>
-                            </div>
+        }
 
-                        </div>
-                    </div>
-Le Cabinet Médical Lecocq est composé des Docteurs :
+        .nav {
+            display: flex;
+            list-style-type: none;
+            width: 50%;
+            margin: auto;
+        }
 
-- Eric PENICHOU
-- Maryline DESCHOUWER-FAURET
+        .lien {
+            text-decoration: none;
+            margin: 10px;
+            color: black;
+            font-weight: bold;
+            font-size: 18px;
+        }
 
-Pour prendre rdv avec les Docteurs Eric PENICHOU ou Maryline DESCHOUWER-FAURET, vous pouvez vous référer aux actes et disponibilités ci dessous.
+        .lien:hover {
+            border-bottom: 3px solid blue;
+        }
 
-En cas d'urgence grave, contactez directement le centre 15.
+        .logo {
+            height: 100px;
+            width: 100px;
+            border-radius: 25px;
+            padding: 10px;
+            margin-left: 150px;
+        }
 
+        .section {
+            width: 80%;
+            margin: auto;
+        }
+        .specialite{
+            padding: 10px;
+            color: blue;
+            background-color: white;
+            border:2px solid #0000ff;
+            width: auto;
+            max-width: 300px;
+            border-radius: 10px;
+            margin: 10px;
 
+        }
+        .spec{
+            display: flex;
+            list-style-type: none;
+        }
+        .addresse{
+            font-size: 18px;
+            padding: 5px;
+        }
+        .horaires{
+            list-style-type: none;
 
+        }
+        .card{
+          margin-bottom:30px;
+          padding:20px;
+        }
+    </style>
 
+    <div class="container" style="padding-top:200px;">
+        <header class="">
+            <div class="header1" style="display:flex;">
 
+                                    <img src="{{asset('img/img/m.jpg')}}" style="height:70px;width:70px;border-radius:50%;" class="col-lg-2" alt="" >
+                <h3 class="col-lg-4" style="color:white;"><br>{{structures.libelle}}</h3>
+
+            </div>
+            <div class="header2">
+                <ul class="nav">
+                    <li><a class="lien" href="#presentation">Presentation</a></li>
+                    <li><a class="lien" href="#carteetcoordonnees">Carte et Coordonnées</a></li>
+                    <li><a class="lien" href="#horaires">Horaires</a></li>
+                    <li><a class="lien" href="#tarif">Tarif</a></li>
+                </ul>
+            </div>
+        </header>
+        <section class="section">
+            <div class="card" id="presentation">
+                <h3>Présentation</h3>
+                <p>
+                    Le docteur Thierry Galtier est spécialiste de la chirurgie de l'oeil depuis plus de 20 ans. Il vous
+                    accueille au sein de son cabinet de Bordeaux, situé au 14 rue Elisée Reclus. </p>
+                    <hr>
+                    <h3>Spécialités</h3>
+                    <ul class="spec">
+                    {% for row in structures.specialite %}
+                        <li class="specialite">
+{{row.libelle}}</li>                                       {% endfor %}
+
+                    </ul>
+                    {% if structures.medecins !== null %}
+                    <hr><h3>Medecins</h3>
+                    <ul class="spec">
+                     {% for struc in structures.medecins %}
+                        <li class="specialite">
+          {{struc.nomcomplet}}                        </li> 
+                                    {% endfor %} 
+                         
+                    </ul>
+                    <hr>
+                    {% endif %}
+                </div>
+            <div class="card" id="carteetcoordonnees">
+                <h3>Carte et coordonéées</h3>
+                <ul>
+                        <li class="addresse"><strong>Pays:</strong> {{structures.quartier.region.pays.libelle}} </li>
+                        <li class="addresse"><strong>Region:</strong>{{structures.quartier.region.libelle}} </li>
+                        <li class="addresse"><strong>Quartier:</strong>{{structures.quartier.libelle}} </li>
+                        <li class="addresse"><strong>Adresse:</strong>{{structures.adresse}} </li>
+                        <li class="addresse"><strong>Téléphone:</strong>{{structures.tel}} </li>
+                </ul>
+            </div>
+            <div class="card" id="horaires">
+                <h3>Horaires</h3>
+                <p>Horaires et contacts <br>   
+                                       Contact du secrétariat
+                    04 66 23 32 21 </p>
+                <ul class="horaires"><li>                    Ouverture du secrétariat
+                </li>
+                    <li>Lundi :
+                        08h30 - 18h00</li><li>Mardi :
+                            08h30 - 18h00</li><li>Mercredi :
+                                08h30 - 18h00</li><li>jeudi :
+                                    08h30 - 18h00</li><li>Vendredi :
+                                        08h30 - 18h00</li>
+                </ul>
+               
+            </div>
+            <div class="card" id="tarif">
+                <h3>Tarifs</h3>
+ 
+
+           <ul>
+               <li>
+                Première consultation 
+                3000 Fcfa<hr>
+               </li>
+               <li>Enfant - Première consultation 4000Fcfa<hr></li><li>Enfant - Consultation de suivi 3000Fcfa<hr></li>
+           </ul> </div>
+        </section>
+    </div>
 {% endblock %}
