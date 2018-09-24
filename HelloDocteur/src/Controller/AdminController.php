@@ -196,7 +196,6 @@ class AdminController extends Controller
         $user=$this->getUser();
 
         $livraisons = $this->getDoctrine()->getRepository(Livraison::Class)->findAll();
-
         return $this->render('admin/listelivraison.html.twig',array('livraison'=>$livraisons,'users'=>$user)); 
     }
      /**
