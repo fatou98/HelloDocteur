@@ -54,7 +54,7 @@
         <td>{{item.datedemande | date('d-m-Y H:m')}}</td>
 <td>{{ item.etat ? 'Validé' : 'Non Validé' }}</td>
         <td>
-        <a href="{{ path('delete', {'id' : item.id }) }}" class="btn btn-rounded btn-danger btn-small">Annuler</a>
+        <a href="{{ path('deletervpatient', {'id' : item.id }) }}" class="btn btn-rounded btn-danger btn-small">Annuler</a>
 
         </td>
       </tr>
@@ -90,7 +90,7 @@
         <td>{{item.datedemande | date('d-m-Y H:m')}}</td>
 <td>{{ item.etat ? 'Validé' : 'Non Validé' }}</td>
         <td>
-        <a href="{{ path('delete', {'id' : item.id }) }}" class="btn btn-rounded btn-danger btn-small">Annuler</a>
+        <a href="{{ path('deletehadpatient', {'id' : item.id }) }}" class="btn btn-rounded btn-danger btn-small">Annuler</a>
 
         </td>
       </tr>
@@ -123,7 +123,7 @@
         <td>{{item.datedemande | date('d-m-Y H:m')}}</td>
 <td>{{ item.etat ? 'Validé' : 'Non Validé' }}</td>
         <td>
-        <a href="{{ path('deletelivraison', {'id' : item.id }) }}" class="btn btn-rounded btn-danger btn-small">Annuler</a>
+        <a href="{{ path('deletelivraisonpatient', {'id' : item.id }) }}" class="btn btn-rounded btn-danger btn-small">Annuler</a>
         </td>
       </tr>
       {% else %}
@@ -155,7 +155,7 @@
         <td>{{item.datedemande | date('d-m-Y H:m')}}</td>
        <td>{{ item.etat ? 'Validé' : 'Non Validé' }}</td>
         <td>
-        <a href="{{ path('deletevsl', {'id' : item.id }) }}" class="btn btn-rounded btn-danger btn-small">Annuler</a>
+        <a href="{{ path('deletevslpatient', {'id' : item.id }) }}" class="btn btn-rounded btn-danger btn-small">Annuler</a>
         </td>
       </tr>
       {% else %}

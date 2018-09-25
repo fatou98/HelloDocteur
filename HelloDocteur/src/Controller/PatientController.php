@@ -219,7 +219,7 @@ $medecins=$medecinrepo->findAll();
 
     }
      /**
-    * @Route("/deletelivraison/{id}", requirements={"id": "\d+"}, name="deletelivraison")
+    * @Route("/deletelivraisonpatient/{id}", requirements={"id": "\d+"}, name="deletelivraisonpatient")
     * @Method({"GET"})
     */
     public function deletelivraison(Request $request, Livraison $livraison): Response
@@ -231,7 +231,7 @@ $medecins=$medecinrepo->findAll();
         return $this->redirectToRoute('patient');
     }
      /**
-    * @Route("/deletevsl/{id}", requirements={"id": "\d+"}, name="deletevsl")
+    * @Route("/deletevslpatient/{id}", requirements={"id": "\d+"}, name="deletevslpatient")
     * @Method({"GET"})
     */
     public function deleteVsl(Request $request, Vsl $vsl): Response
@@ -243,7 +243,7 @@ $medecins=$medecinrepo->findAll();
         return $this->redirectToRoute('patient');
     }
     /**
-    * @Route("/delete/{id}", requirements={"id": "\d+"}, name="delete")
+    * @Route("/deletehadpatient/{id}", requirements={"id": "\d+"}, name="deletehadpatient")
     * @Method({"GET"})
     */
     public function deleteHad(Request $request, Had $had): Response
@@ -255,7 +255,7 @@ $medecins=$medecinrepo->findAll();
         return $this->redirectToRoute('patient');
     }
     /**
-    * @Route("/delete/{id}", requirements={"id": "\d+"}, name="delete")
+    * @Route("/deletervpatient/{id}", requirements={"id": "\d+"}, name="deletervpatient")
     * @Method({"GET"})
     */
     public function deleteRV(Request $request, PriseDeRendezvous $rv): Response
